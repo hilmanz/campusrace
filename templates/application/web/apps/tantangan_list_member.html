@@ -1,0 +1,46 @@
+
+<div id="list-tantangan" class="section">
+	<div id="container">
+        <div class="row-2">
+              <h1 class="yellow textbg">LIST CHALLENGE</h1>
+        </div>
+        <div class="rows">
+            <div id="memberListTabs" class="leaderInfo">
+            	
+              <div class="rows">
+            	<div id="tabs">
+                  <ul>
+                    <li><a href="#tabs-1">CHALLENGE YANG AKAN DATANG</a></li>
+                  </ul>
+                  <div id="tabs-1">
+				   {if $datatantangan}
+                		{section name=i loop=$datatantangan}
+							<div class="rows-list">
+								<div class="infoMembers fl">
+									<p class="name_member yellow">{$datatantangan[i].time_start} - {$datatantangan[i].time_end}</p>
+									<p class="">{$datatantangan[i].name}</p>
+									<div class="buttonAction">
+										<a id="detail" class="button" href="{$basedomain}member/detailtantangan?id={$datatantangan[i].id}">Lihat Challenge</a>
+									</div>
+								</div>
+							</div><!--end rows-->
+						{/section}
+					{else}	
+							<div class="rows-list">
+								<div class="infoMembers fl">
+									<center>Belum ada challenge untuk Anda.</center>
+								</div>
+							</div>
+					{/if}
+                    
+                    
+                  </div>
+                  
+                 
+                </div><!--end#tabs-->
+                </div><!--end rows-->               
+            </div><!--endleaderInfo-->
+        </div><!--end.rows-->
+    	
+    </div><!--end#container-->
+</div><!--end.section-->

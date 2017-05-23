@@ -1,0 +1,169 @@
+{literal}
+	<script>
+	tinymce.init({selector:'textarea',
+
+    toolbar1: "bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | styleselect formatselect fontselect fontsizeselect",
+    toolbar2: "cut copy paste | bullist numlist | outdent indent blockquote | undo redo | anchor | forecolor backcolor",
+
+
+	theme : "modern",
+
+    height: "100",
+    width:900
+	
+	});
+	</script>
+{/literal}
+<div class="page_section" id="project-page">
+    <div id="container">
+        <div class="titlebox">
+            <h2 class="fl"><span class="icon-books">&nbsp;</span> Add New User Admin</h2>
+            {*}<h2 class="fr"><a href="{$basedomain}adminmanagement" class="button2">Back</a></h2>{/*}
+        </div><!-- end .titlebox -->
+        <div class="content">
+
+            <form id="forms" class="forms" method="post" action="">
+            <div id="new-project" class="boxcontent">
+                <section class="step1">
+                    <h3>Nama Pekerja</h3>
+					
+					
+					
+					 <div class="row">
+                        <label for="title">Tipe User <br></label>
+                       <select name="type" class="typeuser">
+					   
+					  {if $load}
+						{section name=i loop=$load} 
+						  <option value="{$load[i].id}" {if $type==$load[i].id } selected="selected" {/if} >{$load[i].name}</option>
+						{/section}
+					  {/if}
+					   </select>
+                    </div><!-- end .row -->
+                    <div class="row">
+                        <label for="name">Nama<br></label>
+                        <input id="name" name="name"  value="{$name}" type="text" class="required name" ><br>
+						<label class="msg_name name_no"  style="color: red;">{$name_no}</label>
+                    </div><!-- end .row -->
+					  <div class="row">
+                        <label for="email">Email<br></label>
+                        <input id="email" name="email" value="{$email}" type="text" class="required email" ><br>
+						<label class="msg_name email_no" style="color: red;">{$email_no}</label>
+                    </div><!-- end .row -->
+					
+					  <div class="row">
+                        <label for="username">Username<br></label>
+                        <input id="username" name="username" value="{$username}" type="text" class="required username" ><br>
+						<label class="msg_name username_no" style="color: red;">{$username_no}</label>
+                    </div><!-- end .row -->
+                     <div class="row">
+                        <label for="password">Password<br></label>
+                        <input id="password" name="password" value="{$password}"  type="password" class="required password" ><br>
+						<label class="msg_name password_no" style="color: red;">{$password_no}</label>
+                    </div><!-- end .row -->
+                     <div class="row">
+                        <label for="passwordc">Konfirmasi Password<br></label>
+                        <input id="passwordc" name="passwordc" type="password" class="required" ><br>
+						
+                    </div><!-- end .row -->
+					<hr>
+					   <div class="row">
+                        <h3>Akses User</h3>
+                    </div><!-- end .row -->
+					<hr>
+                   {if $listModule}
+						{section name=m loop=$listModule} 
+						 <div class="row">
+							<label for="title">{$listModule[m].name_menu}</label>
+							<input type="checkbox" name="menu[]" class="checkboxmenu" value="{$listModule[m].id}"  {if $checkmenu }	{if in_array($listModule[m].id, $checkmenu)  } checked="checked" {/if} {/if} >
+						</div><!-- end .row -->
+						{/section}
+					 {/if}
+						{*}<label class="msg_name checkboxmenu_no"  style="color: red;">{$name_no}</label>{/*}
+                    <input type="hidden" name="submit" value="1">
+                        <input type="submit" value="Simpan" class="fr button3 submitsave"  />
+						 <a href="{$basedomain}adminmanagement" class="button4 fr text-center">Batal</a>
+                        <small class="msg">{$status.msgee}</small>
+                        <small class="msg">{$status.msg}</small>
+                    </div><!-- end .row -->
+                </section>
+            </div><!-- end #wizard -->
+            </form>
+        </div><!-- end .content -->
+    </div><!-- end #container -->
+</div><!-- end #home -->
+<script>
+{literal}
+	$('.typeuser').click(function()
+	{
+			
+			console.log($(this).val());
+			if($(this).val()==9)
+			{
+				$(".checkboxmenu").prop("checked", true);
+				$(".checkboxmenu").attr("disabled", true);				
+			}
+			else {
+				$(".checkboxmenu").prop("checked", false);
+				$(".checkboxmenu").removeAttr("disabled"); 	
+				}
+	});
+	$('.submitsave').click(function()
+		{
+			console.log('asa');return false;
+			var name_no='.name_no';
+			$(name_no).html(' ');
+			var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/; 
+			var email_no=".email_no";
+			$(email_no).html(' ');
+			var username_no='.username_no';
+			$(username_no).html(' ');
+			var password='.password_no';
+			$(password_no).html(' ');
+			var checkboxmenu='.checkboxmenu_no';
+			$(checkboxmenu_no).html(' ');
+			var valid='';
+			if($('.checkboxmenu:checked').length ==0)
+				{
+				
+					$(subcategory_no).html('You cannot leave this field empty');
+					valid='ada';
+				}
+			if($('.name').val()=='')
+			{
+				$(name_no).html('You cannot leave this field empty');
+				valid='ada';
+			}
+			if($('.username').val()=='')
+			{
+				$(username_no).html('You cannot leave this field empty');
+				valid='ada';
+			}
+			if($('.password').val()=='')
+			{
+				$(password_no).html('You cannot leave this field empty');
+				valid='ada';
+			}
+			if($('.email').val()=='')
+			{
+				$(email_no).html('You cannot leave this field empty');
+				valid='ada';
+			}
+			else if(!$('.email').val().match(mailformat))  
+			{  
+				$(email_no).html('format email salah');
+				valid='ada';
+			} 
+			if(valid)
+			{
+				return false;
+			
+			}
+			else
+			{
+				$('input[type="submit"]').attr('disabled','disabled');
+			
+			}
+		}
+{/literal}
+</script>

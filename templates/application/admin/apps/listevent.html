@@ -1,0 +1,394 @@
+<script>
+{literal}
+//UNTUK DOWNLOAD XLS
+		$(document).ready(function(){
+			$(".unduhxls2").on("click", function(){
+				
+				//console.log('masuk');
+				var status=$('.status option:selected').val();
+				var category=$('.category option:selected').val();
+				var startdate=$('.startdate').val();
+				var enddate=$('.enddate').val();
+				var search=$('.search').val();
+				
+				location.href = basedomain+"eventmanagement?download=report&status="+status+"&category="+category+"&startdate="+startdate+"&enddate="+enddate+"&search="+search+"";
+			});
+		});
+
+$(document).on('click','.avatarnya',function(){
+
+	console.log($(this).attr('src'));
+	$gambarnya= $(this).attr('src');
+	console.log($('.gmbrpopup'));
+	$('.gmbrpopup').attr('src',$gambarnya);
+})
+
+$(document).on('click','.idinput',function(){
+
+	$idnya= $(this).attr('idnya');
+	$chapteridnya= $(this).attr('chapteridnya');
+
+	$('.idevent').val($idnya);
+	$('.chapteridnya').val($chapteridnya);
+})
+{/literal}
+</script>
+{include file="application/admin/widgets/popup-images.html"}
+{include file="application/admin/widgets/popup-eventid.html"}
+<div class="page_section" id="project-page">
+    <div id="container">
+        <div class="titlebox">
+            <h2 class="fl"><span class="icon-users">&nbsp;</span>List Event</h2>
+            <!--<h2 class="fr"><a href="{$basedomain}eventmanagement/addevent" class="button2">Tambah Baru</a></h2>-->
+            <!-- <h2 class="fr"><a href="#" class="button2 unduhxls2">Unduh XLS</a></h2>-->
+        </div><!-- end .titlebox -->
+        <div class="content event">
+        	<div class="summary">
+       		 <div class="short">
+			  <form method="GET" action="" id="shorter">
+             	
+                <div class="leftShorter">
+				<div class="select_box">
+                    	<label>Sort By Chapter :</label>
+                        <select name="listchapter" class="sort listchapter">
+                            <option value="">Semua Chapter</option>
+							{section name=t loop=$listchap}
+							{if $chapternya==$listchap[t].id}
+							  <option value="{$listchap[t].id}" selected>{$listchap[t].name_chapter}</option>
+							{else}
+							  <option value="{$listchap[t].id}" >{$listchap[t].name_chapter}</option>
+							{/if}
+							{/section}
+                        </select>
+                    </div>								
+                        <div class="select_box">
+                        <label>Sort by City :</label>
+                        <select name="kota" class="sort">
+                            <option value="">Semua Kota</option>
+                            {section name=i loop=$listcity}
+                                                        {if $kota==$listcity[i].id}
+                                                        <option value="{$listcity[i].id}" selected>{$listcity[i].city}</option>
+                            {else}
+                            <option value="{$listcity[i].id}">{$listcity[i].city}</option>
+                            {/if}
+                                                        {/section}
+
+                        </select>
+                    	</div>
+
+                	<div class="select_box">
+                    	<label>Sort By Status :</label>
+                        <select name="status" class="sort status">
+                            <option value="">Semua Status</option>
+                            <option value="1" {if $status==1}selected{/if}>Approved</option>
+                            <option value="2" {if $status==2}selected{/if}>Inactive</option>
+                        </select>
+                    </div>
+                    <div class="select_box">
+                    	<label>Sort By Kategori :</label>
+                        <select name="category" class="sort category">
+                            <option value="">Semua Kategori</option>
+                            <option value="1" {if $category==1}selected{/if}>Nonton Bareng</option>
+                            <option value="2" {if $category==2}selected{/if}>Futsal</option>
+			    <option value="3" {if $category==3}selected{/if}>Gathering</option>
+			    <option value="4" {if $category==4}selected{/if}>Supersoccer</option>
+                        ></select>
+                    </div>
+                   
+                </div><!--end.row-->
+             	<div class="rightShorter">
+                     <div class="" id="datePick">
+                        <span class="fl">Tanggal :</span>
+                        <div class="inputDate fl">
+                            <input type="text" value="{$startdate}" name="startdate" class="datepicker submitter startdate " id="dp1403509217274">
+                        </div><!-- /.rows -->
+                        
+                        <span class="fl">Sampai</span>
+                        <div class="inputDate fl">
+                            <input type="text"  value="{$enddate}" name="enddate" class="datepicker enddate " id="dp1403509217275">
+                        </div><!-- /.rows -->
+                    </div>
+                    <div id="searchPick">
+                    <span class="fl">Cari :</span>
+                    <input type='text' name='search' value="{$search}"  class='selectEvent fl search' style="width:150px" placeholder="event/chapter/alamat">
+                    <input type="submit" class="button2" style="margin-top:0px;" value="Go">
+                    </div>
+					</form>	
+           		</div><!--end.row-->
+				</div>
+            </div><!-- end .summary -->
+       
+			<table cellpadding="0" cellspacing="0" border="0" width="100%">
+			<thead>
+				<tr>
+				
+					<th class="head0">No</th>
+					<th class="head0">Nama Event</th> 
+					{*}<th class="head0">Deskiripsi Event</th> {/*}
+					<th class="head0">Kategori Event</th> 
+					<th class="head0">Tanggal Mulai</th> 
+					<th class="head0" >Tanggal Berakhir </th> 
+					<th class="head0" >Alamat Event</th> 
+					<th class="head0" >Foto</th> 
+					<th class="head0" >Nama Chapter</th> 
+					<th class="head0" >Tanggal Dibuat</th> 
+					{*}<th class="head0">Partisipasi</th> {/*}
+					<th class="head0">Point Event</th> 
+					<th class="head0">Status</th> 
+					<th class="head0">Action</th> 
+					<th class="head0">Insert Point</th> 
+					
+					
+				</tr>
+			</thead>
+			<tbody class="pagilist">
+					{section name=i loop=$list}
+					<tr>
+					<td>{$list[i].no}</td>
+					<td>{$list[i].names}</td>
+					<td>{$list[i].name_type}</td>
+					<td>{$list[i].time_start}</td>
+					<td>{$list[i].time_end}</td>
+					<td>{$list[i].alamat}</td>
+					<td>  
+				
+				{section name=j loop=$list[i].upload_foto}
+				<a href="#popup-imgbig" class="showPopup">{if $list[i].upload_foto}{if $list[i].upload_foto[j].name}<img src="{$basedomainpath}public_assets/uploadfoto/{$list[i].upload_foto[j].name}" class="avatarnya" width="40"height='40'>{/if}{else}<img src="{$basedomainpath}public_assets/profile/images.jpg" class="avatarnya" width="40"height='40'>{/if}</a>&nbsp;
+				{/section}	
+				
+					</td>
+			
+					<td>{$list[i].name_chapter}</td>
+					<td>{$list[i].date_create}</td>
+					{*}<td class="text-center">{$list[i].jumlahundangan}</td>{/*}
+					<td class="text-center">{$list[i].poin}</td>
+					<td>{if $list[i].stat==1}Approved{elseif $list[i].stat==0}Inactived{elseif $list[i].stat==3}Finished{elseif $list[i].stat==4}Rejected{/if}</td>
+					
+					
+					<td>
+						{if $list[i].stat==0}
+							<a href="{$basedomain}eventmanagement?paramactive={$list[i].id}" style="color:#19CFA8;">Approve</a> | 							
+							<a href="javascript:void(0)" onClick="confirmation('{$basedomain}eventmanagement?paramcancel={$list[i].id}','Confirm to Delete?')" style="color:#19CFA8;">Delete</a>	| 						
+							<a href="{$basedomain}eventmanagement/editevent/{$list[i].id}" style="color:#19CFA8;">Edit</a> | 
+							<a href="{$basedomain}eventmanagement?paramreject={$list[i].id}" style="color:#19CFA8;">Reject</a>
+						{elseif $list[i].stat==1 && $list[i].name_type=='Supersoccer'}							
+							<a href="javascript:void(0)" onClick="confirmation('{$basedomain}eventmanagement?paramcancel={$list[i].id}','Confirm to Delete?')" style="color:#19CFA8;">Delete</a> | 
+							<a href="{$basedomain}eventmanagement/editevent/{$list[i].id}" style="color:#19CFA8;">Edit</a>							
+						{elseif $list[i].stat==1}							
+							<a href="javascript:void(0)" onClick="confirmation('{$basedomain}eventmanagement?paramcancel={$list[i].id}','Confirm to Delete?')" style="color:#19CFA8;">Delete</a> | 
+							<a href="{$basedomain}eventmanagement/editevent/{$list[i].id}" style="color:#19CFA8;">Edit</a> | 
+							<a href="{$basedomain}eventmanagement?paramfinish={$list[i].id}&&idchapter={$list[i].chapter_id}" style="color:#19CFA8;">Finish</a>
+							
+						{elseif $list[i].stat==3}							
+							
+							<a href="{$basedomain}eventmanagement/editevent/{$list[i].id}" style="color:#19CFA8;"></a>
+							
+							
+						{/if}
+					</td>
+					
+					
+					<!-- <td><a href="{$basedomain}eventmanagement?paramreset={$list[i].id}" style="color:#19CFA8;"><input type="submit" class="button2" style="margin-top:0px;" value="Reset"></a></td>
+					 -->
+					 <td>
+					 {if $list[i].name_type=='Supersoccer' && $list[i].stat=='1'}
+					<a href="#popup-eventbig" class="showPopup"><input type="submit" class="button2 idinput" style="margin-top:0px;" value="Insert" idnya="{$list[i].id}" chapteridnya="{$list[i].chapter_id}"></a>
+					 {/if}
+					 </td>
+					
+					</tr>
+					
+			{/section}	
+			
+			
+			</tbody>
+			</table>
+			
+            <div id="paging_of_event_list" class="paging">
+            
+            </div>
+			
+		
+        </div><!-- end .event -->
+    </div><!-- end #container -->
+</div><!-- end #home -->
+
+
+<script type="text/javascript">
+	getpaging(0,{$total},"paging_of_event_list","paging_ajax_event",10);
+</script>
+
+<script>
+{literal}
+function paging_ajax_event(fungsi,start){ 
+var status=$('.status option:selected').val();		
+var startdate=$('.startdate').val();
+var enddate=$('.enddate').val();	
+var listchapter=$('.listchapter option:selected').val();	
+var search=$('.search').val();	
+var category=$('.category option:selected').val();	
+var kota=$('.kota option:selected').val();
+				
+	$.post(basedomain+"eventmanagement/pagingevent",{'start':start,'ajax':1,'status':status,'startdate':startdate,'enddate':enddate,'category':category,'search':search,'listchapter':listchapter},function(response){
+	
+		if(response){
+			  if(response.status==true){
+				var str="";
+			
+				$.each(response.data,function(k,v){
+		
+						str+='<tr>';
+						str+='<td>'+v.no+'</td>';
+						str+='<td>'+v.names+'</td>';
+						str+='<td>'+v.name_type+'</td>';
+						str+='<td>'+v.time_start+'</td>';
+						str+='<td>'+v.time_end+'</td>';
+						str+='<td>'+v.alamat+'</td>';
+						str+='<td>';
+						if(v.upload_foto!=0){
+						$.each(v.upload_foto,function(kk,vv){
+							str+='<a href="#popup-imgbig" class="showPopup">';
+							if(vv.name)
+							{
+							str+='<img src="'+basedomainpath+'public_assets/uploadfoto/'+vv.name+'" class="avatarnya" width="40" height="40"></a>';
+							}
+						});
+						}
+						str+='</td>';
+						if(v.name_chapter)
+						{
+						str+='<td>'+v.name_chapter+'</td>';
+						}else{
+						str+='<td></td>';
+						}
+						str+='<td>'+v.date_create+'</td>';
+						/**str+='<td>'+v.jumlahundangan+'</td>';**/	
+						str+='<td>'+v.poin+'</td>';	
+						str+='<td>'
+						
+						if (v.stat==1){str+='Approved';}else if(v.stat==0){str+='Inactived';}else if(v.stat==3){str+='Finished';}else if(v.stat==4){str+='Rejected';}str+='</td>';
+						if(v.stat==0){
+							str+='<td><a href="'+basedomain+'eventmanagement?paramactive='+v.id+'" style="color:#19CFA8;">Approve</a> <a href="javascript:void(0)" onClick="confirmation(\''+basedomain+'eventmanagement?paramcancel='+v.id+'\',\'Confirm to Delete?\')" style="color:#19CFA8;"> Delete</a> <a href="'+basedomain+'eventmanagement/editevent/'+v.id+'" style="color:#19CFA8;">Edit</a></td>';
+						}	
+						else if(v.stat=='1' && v.name_type=='Supersoccer'){
+                                                        str+='<td>   <a href="javascript:void(0)" onClick="confirmation(\''+basedomain+'eventmanagement?paramcancel='+v.id+'\',\'Confirm to Delete?\')" style="color:#19CFA8;"> Delete</a>  <a href="'+basedomain+'eventmanagement/editevent/'+v.id+'" style="color:#19CFA8;">Edit</a></td>';
+                                                }
+						else if(v.stat==1){
+							str+='<td>   <a href="javascript:void(0)" onClick="confirmation(\''+basedomain+'eventmanagement?paramcancel='+v.id+'\',\'Confirm to Delete?\')" style="color:#19CFA8;"> Delete</a>  <a href="'+basedomain+'eventmanagement/editevent/'+v.id+'" style="color:#19CFA8;">Edit</a>  <a href="'+basedomain+'eventmanagement?paramfinish='+v.id+'&&idchapter='+v.chapter_id+'" style="color:#19CFA8;">Finish</a></td>';
+						}
+						else if(v.stat==3){
+							str+='<td></td>';
+						}
+						else if(v.stat==4){
+                                                        str+='<td></td>';
+                                                }
+						
+						/**str+='<td><a href="'+basedomain+'eventmanagement?paramactive='+v.id+'" style="color:#19CFA8;">Approve</a>   <a href="'+basedomain+'eventmanagement?paramcancel='+v.id+'" style="color:#19CFA8;">Delete</a>  <a href="'+basedomain+'eventmanagement/editevent/'+v.id+'" style="color:#19CFA8;">Edit</a>';
+						if(v.name_type!='Supper Soccer')
+						{
+						str+=' <a href="'+basedomain+'eventmanagement?paramfinish='+v.id+'&&idchapter='+v.chapter_id+'&&pointnya='+v.point+'" style="color:#19CFA8;">Finish</a>';
+						}
+						str+='</td>'**/
+						
+						if(v.name_type=='Supersoccer' && v.stat=='1')
+						{
+						str+='<td><a href="#popup-eventbig" class="showPopup"><input type="submit" class="button2 idinput" style="margin-top:0px;" value="Insert" idnya="'+v.id+'" chapteridnya="'+v.chapter_id+'"></a></td>';						
+						}else{
+						str+='<td></td>';
+						}
+						str+='</tr>';
+						
+						});
+						$('.pagilist').html(str);
+						$('.showPopup').magnificPopup({
+							type:'inline',
+							midClick: true 
+						});
+						
+						
+						likeunlike();	
+					
+				}
+			}
+		},"JSON");
+	}
+	
+{/literal}
+	</script>
+	
+	
+<script>
+{literal}
+//select bootstarp
+
+$('.selectpicker').selectpicker();
+likeunlike();
+
+function likeunlike(){
+
+$(document).ready(function(){
+			$(".checkactive").on("click", function(){
+			var idnya=$(this).val();
+			var thisnya=$(this);
+					  $.ajax({
+                        'type': 'POST',
+                        'url': basedomain+'eventmanagement/checkit',
+                        'data': {idnya:idnya},
+						'dataType':'json',
+                        'success': function(result){
+						
+							thisnya.hide();
+							thisnya.parent().html('<center><input type="checkbox" class="checkinactives" value='+idnya+' checked>Checked</center>');
+							
+							$(document).ready(function(){
+							$(".checkinactives").on("click", function(){
+							var idnya=$(this).val();
+							var thisnya=$(this);
+									  $.ajax({
+										'type': 'POST',
+										'url': basedomain+'eventmanagement/incheckit',
+										'data': {idnya:idnya},
+										'dataType':'json',
+										'success': function(result){
+										
+											thisnya.hide();
+											thisnya.parent().html('<center><input type="checkbox" class="checkactive" value='+idnya+'></center>');
+											likeunlike();
+										}
+										
+										});
+
+								});
+							});
+						}
+						
+						});
+
+				});
+			});
+			
+$(document).ready(function(){
+			$(".checkinactive").on("click", function(){
+			var idnya=$(this).val();
+			var thisnya=$(this);
+					  $.ajax({
+                        'type': 'POST',
+                        'url': basedomain+'eventmanagement/incheckit',
+                        'data': {idnya:idnya},
+						'dataType':'json',
+                        'success': function(result){
+						
+							thisnya.hide();
+							thisnya.parent().html('<center><input type="checkbox" class="checkactive" value="'+idnya+'"></center>');
+							likeunlike();
+						}
+						
+						});
+
+				});
+			});
+}
+
+
+{/literal}
+</script>

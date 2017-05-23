@@ -1,0 +1,317 @@
+  {literal}
+<script>
+ $(function() {
+		function convertDate(inputFormat) {
+		  function pad(s) { return (s < 10) ? '0' + s : s; }
+		  var d = new Date(inputFormat);
+		  return [pad(d.getMonth()), pad(d.getDate()+1), d.getFullYear()].join('/');
+		}
+		
+		$('#datepickers1').change(function()
+									{
+										
+										var today = new Date();     
+										var tglintv =  convertDate($(this).val());   
+										var miliday = 24 * 60 * 60 * 1000;
+										var selisih = (tglintv - today) / miliday;
+										 console.log(selisih);
+										 $('.dateintrv_no').html('');
+										if(selisih<=2)
+										{
+										console.log('ss');
+											$('.dateintrv_no').html('The date you selected is less than 2 days from today.');
+										}
+									});	
+		$('#timepicker1').timepicker();
+	});
+	  $(function() {
+	  $('#datepicker2').datepicker();
+		$('#timepicker2').timepicker();
+	});
+{/literal}
+</script>
+<script>
+{literal}
+ // This example adds a search box to a map, using the Google Place Autocomplete
+// feature. People can enter geographical searches. The search box will return a
+// pick list containing a mix of places and predicted search terms.
+
+
+
+  
+
+
+$(function() {
+    $( "#datepickers1" ).datepicker({
+	dateFormat:"dd-mm-yy",
+     // defaultDate: "+1w",
+      changeMonth: true,
+      numberOfMonths: 1,
+      onClose: function( selectedDate ) {
+        $( "#datepickers2" ).datepicker( "option", "minDate", selectedDate );
+		$('#timepicker1').val('');
+		$('#timepicker2').val('');
+		
+      }
+    });
+    $( "#datepickers2" ).datepicker({
+	dateFormat:"dd-mm-yy",
+     // defaultDate: "+1w",
+      changeMonth: true,
+      numberOfMonths: 1,
+      onClose: function( selectedDate ) { 
+        $( "#datepickers1" ).datepicker( "option", "maxDate", selectedDate );
+		$('#timepicker1').val('');
+		$('#timepicker2').val('');
+      }
+    });
+	
+	
+
+});
+    </script>
+ {/literal}
+<div class="page_section" id="project-page">
+    <div id="container">
+        <div class="titlebox">
+            <h2 class="fl"><span class="icon-event">&nbsp;</span>Edit Challenge</h2>            
+        </div><!-- end .titlebox -->
+        <div class="content">
+            <form id="forms" class="forms" method="post" action="../../challangemanagement">
+			{section name=i loop=$listnya}
+				<div id="new-project" class="boxcontent">
+					<section class="step1">	
+						<!--
+						<div class="row">							
+							
+							<label for="klubfav">Nama Chapter<br></label>
+							<select name="chapter_id[]" class="chapter_id selectpicker" multiple data-selected-text-format="count>2">
+						   
+							  <option value="" ]>Pilih Chapter</option>
+							  {section name=j loop=$listchap}
+							  {if $listchap[j].id|in_array:$listnya[i].chapter_id}
+							  <option value="{$listchap[j].id}" selected>{$listchap[j].name_chapter}</option>
+							  {else}
+							  <option value="{$listchap[j].id}">{$listchap[j].name_chapter}</option>
+							  {/if}
+							  {/section}
+							
+						   </select><br>
+							
+							
+							<label class="chapter_id_erorr msg_name"  style="color: red;"></label>
+						</div>
+						-->
+
+						<div class="row">
+							<label for="email">Nama Challenge<br></label>
+							<input id="name" name="name" value="{$listnya[i].name}" type="text" class="required name" ><br>
+							<label class="msg_name name" style="color: red;">{$name}</label>
+						</div><!-- end .row -->
+					  					
+						<div class="row">
+							<label for="idktp">Deskripsi Challenge<br></label>							
+							<textarea id="description" name="description">{$listnya[i].description}</textarea><br>
+							<label class="msg_name description"  style="color: red;">{$description}</label>
+						</div><!-- end .row -->												
+						
+						<div class="row">							
+							<label>Kategori Challenge<br></label>
+							<select name="category" class="catchalange">						   
+							<option value="" ]>Pilih Kategori</option>
+							  {section name=k loop=$listcat}
+							  {if $listcat[k].id==$listnya[i].category}
+							  <option value="{$listcat[k].id}" selected>{$listcat[k].name_category}</option>
+							  {else}
+							  <option value="{$listcat[k].id}">{$listcat[k].name_category}</option>
+							  {/if}
+							  {/section}
+						   </select><br>
+							
+							<label class="tantangan_erorr msg_name" style="color: red;"></label>						
+						</div><!-- end .row -->	
+						
+						<!--<div class="row urlnya" style="display:none">
+							<label for="url">URL<br></label>
+							<input type="text" id="" name="url" class="" value="{$listnya[i].hastags}"><br>
+							<label class="url_erorr msg_name"  style="color: red;">{$hastags}</label>
+							<label class="dateintrv_no" style="color: red;"></label>
+						</div>-->
+						
+						{if $listnya[i].category==2}
+							<div class="row hastagnya">
+								<label for="hastag">Hastags<br></label>
+                                <div class="relative rowhastags">
+                            		<span class="hastagss"></span>
+								<input type="text" id="" name="hastags" class="" value="{$listnya[i].hastags}"></div><br>
+								<label class="hastag_erorr msg_name"  style="color: red;">{$hastags}</label>
+								<label class="dateintrv_no" style="color: red;"></label>
+							</div>
+						
+						{else}
+							<div class="row hastagnya" style="display:none">
+								<label for="hastag">Hastags<br></label>
+                                <div class="relative rowhastags">
+                            		<span class="hastagss"></span>
+								<input type="text" id="" name="hastags" class="" value="{$listnya[i].hastags}"></div><br>
+								<label class="hastag_erorr msg_name"  style="color: red;">{$hastags}</label>
+								<label class="dateintrv_no" style="color: red;"></label>
+							</div>
+						{/if}
+						
+						{if $listnya[i].category==1}
+							<div class="row urlnya">
+								<label for="url">URL<br></label>
+								<input type="text" id="" name="url" class="" value="{$listnya[i].url}"><br>
+								<label class="hastag_erorr msg_name"  style="color: red;">{$url}</label>
+								<label class="dateintrv_no" style="color: red;"></label>
+							</div>
+						
+						{else}
+							<div class="row urlnya" style="display:none">
+								<label for="url">URL<br></label>
+								<input type="text" id="" name="url" class="" value="{$listnya[i].url}"><br>
+								<label class="hastag_erorr msg_name"  style="color: red;">{$url}</label>
+								<label class="dateintrv_no" style="color: red;"></label>
+							</div>
+						{/if}
+						
+						
+						<!-- end .row -->
+						
+						<div class="row">
+							<label for="start_time">Tanggal Mulai<br></label>
+							<input id="datepickers1" name="start_time" value="{$listnya[i].start_time}" type="text" class="required start_time" ><br>
+							<label class="msg_name start_time_erorr" style="color: red;">{$start_time}</label>
+							<label class="dateintrv_no" style="color: red;"></label>							
+						</div><!-- end .row -->
+						<div class="row">
+							<label for="end_time">Tanggal Berakhir<br></label>
+							<input id="datepickers2" name="end_time" value="{$listnya[i].end_time}" type="text" class="required end_time" ><br>
+							<label class="msg_name end_time_erorr" style="color: red;">{$end_time}</label>
+							<label class="dateintrv_no" style="color: red;"></label>														
+						</div><!-- end .row -->						
+												
+						
+						<div class="row">
+							<input type="hidden" name="submit" value="1">
+							<input type="hidden" name="idnya" value="{$listnya[i].id}">
+							<input type="submit" value="Simpan" name="submit" class="fr button3 submitsave"  />&nbsp;
+							<a href="{$basedomain}challangemanagement" class="button4 fr text-center">Batal </a>
+							<small class="msg">{$status.msgee}</small>
+							<small class="msg">{$status.msg}</small>
+						</div><!-- end .row -->
+                
+					</section>
+				</div><!-- end #wizard -->	
+				{/section}
+            </form>
+        </div><!-- end .content -->
+    </div><!-- end #container -->
+</div><!-- end #home -->
+<script>
+{literal}
+	$(document).on('click','.submitevent',function(){
+		$('.chapter_id_erorr').html('');
+		$('.name_erorr').html('');
+		$('.cdescription_erorr').html('');
+		$('.start_time_erorr').html('');
+		$('.tantangan_erorr').html('');
+		$('.end_time').html('');
+		$('.dateend_erorr').html('');
+		$('.timeend_erorr').html('');
+		$('.timestart_erorr').html('');
+		$('.jumlahpeserta_erorr').html('');
+		$('.alamat_erorr').html('');
+		$('.namechapter_erorr').html('');
+		$('.lang_erorr').html('');
+		var valid='';
+		
+		if($('.chapter_id').val()=='')
+		{
+			$('.chapter_id_erorr').html('kolom ini harus di isi');
+			valid='ada';
+		}
+		
+		if($('.catchalange').val()=='')
+		{
+			$('.tantangan_erorr').html('kolom ini harus di isi');
+			valid='ada';
+		}
+		
+		if($('.name').val()=='')
+		{
+			$('.name_erorr').html('kolom ini harus di isi');
+			valid='ada';
+		}
+		if($('.description').val()=='')
+		{
+			$('.description_erorr').html('kolom ini harus di isi');
+			valid='ada';
+		}
+		if($('.start_time').val()=='')
+		{
+			$('.start_time_erorr').html('kolom ini harus di isi');
+			valid='ada';
+		}
+		if($('.end_time').val()=='')
+		{
+			$('.end_time_erorr').html('kolom ini harus di isi');
+			valid='ada';
+		}
+		if($('.timestart').val()=='')
+		{
+			$('.timestart_erorr').html('kolom ini harus di isi');
+			valid='ada';
+		}
+		if($('.dateend').val()=='')
+		{
+			$('.dateend_erorr').html('kolom ini harus di isi');
+			valid='ada';
+		}
+		if($('.timeend').val()=='')
+		{
+			$('.timeend_erorr').html('kolom ini harus di isi');
+			valid='ada';
+		}
+		if($('.alamat').val()=='')
+		{
+			$('.alamat_erorr').html('kolom ini harus di isi');
+			valid='ada';
+		}
+
+		if($('.chapter_id').val()=='')
+		{
+			$('.namechapter_erorr').html('kolom ini harus di isi');
+			valid='ada';
+		}
+		if(valid)
+		{
+			return false;
+		}
+		else
+		{
+			$('.fromevent').trigger('submit');
+		}
+	})
+	
+	$(document).on('change','.catchalange',function(){
+			console.log($(this).val());
+		if ($(this).val()==1 ){
+			$('.urlnya').show();
+			$('.hastagnya').hide();
+		}
+		if ($('.catchalange').val()==2 ){
+			$('.hastagnya').show();
+			$('.urlnya').hide();
+		}
+		if ($('.catchalange').val()=='' ){
+			$('.hastagnya').hide();
+			$('.urlnya').hide();
+		}
+		
+		
+		
+	});
+{/literal}
+</script>

@@ -1,0 +1,313 @@
+<div id="tebak-skor" class="section">
+	<div id="container">
+        <div class="rows">
+        	<img src="{$basedomain}assets/images/banner-skor2.jpg" >
+        </div>
+        {*}<div class="rows">
+        	<div class="descSkor rowboxs tr">
+            	
+                      <h4 class="title-entry yellow">Cara Bermain</h4>
+             
+                <ul>
+                	<li>Isi tebakan skor kamu untuk 3 pertandingan yang dipilih untuk ditebak.</li>
+                    <li>Setelah mengisi seluruh tebakan yang kamu pikir paling jitu, klik tombol submit.</li>
+                    <li>Pengumuman pemenang akan diumumkan disini pada tanggal <span class="yellow">19 Oktober 2015</span>.</li>
+                </ul>
+                <br />
+                <h4 class="title-entry yellow">Syarat & ketentuan</h4>
+              
+                <ul>
+                	<li>Pemenang adalah peserta yang berhasil menebak skor ketiga pertandingan paling tepat dan cepat.</li>
+                    <li>Setiap pertandingan yang berhasil ditebak secara jitu dan tepat, maka peserta akan mendapatkan 5 poin.</li>
+                    <li>Poin yang dihasilkan dari TEBAK SKOR! Ini akan masuk ke dalam poin masing-masing peserta dalam Supersoccer Community Race.</li>
+                    <li>Peserta dapat mengubah-ubah prediksi skornya hingga hari <span class="yellow">Jumat, 16 Oktober 2015 pukul 23:59 WIB</span>. Panitia akan menutup submission TEBAK SKOR! Pada <span class="yellow">Sabtu dini hari, pukul 00:00 WIB</span>.</li>
+                </ul>
+            </div><!--end.skorInput-->
+        </div><!--end.rows-->{/*}
+		
+		<div class="rows">
+        	<div class="descSkor rowboxs tr">
+            	
+                      <h4 class="title-entry yellow">Maaf, TEBAK SKOR! periode ini sudah ditutup.</h4>
+             
+                <p>Anda dapat ikutan TEBAK SKOR! periode selanjutnya di pertandingan yang akan datang. Tetap update di game Supersoccer Community Race dan raih hadiah menarik setiap minggunya!</p>
+            </div><!--end.skorInput-->
+        </div><!--end.rows-->
+		{*}<form method="post" action="member/masukskor" name="myform">
+			<div class="rows skorRows">
+            	<!--a href="#succespopup" class="showPopup">inini</a-->
+				<h1 class="tittle yellow">SCOREBOARD</h1> 
+				{if $lispertandingan}
+					<div class="skorsInput tr">					
+						{section name=i loop=$lisskor1}
+							<div class="rows skorRowss">
+								<div class="col3">
+									<h4 class="namaClub yellow">{$lisskor1[i].club1}</h4>
+									<div class="skorIn">
+										<h5 class="skornya yellow">{$lisskor1[i].skor1}</h5>
+									</div>
+									
+								</div>
+								<div class="col3 textSkor">
+									<span class="arrow-left">&nbsp;</span>
+									<h1 class="textVs yellow">VS</h1>
+									<span class="arrow-right">&nbsp;</span>
+								</div>
+								<div class="col3">
+									<h4 class="namaClub yellow">{$lisskor1[i].club2}</h4>
+									<div class="skorIn">
+										<h5 class="skornya yellow">{$lisskor1[i].skor2}</h5>								
+									</div>
+								</div>
+							</div><!--end rows-->
+						{/section}
+						
+						{section name=i loop=$lisskor2}
+							<div class="rows skorRowss">
+								<div class="col3">
+									<h4 class="namaClub yellow">{$lisskor2[i].club1}</h4>
+									<div class="skorIn">
+										<h5 class="skornya yellow">{$lisskor2[i].skor1}</h5>
+									</div>
+									
+								</div>
+								<div class="col3 textSkor">
+									<span class="arrow-left">&nbsp;</span>
+									<h1 class="textVs yellow">VS</h1>
+									<span class="arrow-right">&nbsp;</span>
+								</div>
+								<div class="col3">
+									<h4 class="namaClub yellow">{$lisskor2[i].club2}</h4>
+									<div class="skorIn">
+										<h5 class="skornya yellow">{$lisskor2[i].skor2}</h5>									
+									</div>
+								</div>
+							</div><!--end rows-->
+						{/section}
+						
+						{section name=i loop=$lisskor3}
+							<div class="rows skorRowss">
+								<div class="col3">
+									<h4 class="namaClub yellow">{$lisskor3[i].club1}</h4>
+									<div class="skorIn">
+										<h5 class="skornya yellow">{$lisskor3[i].skor1}</h5>
+									</div>
+									
+								</div>
+								<div class="col3 textSkor">
+									<span class="arrow-left">&nbsp;</span>
+									<h1 class="textVs yellow">VS</h1>
+									<span class="arrow-right">&nbsp;</span>
+								</div>
+								<div class="col3">
+									<h4 class="namaClub yellow">{$lisskor3[i].club2}</h4>
+									<div class="skorIn">
+										<h5 class="skornya yellow">{$lisskor3[i].skor2}</h5>									
+									</div>
+								</div>
+							</div><!--end rows-->
+						{/section}
+						
+						<div class="rows">
+							<!-- <input type="hidden" name="id_member" value="{$memberprofile.ids}">
+							<!-- <button class="button" name="submit">Submit</button> 
+							<input class="button" type="submit" name="submit" value="Edit"> -->
+							<a href="tebakskor/editskor/{$memberprofile.ids}"><span class="button" value="edit">EDIT</span></a>
+						</div>
+						
+						
+					</div><!--end.skorsInput-->
+				{else}
+					<div class="skorsInput tr">					
+						{section name=i loop=$lispertandingan1}
+							<div class="rows skorRowss">
+								<div class="col3">
+									<h4 class="namaClub yellow">{$lispertandingan1[i].club1}</h4>
+									<div class="skorIn">
+										<input class="skornya1 number"  type="text" name="skor1" maxlength="2" />
+										<input type="hidden" name="pertandingan1" value="{$lispertandingan1[i].id}"/>
+                                        
+									</div>
+                                    <label class="skor1_error error_red"></label>
+									
+								</div>
+								<div class="col3 textSkor">
+									<span class="arrow-left">&nbsp;</span>
+									<h1 class="textVs yellow">VS</h1>
+									<span class="arrow-right">&nbsp;</span>
+								</div>
+								<div class="col3">
+									<h4 class="namaClub yellow">{$lispertandingan1[i].club2}</h4>
+									<div class="skorIn">
+										<input class="skornya2 number"  type="text" name="skor2" maxlength="2" />
+                                        									
+									</div>
+                                    <label class="skor2_error error_red"></label>
+								</div>
+							</div><!--end rows-->
+						{/section}
+						
+						{section name=i loop=$lispertandingan2}
+							<div class="rows skorRowss">
+								<div class="col3">
+									<h4 class="namaClub yellow">{$lispertandingan2[i].club1}</h4>
+									<div class="skorIn">
+										<input class="skornya3 number"  type="text" name="skor3" maxlength="2" />
+										<input type="hidden" name="pertandingan3" value="{$lispertandingan2[i].id}"/>
+                                        
+									</div>
+                                    <label class="skor3_error error_red"></label>
+									
+								</div>
+								<div class="col3 textSkor">
+									<span class="arrow-left">&nbsp;</span>
+									<h1 class="textVs yellow">VS</h1>
+									<span class="arrow-right">&nbsp;</span>
+								</div>
+								<div class="col3">
+									<h4 class="namaClub yellow">{$lispertandingan2[i].club2}</h4>
+									<div class="skorIn">
+										<input class="skornya4 number"  type="text" name="skor4" maxlength="2" />
+                                        									
+									</div>
+                                    <label class="skor4_error error_red"></label>
+								</div>
+							</div><!--end rows-->
+						{/section}
+						
+						{section name=i loop=$lispertandingan3}
+							<div class="rows skorRowss">
+								<div class="col3">
+									<h4 class="namaClub yellow">{$lispertandingan3[i].club1}</h4>
+									<div class="skorIn">
+										<input class="skornya5 number"  type="text" name="skor5" maxlength="2" />
+										<input type="hidden" name="pertandingan5" value="{$lispertandingan3[i].id}"/>
+                                        
+									</div>
+                                    <label class="skor5_error error_red"></label>
+									
+								</div>
+								<div class="col3 textSkor">
+									<span class="arrow-left">&nbsp;</span>
+									<h1 class="textVs yellow">VS</h1>
+									<span class="arrow-right">&nbsp;</span>
+								</div>
+								<div class="col3">
+									<h4 class="namaClub yellow">{$lispertandingan3[i].club2}</h4>
+									<div class="skorIn">
+										<input class="skornya6 number"  type="text" name="skor6" maxlength="2" />									
+									</div>
+                                    <label class="skor6_error error_red"></label>
+								</div>
+							</div><!--end rows-->
+						{/section}
+							
+						<div class="popup popupdetail" id="succespopup">
+							<div id="popup-imgbig" class="popup-container">
+								<a class="closePopup" href="javascript: submitform()">&nbsp;</a>
+								<div class="popup-content">
+									<p><span class="bigtext">Terima kasih telah berpartisipasi dalam TEBAK SKOR!</span><br />
+										Pemenang TEBAK SKOR! akan diumumkan pada <span class="white">19 Oktober 2015</span>. Bagi pemenang yang beruntung berhak mendapatkan tambahan 15 poin dan 
+										satu Jersey Bola Original! 
+									</p>
+								</div>
+							</div><!-- END .popupContainer -->
+						</div><!-- END .popup -->
+						
+						<div class="rows">
+							<input type="hidden" name="id_member" value="{$memberprofile.ids}">
+							<!-- <button class="button" name="submit">Submit</button> -->
+							 <!-- <input id="simpannya" class="button simpan" type="submit" name="submit" value="Submit" onclick="mfp();"> -->
+							<a href="#succespopup" class="showPopup button">Submit</a> 
+						</div>
+						
+					</div><!--end.skorsInput-->
+				{/if}
+			</div><!--skorRows-->
+		</form>{/*}
+    </div><!--end#container-->
+</div><!--end.section-->
+
+
+
+{literal}
+<script>
+$(document).on('click','.simpan',function(){
+	$('.skor1_error').html('');
+	$('.skor2_error').html('');
+	$('.skor3_error').html('');
+	$('.skor4_error').html('');
+	$('.skor5_error').html('');
+	$('.skor6_error').html('');
+	
+	var valid="";
+	if($('.skornya1').val()=='')
+	{
+		$('.skor1_error').html('Kolom ini harus diisi');
+		valid="ada";
+	}
+	if($('.skornya2').val()=='')
+	{
+		$('.skor2_error').html('Kolom ini harus diisi');
+		valid="ada";
+	}
+	if($('.skornya3').val()=='')
+	{
+		$('.skor3_error').html('Kolom ini harus diisi');
+		valid="ada";
+	}
+	if($('.skornya4').val()=='')
+	{
+		$('.skor4_error').html('Kolom ini harus diisi');
+		valid="ada";
+	}
+	if($('.skornya5').val()=='')
+	{
+		$('.skor5_error').html('Kolom ini harus diisi');
+		valid="ada";
+	}
+	if($('.skornya6').val()=='')
+	{
+		$('.skor6_error').html('Kolom ini harus diisi');
+		valid="ada";
+	}
+	if(valid)
+	{
+		//return false;
+		$(document).on('click','.mfp-close',function(){
+	//alert("asasasasas");
+	 document.myform.submit();
+});
+	}
+	
+										  
+});
+
+$('.number').keyup(function () {  
+	if(this.value)
+	{
+		this.value = this.value.replace(/[^0-9]/g,''); 
+		
+	}
+});
+
+function mfp(){
+$(document).on('click','.mfp-close',function(){
+  //$( "#simpannya" ).trigger( "click" );
+  alert("asasas");
+});
+}
+
+
+ 
+/*function submitform()
+{
+  document.myform.submit();
+  
+}*/
+/*$(document).on('click','.mfp-close',function(){
+	//alert("asasasasas");
+	 document.myform.submit();
+});*/
+</script>
+{/literal}

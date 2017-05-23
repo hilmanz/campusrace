@@ -1,0 +1,33 @@
+'<html>
+	<head>
+	<title>Undangan Chapter</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+	</head>
+	<body bgcolor="#000" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+   	<table id="Table_01" width="750" border="0" cellpadding="0" cellspacing="0">
+       	<tr>
+       	<td>
+        <img src="http://gte.supersoccer.co.id/assets/images/email-template-invi_01.jpg" width="750" height="276" alt=""></td>
+       	</tr>
+       	<tr>
+       	<td>
+       	<div style=" background:#730000; color:#fff; padding:40px 30px; font-family:sans-serif; line-height: 24px; text-align:justify;">
+	<p>Hi <span style="color:#fdcb02;">ADE</span>,</p>
+        <p>Silahkan klik <a style="color:#fdcb02; text-decoration:none;" target="blank
+        "href="www.supersoccer.co.id/sscrregion1/home/registerChapter">disini</a> untuk mendaftarkan Chapter Anda dalam program <strong>Supersoccer Community Race</strong>.
+        <br>
+        Jika Anda tidak bisa klik link di atas, copy link berikut ini ke browser<br><span style="color:#fdcb02;">www.supersoccer.co.id/sscrregion1/home/registerChapter</span></p>
+        <p>Setelah registrasi Chapter, jangan lupa mengisi data seluruh member Chapter yang ingin Anda undang bergabung di Supersoccer Community Race menggunakan file XLS yang terlampir dalam email ini.</p>
+        <p>Setelah mengisi data seluruh member, mohon dapat dikirim ke alamat email SSCRRegion1@gmail.com untuk dapat kami proses pengiriman undangan untuk bergabung di Supersoccer Community Race.</p>
+        <p>Pastikan semua data diisi dengan format yang sesuai dan seluruh member Anda sudah ada di dalam daftar tersebut.</p>
+        <p>Untuk Chapter terbaik, Supersoccer akan menyelenggarakan event NOBAR yang super seru dengan mendatangkan pemain legendaris Liga Inggris/Italia khusus untuk chapter Anda!</p>
+       	</div>
+       	</td>
+       	</tr>
+       	<tr>
+       	<td>
+        <img src="http://gte.supersoccer.co.id/assets/images/email-template-invi_03.jpg" width="750" height="136" alt=""></td>
+       	</tr>
+   	</table>
+	</body>
+</html>'

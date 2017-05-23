@@ -1,0 +1,299 @@
+<div id="registration" class="section">
+	<div id="container">
+    	<div class="row-2">
+            <h1 class="yellow textbg">REGISTRASI MEMBER Twitter</h1>
+            <p>Lengkapi data diri Anda di bawah ini untuk mulai bergabung di Supersoccer Campus League dan mengumpulkan poin terbanyak untuk menjadi finalis yang berkesempatan memenangkan Supersoccer Tour langsung ke Inggris/Italia! Selain itu, Anda juga bisa melakukan redeem coins untuk mendapatkan merchandise keren dari Supersoccer!</p>
+    	</div>
+        
+		<div class="rows">
+        	<div class="profileInfo">
+            	
+               {*} <div class="tr avatarBox">
+                    <div class="avatar-big">   
+                     {if $img_avatar}
+						<img src="{$basedomain}public_assets/profile/{$img_avatar}" >
+					{else}
+                            <img src="{$basedomain}public_assets/profile/images.jpg" >
+					{/if}
+                    </div>
+                </div><!--end avatarBox-->{/*}
+                <div class="chapterDetail">
+                	<div class="rownya" style="margin-left:-20px;">
+                        	<label style="width:auto;">Member ID:&nbsp;</label> {section name=i loop=$list} <div class="infonya yellow"> &nbsp;{$list[i].username}</div>{/section}
+                        </div>
+                    {*}<h3>No Member</h3>
+					{section name=i loop=$list}
+                    <p>{$list[i].ssgte_id}</p>
+					{/section}{/*}
+                </div><!---end.chapterDetail-->
+            </div><!--end.profileInfo-->
+        </div>
+		
+        <div class="formregis">
+			{section name=i loop=$list}
+        	<h2 class="formTittle red">Biodata Member</h2>
+        	
+			<form method="post" id="fromaddmember" action="../memberreg/registerTwitter" enctype="application/x-www-form-urlencoded">
+				<div class="reg1">
+            <div class="row">
+                <input type="text" placeholder="Nama Member" name="name" class="nameanggota string" value="{$list[i].name}">
+				<label class="nameanggota_error error_red"></label>
+            </div>
+             <div class="row">
+                <input type="text"  placeholder="Email Member" name="email" value="{$list[i].username}" id="emailmember" class="emailMember">
+				<label class="infotext emailmember_erorr error_red" id="emailmember_error"></label>				
+            </div>
+			<!--<div class="row">
+                <input type="text"  placeholder="Email Member" name="email" value="{$list[i].username}" class="emailanggota" readonly>
+				<label class="emailanggota_error error_red"></label>
+            </div>
+            <div class="row">
+                <input type="password"  placeholder="Password" name="password" class="passwordanggota">
+				<label class="passwordanggota_error error_red"></label>
+            </div>
+            <div class="row">
+                <input type="password"  placeholder="Konfirmasi Password" name="repassword" class="repasswordanggota">
+				<label class="repasswordanggota_error error_red"></label>
+            </div>-->
+            <div class="row">
+                <input type="text"  placeholder="ID KTP/SIM" name="idktpsim" value="{$list[i].ktp_sim}"  class="idktpsim number">
+				<label class="idktpsim_error error_red"></label>
+            </div>
+            <div class="row">
+                <input type="text"  placeholder="Nama Kampus" name="kampus" value="{$list[i].kampus}"  class="kampus">
+				<label class="kampus_error error_red"></label>
+            </div>
+            
+            <div class="row relative">
+            	<span class="infoUrl">https://www.facebook.com/</span>
+                <input type="text"  placeholder="Akun facebook member"  value="{$list[i].fb_id}"  name="fbanggota" class="inputsocmedfacebook">
+				<label class="error_red"></label>
+            </div>
+            <div class="row relative">
+            	<span class="infoUrl">https://twitter.com/</span>
+                <input type="text"  placeholder="Akun twitter member"  value="{$list[i].twiiter_id}"  name="twitteranggota" class="inputsocmedtwitt">
+				<label class="error_red"></label>
+            </div>
+			 <div class="row">
+                <input type="text"  placeholder="Nomor Telp." value="{$list[i].no_tlp}"  name="no_telp" class="no_telp number">
+				<label class="no_telp_error error_red"></label>
+            </div>
+			<div class="row">
+            	<textarea class="alamat" name="alamat" placeholder='Alamat'>{$list[i].alamat}</textarea><br />
+               <label class="alamat_error error_red"></label>
+            </div>
+			<input type="hidden" value="admin" name="password">
+			<input type="hidden" value="admin" name="repassword">
+			<input type="hidden" value="{$list[i].id}" name="id">
+			<input type="hidden" value="{$list[i].user_login}" name="userid">
+            
+            </div><!--end reg-->
+				
+				<!-- <div class="row">
+					<textarea class="emailMember" id="emailmember" name="email" placeholder="Masukan email kamu"></textarea><br />
+					<p class="infotext emailmember_erorr error_red" id="emailmember_error" style="width:100%;"></p>
+					{*}<p class="infotext">Maximal 20 email member, setiap email dipisahkan dengan tanda koma (,).</p>{/*}
+					<p class="infotext">Contoh: yahoo@email.com atau gmail@email.com</p>
+				</div> -->
+				
+				<div class="row">
+					<a  href="javascript:void(0)" class="button submitaddmember">KIRIM</a>
+				</div>
+			</form>
+		{/section}
+		
+        </div>
+    </div><!--end#container-->
+</div><!--end.section-->
+
+<script>
+{literal}
+   
+	$(document).on('click','.submitaddmember',function(){
+		$('#emailmember_error').html('');
+		$('.nameanggota_error').html('');
+		$('.passwordanggota_error').html('');
+		$('.repasswordanggota_error').html('');
+		$('.idktpsim_error').html('');
+		$('.fbanggota_error').html('');
+		$('.twitteranggota_error').html('');
+		$('.no_telp_error').html('');
+		$('.alamat_error').html('');		
+		$('.kampus_error').html('');		
+		var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,15})+$/; 
+	
+		
+		var valid='';
+		if($('#emailmember').val()=='')
+		{
+			$('#emailmember_error').html('kolom ini harus di isi');
+			valid='ada';
+		}
+		if($('.nameanggota').val()=='')
+		{
+			$('.nameanggota_error').html('Kolom ini harus diisi');
+			valid="ada";
+		}
+		if($('.passwordanggota').val()=='')
+		{
+			$('.passwordanggota_error').html('Kolom ini harus diisi');
+			valid="ada";
+		}
+		
+		if($('.repasswordanggota').val()=='')
+		{
+			$('.repasswordanggota_error').html('Kolom ini harus diisi');
+			valid="ada";
+		}
+		else if($('.passwordanggota').val() != $('.repasswordanggota').val())
+		{
+			$('.repasswordanggota_error').html('Password yang anda masukan tidak cocok');
+			valid="ada";
+		}
+		if($('.idktpsim').val()=='')
+		{
+			$('.idktpsim_error').html('Kolom ini harus diisi');
+			valid="ada";
+		}
+		if($('.fbanggota').val()=='')
+		{
+			$('.fbanggota_error').html('Kolom ini harus diisi');
+			valid="ada";
+		}
+		if($('.twitteranggota').val()=='')
+		{
+			$('.twitteranggota_error').html('Kolom ini harus diisi');
+			valid="ada";
+		}
+		if($('.no_telp').val()=='')
+		{
+			$('.no_telp_error').html('Kolom ini harus diisi');
+			valid="ada";
+		}
+		
+		if($('.alamat').val()=='')
+		{
+			$('.alamat_error').html('Kolom ini harus diisi');
+			valid="ada";
+		}
+		if($('.kampus').val()=='')
+		{
+			$('.kampus_error').html('Kolom ini harus diisi');
+			valid="ada";
+		}
+		
+		
+		if(valid)
+		{
+			return false;
+		}
+		else
+		{
+			vlidemail(valid);
+		}
+	})
+  
+
+
+function vlidemail(valid)
+{
+	var valid= valid;
+	emailsplit = $('.emailMember').val().split(',');
+	emailformat='';
+	var emailSame='';
+	var ix=0;
+	var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,15})+$/; 
+	if(emailformat=='' && emailSame=='')
+		{
+			if(emailsplit.length > 20 )
+			{
+				$('.emailmember_erorr').html('Maximal 20 Email Member');
+				 valid='ada';	
+				
+			}
+		}	
+		//console.log(emailsplit);
+		$.each(emailsplit,function(ind,value)
+		{
+			mailnya = value.trim();
+			
+			if(!mailnya.match(mailformat))  
+			{  
+				$('.emailmember_erorr').html(' format email salah (e.g. example@gmail.com)');
+				
+				valid='ada';
+				emailformat='ada';
+				//console.log(mailnya);
+			} 
+			else
+			{
+				$.ajax ({ 
+					type	 : 'POST', 
+					url	 :  basedomain+'home/checkEmailMember' , 
+					data:{email:mailnya},
+					dataType:'json',
+					success	: function (result) 
+						{
+							++ix;
+						
+							if(result.status==1)
+							{
+								//console.log(emailSame);
+								if(emailSame=='')
+								{
+									emailSame +=result.email;
+									
+								}
+								else
+								{
+									emailSame +=','+result.email;
+								}
+								if(emailSame)
+									{
+										$('.emailmember_erorr').html('email <span class="emailsama" > '+emailSame+'</span> sudah terdaftar');
+										valid='ada';
+									}
+							}
+							//console.log(valid);
+							if(emailsplit.length==ix)
+							{
+								if(valid)
+								{
+									return false;
+								}
+								else
+								{
+									$('#fromaddmember').trigger('submit');
+								}
+							}
+						}
+				});
+				
+			}
+		});
+		if(valid)
+		{
+			return false;
+		}
+		return false;
+		
+		
+
+}
+
+$('.number').keyup(function () {  
+		if(this.value)
+		{
+			this.value = this.value.replace(/[^0-9]/g,''); 
+			
+		}
+	});
+	$('.string').keyup(function () {  
+		if(this.value)
+		{
+			this.value = this.value.replace(/[^a-zA-Z'"]/g,''); 
+			
+		}
+	});	
+{/literal}
+</script>

@@ -1,0 +1,93 @@
+
+<div id="chapter-profile" class="section">
+	<div id="container">
+        <div class="row-2">
+              <h1 class="yellow textbg">PROFIL CHAPTER</h1>
+        </div>
+            <div class="rows">
+            	<div class="profileInfo">
+                	<div class="tr avatarBox">
+                        <div class="avatar-big">   
+						{if $userdata.img_avatar}
+						<img src="{$basedomain}public_assets/profile/{$userdata.img_avatar}" >
+					{else}
+                            <img src="{$basedomain}public_assets/profile/images.jpg" >
+					{/if}
+                        </div>
+                    </div><!--end avatarBox-->
+                    <div class="chapterDetail">
+                    	<div class="rownya">
+                    		<label>Nama / ID Chapter :</label><div class="infonya yellow"> {$userdata.name_chapter} / {$userdata.id}</div>
+                        </div>
+                        <div class="rownya">
+                        	<label>Kota :</label><div class="infonya yellow"> {$userdata.citinya} </div>
+                        </div>
+                        <div class="rownya">
+                        	<label>Head Chapter :</label><div class="infonya yellow"> {$userdata.name} </div>
+                        </div>
+                        <div class="rownya rownsocial">
+                        	<label>Social Media :</label><div class="infonya yellow"> <p><span class="icon-facebook2">&nbsp;</span><a href="https://www.facebook.com/{$userdata.facebook}" target="_blank">{$userdata.facebook}</a></p><p><span class="icon-twitter2">&nbsp;</span><a href="https://twitter.com/{$userdata.twitter}" target="_blank">{$userdata.twitter}</a></p></div>
+                        </div>
+						
+                        <p class="points yellow"><span class="bigNumber">{$akumulasi}</span> Points</p>
+                        
+                        <a href="{$basedomain}chapter/editchapter/{$userdata.id}/{$userdata.name_chapter}" class="button" id="btn_upload">UBAH</a>
+                    </div><!---end.chapterDetail-->
+                </div><!--end.profileInfo-->
+            </div><!--end.rows-->
+            <div class="rows">
+            	<div class="mList-chapter">
+                	<div class="box-grey">
+                    	<div class="textAng fl">
+                        	<p>Member</p>
+                        </div>
+                        <div class="textNumber fr">
+                        	<p class="yellow">{$membertotal}</p>
+                        </div>
+                    </div>
+                </div><!--end.listchapter-->
+            </div><!--end.rows-->
+            <div class="rows">
+            	<a class="button2 halfWidth fl" href="{$basedomain}chapter/member">Lihat Member</a>
+            	<a class="button2 halfWidth fr" href="{$basedomain}chapter/addMember">Tambah Member</a>
+            </div>
+            
+            <div class="rows">
+            	<div class="mList-chapter">
+                	<div class="box-grey">
+                    	<div class="textAng fl">
+                        	<p>Event</p>
+                        </div>
+                        <div class="textNumber fr">
+                        	<p class="yellow">{$totalEvent}</p>
+                        </div>
+                    </div>
+                </div><!--end.listchapter-->
+            </div><!--end.rows-->
+            <div class="rows">
+            	<a class="button2 halfWidth fl" href="{$basedomain}chapter/event">Lihat Event</a>
+          
+            	<a class="button2 halfWidth fr" href="{$basedomain}chapter/addEvent">Tambah Event</a>
+            </div>
+           
+            <div class="rows">
+            	<div class="mList-chapter">
+                	<div class="box-grey">
+                    	<div class="textAng fl">
+                        	<p>Challenge</p>
+                        </div>
+                        <div class="textNumber fr">
+                        	<p class="yellow">{$totalTantangan}</p>
+                        </div>
+                    </div>
+                </div><!--end.listchapter-->
+            </div><!--end.rows-->
+            <div class="rows">
+            	<a class="button2 halfWidth fl" href="{$basedomain}chapter/tantangan">Lihat Challenge</a>
+           
+            	{*}<a class="button2 halfWidth fr" href="{$basedomain}chapter/addtantangan">Tambah Challenge</a>{/*}
+            </div>
+          
+    	
+    </div><!--end#container-->
+</div><!--end.section-->

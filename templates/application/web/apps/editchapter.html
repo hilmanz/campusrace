@@ -1,0 +1,240 @@
+<div id="Edit-Chapter" class="section">
+	<div id="container">
+    	<div class="row-2">
+            <h1 class="yellow textbg">EDIT CHAPTER</h1>  
+    	</div>
+        <div class="formregis">
+        	<form method="post" id="fromreg" action="{$basedomain}chapter/proseseditchapter"  enctype="multipart/form-data">
+            <div class="row">
+                <div class="tr avatarBox">
+                    <div class="avatar-big" id='uploadPreview'>   
+                      {if $profile.img_avatar}
+						<img src="{$basedomain}public_assets/profile/{$profile.img_avatar}" >
+					{else}
+                            <img src="{$basedomain}public_assets/profile/images.jpg" >
+					{/if}
+                    </div>
+                    <p class="infotext" style="margin:10px 0;">Maximal file 2MB (JPG, JPEG, PNG)</p>
+					<div style="display:none">
+						  
+					      <input type="file" class="myfile imgbanner" id="myfile" name="myfile" /> 
+				</div>
+                    <a  class="button browsfile" id="btn_upload ">UNGGAH</a>
+                </div><!--end avatarBox-->
+            </div>
+             <div class="row">
+                <input type="text" value="{$profile.name_chapter}" class="namechapter" name='name_chapter' placeholder="Nama Chapter">
+            <label class="namechapter_error error_red"></label>
+			</div>
+            <div class="row">
+                <input type="text" placeholder="Email Chapter" name='email' value="{$profile.email}" class="email" readonly>
+				<label class="email_error error_red"></label>
+            </div>
+            <div class="row">
+                <input type="text"  class="number telp" placeholder="No Telp/HP head chapter" name='telp' value="{$profile.no_tlp}">
+				<label class="telp_error error_red"></label>
+			</div>
+             <div class="row relative">
+             	<span class="infoUrl">https://www.facebook.com/</span>
+                <input class="inputsocmedfacebook" type="text"  placeholder="Facebook" name='facebook' value="{$profile.facebook}">
+				<label class="error_red"></label>
+			</div>
+			 <div class="row relative">
+             	<span class="infoUrl">https://twitter.com/</span>
+                <input class="inputsocmedtwitt" type="text"  placeholder="Twitter" name='twitter' value="{$profile.twitter}">
+				<label class="error_red"></label>
+		   </div>
+            <div class="row">
+                <input type="password"  placeholder="Password" name='password' value="{$password}" class="password">
+				<label class="password_error error_red"></label>
+		   </div>
+            <div class="row">
+                <input type="password"  placeholder="Konfirmasi Password" name='repass' value="{$password}" class="confirmpassword">
+            <label class="confirmpassword_error error_red"></label>
+			</div>
+            <div class="row">
+            	<textarea placeholder="Alamat" name='alamat'  class="alamat">{$profile.alamat}</textarea>
+			<label class="alamat_error error_red"></label>
+		   </div>
+            
+            <div class="row">
+				<input type='hidden' name='submit' value='1'> 
+                <button    class="button save">SIMPAN</button>
+            </div>
+        </form>
+		
+		
+						  
+        </div>
+    </div><!--end#container-->
+</div><!--end.section-->
+<script>
+{literal}
+function readImage(file) {
+
+    var reader = new FileReader();
+    var image  = new Image();
+
+    reader.readAsDataURL(file);  
+    reader.onload = function(_file) {
+        image.src    = _file.target.result;              // url.createObjectURL(file);
+        image.onload = function() {
+            var w = this.width,
+                h = this.height,
+                t = file.type,                           // ext only: // file.type.split('/')[1],
+                n = file.name,
+                s = ~~(file.size/1024) +'KB';
+		
+			//if(w=='970' && h=='480')
+			//{			con
+			console.log('previe');
+            $('#uploadPreview').html('<img src="'+ this.src +'">');
+			
+			//}else{
+			//alert('( Ukuran file harus 970 px * 480 px )');
+			//$(".imgbanner").val('');
+			//return false;
+			
+			//}
+        };
+        image.onerror= function() {
+            alert('Silahkan unggah ulang menggunakan file dengan format JPG, JPEG atau PNG');
+        };      
+    };
+
+}
+ 
+$('.browsfile').click(function(e)
+ {
+
+			$(".myfile").trigger('click');
+
+			thiss= $(".myfile");
+ 
+			thiss.change(function(e)
+			{
+		  // console.log(this.files[0].size);
+			   e.preventDefault();
+			 
+			if(this.files[0].size != '')
+			   {
+				if(this.files[0].size > 2000000)
+				{
+					alert ('Maaf, Anda hanya bisa mengunggah foto maksimum 2MB');
+					$(".imgbanner").val('');
+					return false;
+					
+				}				
+				if(this.files[0].type != 'image/jpeg' && this.files[0].type != 'image/png')
+				{
+					 alert('Silahkan unggah ulang menggunakan file dengan format JPG, JPEG atau PNG');
+					 $(".imgbanner").val('');
+					 return false;
+					
+				}
+				
+			  }
+			  
+				var F = this.files;
+				if(F && F[0]) for(var i=0; i<F.length; i++) readImage( F[i] );
+				
+			});
+			});
+
+
+$(document).on('click','.save',function(){
+	$('.namechapter_error').html('');
+	$('.email_error').html('');
+	$('.telp_error').html('');
+
+	$('.password_error').html('');
+	$('.confirmpassword_error').html('');
+	$('.facebook_error').html('');
+	$('.twitter_error').html('');
+	$('.alamat_error').html('');
+	
+	var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,15})+$/; 
+			
+	var valid="";
+	if($('.namechapter').val()=='')
+	{
+		$('.namechapter_error').html('kolom ini harus di isi');
+		valid="ada";
+	}
+	
+	if($('.email').val()=='')
+	{
+		$('.email_error').html('kolom ini harus di isi');
+		valid="ada";
+	}
+	else if(!$('.email').val().match(mailformat))  
+			{  
+				$('.email_error').html(' Format email salah (contoh: nama@gmail.co.id)');
+				//$(".email").addClass('error');
+				valid='ada';
+			} 
+	if($('.password').val()=='')
+	{
+		$('.password_error').html('Kolom ini harus diisi');
+		valid="ada";
+	}
+	
+	if($('.telp').val()=='')
+	{
+		$('.telp_error').html('Kolom ini harus diisi');
+		valid="ada";
+	}
+	
+	if($('.confirmpassword').val()=='')
+	{
+		$('.confirmpassword_error').html('Kolom ini harus diisi');
+		valid="ada";
+	}
+	else if($('.password').val() != $('.confirmpassword').val())
+	{
+		console.log($('.password').val()+'!='+$('.confirmpassword').val());
+		$('.confirmpassword_error').html('Password yang anda masukan tidak cocok');
+		valid="ada";
+	}
+	if($('.facebook').val()=='')
+	{
+		$('.facebook_error').html('Kolom ini harus diisi');
+		valid="ada";
+	}
+	if($('.twitter').val()=='')
+	{
+		$('.twitter_error').html('Kolom ini harus diisi');
+		valid="ada";
+	}
+	if($('.alamat').val()=='')
+	{
+		$('.alamat_error').html('Kolom ini harus diisi');
+		valid="ada";
+	}
+	
+	if(valid)
+	{
+		return false;
+		
+	}else{
+		$('#fromreg').trigger('submit');
+	
+	}			
+});			
+
+$('.number').keyup(function () {  
+		if(this.value)
+		{
+			this.value = this.value.replace(/[^0-9]/g,''); 
+			
+		}
+	});
+$('.string').keyup(function () {  
+		if(this.value)
+		{
+			this.value = this.value.replace(/[^a-zA-Z'"]/g,''); 
+			
+		}
+	});	
+{/literal}		
+</script>

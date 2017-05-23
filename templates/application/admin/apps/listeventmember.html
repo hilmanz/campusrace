@@ -1,0 +1,224 @@
+<script>
+{literal}
+function paging_ajax_chapter(fungsi,start){ 
+				
+	$.post(basedomain+"chapter/pagingchapter",{start:start,ajax:1},function(response){
+	
+		if(response){
+			  if(response.status==true){
+				var str="";
+				$.each(response.data,function(k,v){
+		
+						str+='<tr>';
+						str+='<td>'+v.no+'</td>';
+						str+='<td>'+v.name+'</td>';
+						str+='<td>'+v.description+'</td>';
+						str+='<td>'+v.name_type+'</td>';
+						str+='<td>'+v.time_start+'</td>';
+						str+='<td>'+v.time_end+'</td>';
+						str+='<td>'+v.alamat+'</td>';
+						str+='<td>'+v.lat+'</td>';	
+						str+='<td>'+v.name_chapter+'</td>';
+						str+='<td>'+v.date_create+'</td>';
+						str+='<td>'+v.jumlahundangan+'</td>';	
+					
+						str+='<td>'
+						if (v.n_status==1){str+='Done';}else if(v.n_status==0){str+='New';}else{str+='Cancel';}str+='</td>';
+						str+='<td><a href="'+basedomain+'chapter?paramactive='+v.id+'" style="color:#19CFA8;">Active</a>|<a href="'+basedomain+'chapter?paraminactive='+v.id+'" style="color:#19CFA8;">Inactive</a>|<a href="'+basedomain+'chapter?paramcancel='+v.id+'" style="color:#19CFA8;">Cancel</a></td>';					
+						str+='</tr>';
+						
+						});
+						
+						$('.pagilist').html(str);
+						likeunlike();	
+					
+				}
+			}
+		},"JSON");
+	}
+	
+{/literal}
+	</script>
+	
+<div class="page_section" id="project-page">
+    <div id="container">
+        <div class="titlebox">
+            <h2 class="fl"><span class="icon-users">&nbsp;</span>List Event</h2>
+             
+        </div><!-- end .titlebox -->
+        <div class="content chapter">
+        	<div class="summary">
+       		 <div class="short">
+			  <form method="GET" action="" id="shorter">
+             	
+                <div class="row">
+                	<div class="select_box">
+                    	<label>Sort By Status :</label>
+                        <select name="status" class="sort">
+                            <option value="">Semua Status</option>
+                            <option value="1" >Active</option>
+                            <option value="2">Inactive</option>
+                        </select>
+                    </div>
+                   <div class="select_box">
+                    	<label>Sort By Category :</label>
+                        <select name="category" class="sort">
+                            <option value="">Semua Category</option>
+                            <option value="1" >Futsal</option>
+                            <option value="2">Nobar</option>
+                        </select>
+                    </div>
+
+                </div><!--end.row-->
+             	<div class="row">
+                		<div class="shorter fl" id="datePick">
+                                <span class="fl">Date Range</span>
+                                <div class="rows fl">
+                                    <input type="text" name="startdate" class="datepicker submitter startdate " id="dp1403509217274">
+                                </div><!-- /.rows -->
+                                
+                                <span class="fl">To</span>
+                                <div class="rows fl">
+                                    <input type="text"  name="enddate" class="datepicker enddate " id="dp1403509217275">
+                                </div><!-- /.rows -->
+                                
+                        </div>
+           
+						<div class="shorter fr">
+						<span class="fl">Chapter Name</span>
+						<input type='text' name='search' class='selectEvent fl' style="width:150px">
+                        <input type="submit" class="button2" style="margin-top:0px;" value="GO">
+						
+						</div>
+					
+						 
+					</form>	
+           		</div><!--end.row-->
+				</div>
+            </div><!-- end .summary -->
+			<table cellpadding="0" cellspacing="0" border="0" width="100%">
+			<thead>
+				<tr>
+				
+					<th class="head0">No</th>
+					<th class="head0">Nama Event</th> 
+					<th class="head0">Event Description</th> 
+					<th class="head0">Event Category</th> 
+					<th class="head0">Start Date</th> 
+					<th class="head0" >End Date </th> 
+					 
+					<th class="head0" >Alamat Event</th> 
+					<th class="head0" >Coordinate</th> 
+					<th class="head0" >Nama Chapter</th> 
+					<th class="head0" >Create Date</th> 
+					<th class="head0">Participant</th> 
+					<th class="head0">Status</th> 
+					<th class="head0">Action</th> 
+					
+				</tr>
+			</thead>
+			<tbody class="pagilist">
+					{section name=i loop=$list}
+					<tr>
+					<td>{$list[i].no}</td>
+					<td>{$list[i].name}</td>
+					<td>{$list[i].description}</td>
+					<td>{$list[i].name_type}</td>
+					<td>{$list[i].time_start}</td>
+					<td>{$list[i].time_end}</td>
+					<td>{$list[i].alamat}</td>
+					<td>{$list[i].lat},{$list[i].long}</td>
+					<td>{$list[i].name_chapter}</td>
+					<td>{$list[i].date_create}</td>
+					<td>{$list[i].jumlahundangan}</td>
+					<td>{if $list[i].n_status==1}Done{elseif $list[i].n_status==0}Inactive{else}Cancel{/if}</td>
+					<td><a href="{$basedomain}chaptermanagement?paramactive={$list[i].id}" style="color:#19CFA8;">Active</a>|<a href="{$basedomain}chaptermanagement?paraminactive={$list[i].id}" style="color:#19CFA8;">Inactive</a>|<a href="{$basedomain}chaptermanagement?paramcancel={$list[i].id}" style="color:#19CFA8;">Cancel</a></td>
+					</tr>
+					{/section}	
+			</tbody>
+			</table>
+            <div id="paging_of_chapter_list" class="paging">
+            
+            </div>
+        </div><!-- end .chapter -->
+    </div><!-- end #container -->
+</div><!-- end #home -->
+
+<script type="text/javascript">
+	getpaging(0,{$total},"paging_of_chapter_list","paging_ajax_chapter",10);
+</script>
+
+
+<script>
+{literal}
+//select bootstarp
+
+$('.selectpicker').selectpicker();
+likeunlike();
+
+function likeunlike(){
+
+$(document).ready(function(){
+			$(".checkactive").on("click", function(){
+			var idnya=$(this).val();
+			var thisnya=$(this);
+					  $.ajax({
+                        'type': 'POST',
+                        'url': basedomain+'chapter/checkit',
+                        'data': {idnya:idnya},
+						'dataType':'json',
+                        'success': function(result){
+						
+							thisnya.hide();
+							thisnya.parent().html('<center><input type="checkbox" class="checkinactives" value='+idnya+' checked>Checked</center>');
+							
+							$(document).ready(function(){
+							$(".checkinactives").on("click", function(){
+							var idnya=$(this).val();
+							var thisnya=$(this);
+									  $.ajax({
+										'type': 'POST',
+										'url': basedomain+'chapter/incheckit',
+										'data': {idnya:idnya},
+										'dataType':'json',
+										'success': function(result){
+										
+											thisnya.hide();
+											thisnya.parent().html('<center><input type="checkbox" class="checkactive" value='+idnya+'></center>');
+											likeunlike();
+										}
+										
+										});
+
+								});
+							});
+						}
+						
+						});
+
+				});
+			});
+			
+$(document).ready(function(){
+			$(".checkinactive").on("click", function(){
+			var idnya=$(this).val();
+			var thisnya=$(this);
+					  $.ajax({
+                        'type': 'POST',
+                        'url': basedomain+'chapter/incheckit',
+                        'data': {idnya:idnya},
+						'dataType':'json',
+                        'success': function(result){
+						
+							thisnya.hide();
+							thisnya.parent().html('<center><input type="checkbox" class="checkactive" value="'+idnya+'"></center>');
+							likeunlike();
+						}
+						
+						});
+
+				});
+			});
+}
+{/literal}
+</script>

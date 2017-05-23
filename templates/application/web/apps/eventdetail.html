@@ -1,0 +1,260 @@
+<style>
+{literal}
+
+form { display: block; margin: 20px auto;  border-radius: 10px; padding: 15px }
+
+.progress { position:relative; width:400px; border: 1px solid #ddd; padding: 1px; border-radius: 3px; }
+.bar { background-color: #B4F5B4; width:0%; height:20px; border-radius: 3px; }
+.percent { position:absolute; display:inline-block; top:3px; left:48%; }
+
+{/literal}
+</style>
+<script src="http://malsup.github.com/jquery.form.js"></script>
+
+<div id="event-detail" class="section">
+	<div id="container">
+    	<div class="row-2">
+            <h1 class="yellow textbg">EVENT DETAIL</h1>
+    	</div>
+        
+       <!--  <div class="row">
+            <div id="map-canvas"></div>
+        </div> -->
+        <div class="row">
+            <div class="box-grey">
+            	<div class="infoDetailEvent">  
+                    <h1 class="yellow textbg"><span class="startDates">{$dataevent.time_start}</span>  <span class="dashDates">&ndash;</span> <span class="endDates">{$dataevent.time_end}</span></h1>
+                    <p class="">Waktu: {$dataevent.jam_awal} - {$dataevent.jam_akhir}</p>
+                    <h1 class="">{$dataevent.name}<br><span class="categoryEvents">{$dataevent.name_type}</span></h1>
+                    <address>{$dataevent.alamat}</address>         
+                    <p>{$dataevent.description}</p>
+                </div>
+            </div>
+        </div><!--end.row-->
+        
+		
+		<!--FORM UNTUK SUBMIT FOTO -->
+		<form action="{$basedomain}chapter/eventDetail" method="post" enctype="multipart/form-data">
+        <div class="rowss" style="overflow:inherit;">
+		
+			<div style="display:none">
+					      <input type="file" class="myfile" id="myfile" name="myfile[]" />
+						  <input type="hidden" name="idevent" value="{$idevent}">
+					     
+			</div>
+				{if $dataevent.n_status!=0}
+            <div class="uploadFoto" style="margin-left:10px;">
+				{section name=i loop="$upload_foto"}
+				<div class="imagePost"><img width="150" class="filimg rot{$smarty.section.i.index}"  src="{$basedomain}public_assets/uploadfoto/{$upload_foto[i].name}" data-row="{$smarty.section.i.index}">
+				{if $dataevent.n_status==1}
+				<label onclick="delimgst({$smarty.section.i.index})" class="rot{$smarty.section.i.index}"> x </label>
+				{/if}
+				</div>
+				
+				<input style='display:none' class='ros{$smarty.section.i.index}' type="file"  name="myfile[]" value="{$localasset}uploadfoto/{$upload_foto[i].name}"/>
+				<input type="hidden" class="rot{$smarty.section.i.index}" name="imagessementara[]" value="{$upload_foto[i].name}">
+				{/section}<br>
+				 <div class="rowss">
+                 </div>
+			{if $dataevent.n_status==1 && $dataevent.date_start lte $dataevent.time_now}
+				
+				<!--<div {if $upload_foto==''} style="display:none" {/if} id="progressbar"><div  class="progress-label">Loading...</div></div>-->
+			<div id="status"></div>
+			<div class="progress" style="display:none;">
+							<div class="bar"></div >
+							<div class="percent">0%</div >
+						</div>
+						<br>
+						
+				<a   href="javascript:void(0)" class="button browsfile" id="browsfile">PILIH FILE</a>
+				
+				<button {if $upload_foto==''} style="display:none;" {/if} href="javascript:void(0)" class="button button2s submitnya " >SIMPAN</button>
+				
+			<br><p class="infotext" style="margin:10px 0 0 10px;">Maksimal 2 foto, ukuran 1 foto maks. 2MB (format JPG, JPEG, PNG)</p>
+			{/if}
+		  </div>
+		   {/if}
+        </div>
+		</form>
+		
+		{*}
+        <div class="rows">
+            <div id="memberListTabs" class="leaderInfo">
+            	
+            	<div id="tabs">
+                  <ul>
+                    <li><a href="#tabs-1">ANGGOTA CHECK-IN</a></li>
+                  </ul>
+                  <div id="tabs-1">
+				   {if $dataeventpeserta}
+							{section name=j loop=$dataeventpeserta}
+							
+							<div class="rows-list">
+								<div class="infoMembers fl">
+									<p class="name_member fl">{$dataeventpeserta[j].name}</p>
+									<span class="cekin fr icon-checkmark">&nbsp;</span>
+								</div>
+							</div><!--end rows-->
+                   
+							{/section}
+					{/if}
+                  	
+                    
+                  	
+                    
+                  </div><!--end#tabs1-->
+                  
+                 
+                </div><!--end#tabs-->
+
+            </div><!--endleaderInfo-->
+        </div><!--end.rows-->{/*}
+        
+    </div><!--end#container-->
+</div><!--end.section-->
+ 
+  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+ 
+ <script>
+{literal}
+(function() {
+    
+var bar = $('.bar');
+var percent = $('.percent');
+var status = $('#status');
+   
+$('form').ajaxForm({
+	
+    beforeSend: function() {
+	$('.progress').show();
+        status.empty();
+        var percentVal = '0%';
+        bar.width(percentVal)
+        percent.html(percentVal);
+    },
+    uploadProgress: function(event, position, total, percentComplete) {
+        var percentVal = percentComplete + '%';
+        bar.width(percentVal)
+        percent.html(percentVal);
+		//console.log(percentVal, position, total);
+    },
+    success: function() {
+        var percentVal = '100%';
+        bar.width(percentVal)
+        percent.html(percentVal);
+    },
+	complete: function(xhr) {
+		
+		location.reload();
+	}
+}); 
+
+})();   
+{/literal}    
+</script>
+<script>
+
+var urt=0;
+{literal}
+$('.browsfile').click(function(e)
+ {
+	console.log($('.filimg').length);
+	console.log($('.myfile').length);
+	if($('.filimg').length < 2  )
+	{
+		console.log($('.filimg').length);
+		console.log('sss');
+		if(($('.myfile').length >1 && $('.myfile').length<=2) || ($('.browsfile').length >1 && $('.browsfile').length<=2 ))
+		{
+			$(".myfile:last").trigger('click');
+			thiss= $(".myfile:last");
+		}
+		else if($('.myfile').length==1)
+		{
+			$(".myfile").trigger('click');
+			thiss= $(".myfile");
+		}
+		else
+		{
+			
+			alert('Maaf, Anda hanya bisa mengunggah maksimum 2 foto');
+		}
+	}
+	else
+	{
+		alert('Maaf, Anda hanya bisa mengunggah maksimum 2 foto');
+	}
+	if($('.myfile').length<=2)
+	{
+		thiss.change(function(e)
+		 {
+		   
+			   e.preventDefault();
+				
+			    $(".upload_no").html('');
+				
+				var dataup = $('.filimg').length;
+				console.log(this.files[0].size);
+				if(this.files[0].size > 2000000)
+				{
+				
+					alert('Maaf, Anda hanya bisa mengunggah foto maksimum 2MB');
+					
+				}
+				else
+				{
+					++urt;
+				   if(this.files[0].type=='image/jpeg' || this.files[0].type=='image/png' )
+					{
+						 var reader = new FileReader();
+						 reader.onload = function (ex) {
+							ex.preventDefault();
+							
+						 $('.browsfile').prev().before(' <div class="imagePost  ros'+urt+'"><img width="150"  data-row="'+urt+'"  class="filimg ros'+urt+'" hegiht="50" src="'+ex.target.result+'"><label class="ros'+urt+'" onclick="delimgs('+urt+')" > x </label></div>  ');
+						  }
+					  reader.readAsDataURL(this.files[0]);
+					  
+					  $(this).after(' <input type="file" class="myfile ros'+urt+'" data-row="'+urt+'" id="myfile" name="myfile[]" />');
+					  $('.submitnya').show();
+					}
+				 
+				   else
+				   {
+				   
+					alert('Silahkan unggah ulang menggunakan file dengan format JPG, JPEG atau PNG');
+				   }
+				   end;
+				}
+			   
+				
+			   // $('browsfile')
+			   // $('.bg_home').attr('src', e.target.result);   
+
+		 });
+	 }
+	
+ });
+ 
+   
+  
+  
+ 
+ function delimgs(rows)
+		{
+			
+			$('.ros'+rows).remove();
+		
+		}
+ function delimgst(rows)
+		{
+			
+			$('.rot'+rows).remove();
+		
+		}
+		
+		
+
+{/literal}
+
+
+</script>

@@ -1,0 +1,486 @@
+/*
+Theme Name:  Supersoccer Goes To England
+Version: 1.0
+Author: Febriansyah 2015
+*/
+
+@import url('../font/colaborate.css');
+@import url('../font/bebas.css');
+@import url('../font/icon.css');
+
+*{outline:none;}
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,p,blockquote,th,td{margin:0;padding:0;}
+table{border-collapse:collapse;border-spacing:0;}
+fieldset,img{border:0;}
+address,caption,cite,code,dfn,em,strong,th,var{font-style:normal;font-weight:normal;}
+ol,ul {list-style:none;}
+caption,th {text-align:left;}
+q:before,q:after{content:'';}
+body{
+	background: url(../images/bg.jpg) no-repeat center center fixed;
+	background-color:#000;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/bg.jpg', sizingMethod='scale');
+	-ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/bg.jpg', sizingMethod='scale')";
+	margin:0;
+	padding:0;
+    font-family: 'ColaborateRegular';
+	font-size:14px;
+	color:#fff;
+	line-height:1.4;
+	overflow-x:hidden;
+	 -webkit-font-smoothing: antialiased;
+     font-smoothing: antialiased;
+}
+h1,h2,h3,h4,h5,h6{
+    font-family: 'BebasNeueRegular';
+	font-weight:normal;
+	margin:15px 0;
+}
+h1{
+	font-size:24px;
+}
+h2{
+	font-size:22px;
+}
+h3{
+	font-size:20px;
+}
+h4{
+	font-size:18px;
+}
+a{
+	text-decoration:none;
+	color:#c20101;
+	outline:none;
+	-webkit-transition: all 0.3s ease-in-out;
+	-moz-transition: all 0.3s ease-in-out;
+	-o-transition: all 0.3s ease-in-out;
+	-ms-transition: all 0.3s ease-in-out;
+	transition: all 0.3s ease-in-out;
+}
+a:hover{
+	text-decoration:underline;
+	color:#FC0
+}
+.fl{ float:left;}
+.fr{ float:right;}
+.yellow{
+	color:#fdcb02;
+}
+.red{
+	color:#F00;
+}
+.white{
+	color:#FFF;
+}
+a.download-googleplay,
+a.download-appstore{
+	background:url(../images/googleplay.png) no-repeat;
+	display:block; width:105px; height:35px;
+	text-decoration:none;
+	float:left;
+	margin:0 0 5px 0;
+}
+a.download-appstore{
+	background:url(../images/appstore.png) no-repeat;
+	float:right;
+}
+.downloadapp{
+	padding:10px 20px !important;
+	text-align:center;
+}
+.downloadapp h3{
+	margin:10px 0 5px 0;
+	font-size:16px;
+}
+/*============= LAYOUT ===============*/
+#body{
+	background:url(../images/top-nav-bg.png) top repeat-x;
+}
+#effect{
+	width:100%; height:100%;
+	position:fixed;
+	left:0;
+	top:0;
+}
+#universal{
+	max-width:1100px;
+	margin:0 auto;
+	position:relative;
+	padding:0 20px;
+}
+#header{
+	position:relative;
+	text-align:center;
+}
+.menuTrigger {
+  height: 50px;
+  width: 58px;
+  display: block;
+  position: absolute;
+  /* padding: 22px; */
+  top: 3px;
+  right: -12px;
+  border: none;
+  cursor: pointer;
+  background: #c30000;
+  color: #fff;
+  font-size: 34px;
+  text-align: center;
+}
+#navMobile {
+  position: absolute;
+  right: -18px;
+  top: 63px;
+  text-align: right;
+  background: #c30000;
+  z-index:100;
+}
+#navMobile {
+  display: none;
+}
+#navMobile ul {
+  margin: 0;
+  padding: 0;
+}
+#navMobile li {
+  margin: 0;
+  padding: 0;
+}
+#navMobile ul li a {
+  width: auto;
+  background: #c30000;
+  border-top: solid 1px #666;
+}
+#navMobile a {
+  display: block;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 16px;
+  color: #fff;
+  padding: 15px 45px;
+}
+#header2{
+	height:120px;
+	position:relative;
+}
+#container{
+	padding:20px;
+	background:url(../images/tr.png) repeat;
+	box-shadow:0 0 50px rgba(0,0,0,0.25) inset,0 0 10px rgba(0,0,0,0.7) inset;
+	-o-box-shadow:0 0 50px rgba(0,0,0,0.25) inset,0 0 10px rgba(0,0,0,0.7) inset;
+	border-radius:7px;
+	overflow:hidden;
+	clear:both;
+}
+#logo{
+	max-width:364px; height:auto; display:block;
+	margin:0 auto;
+}
+#logo img{
+	width:100%;
+}
+#user-info{
+	float:right;
+	right:25px;
+	top:10px;
+	position:relative;
+	line-height:18px;
+}
+#user-info a{
+	color:#fff;
+}
+#user-info a.logout{
+	color:#000;
+    font-family: 'ColaborateRegular';
+}
+#user-info span{
+	display:block;
+	float:left;
+	color:#fdcb02 !important;
+	padding:0 5px 0 0;
+}
+#user-info .entry{
+	float:left;
+	margin:0 0 0 10px;
+}
+.rowboxs h1 {
+  font-size: 36px;
+  color: #fdcb02;
+  margin: 10px 0;
+}
+.rowboxs>h3{
+	font-size: 30px;
+	margin-bottom:-15px;
+}
+.rowboxs h4.title-entry{
+	font-size:24px;
+	margin:20px 0 0 0;
+}
+.row {
+  clear: both;
+  padding: 10px 0;
+  overflow: hidden;
+}
+.rows{
+	clear:both;
+	overflow:hidden;
+	margin:20px 0;
+}
+.button {
+  background: url(../images/bg_nav.jpg) repeat-x 0 -32px;
+  display: inline-block;
+  line-height: 32px;
+  color: #fff;
+  text-shadow: 0 1px 1px #000;
+  border-radius: 4px;
+  border: solid 1px #222222;
+  padding: 0 20px;
+  cursor: pointer;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+/*-----------loginFomr-------------*/
+.loginForm{
+	margin:20px 0;
+	text-align:center;
+}
+input[type=text], input[type="password"],textarea,select{
+  background: #303030;
+  border-radius: 4px;
+  border: none;
+  padding: 5px 10px;
+  width: 100%;
+  box-shadow: 0 2px 2px rgba(0,0,0,0.25) inset,1px 1px 1px rgba(255,125,124,0.2);
+  color: #fff;
+  text-align:center;
+  height: 20px;
+}
+textarea{
+	height:50px;
+}
+.emailMember textarea{
+	height:200px;
+}
+select{
+	height:30px;
+	text-align:center;
+}
+.signupBt{
+	font-size:18px;
+	color:#fff;
+}
+.formTittle{
+	border-bottom:solid 1px #742d2d;
+	font-size:24px;
+	text-align:left;
+}
+/*------rowlist--*/
+.leaderInfo{
+	margin-top:20px;
+}
+.rows-list{
+	background: #666;
+  padding: 10px;
+  border: none;
+  margin: 0 0 5px 0;
+  color:#fff;
+}
+.leaderInfo .ui-widget-content{
+	background:#000;
+	border:none;
+}
+.leaderInfo .ui-widget-header{
+	background:none;
+	border:none;
+}
+.leaderInfo li.ui-state-default{
+	background:none;
+	color:#fff;
+	border:none;
+}
+.leaderInfo .ui-tabs .ui-tabs-panel{
+	padding:20px 0 0 0;
+}
+.ui-state-active a, .ui-state-active a:link, .ui-state-active a:visited{
+	color:#fff !important;
+}
+.ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited{
+	color:#fff !important;
+}
+.leaderInfo .ui-state-active,.leaderInfo .ui-widget-content .ui-state-active,.leaderInfo .ui-widget-header .ui-state-active{
+	background:#cd2b2b;
+	color:#fff;
+	border:none;
+}
+.page{
+	text-align:center;
+	margin:10px 0;
+}
+.page a{
+	width:10px;
+	height:10px;
+	background: #999;
+	border-radius:100px;
+	display:inline-block;
+}
+.page a.active{
+	background: #CCC;
+}
+/*--form-------*/
+.tittleForm{
+	font-size:18px;
+	font-weight:bold;
+}
+.formregis{
+	margin:20px 0;
+	clear:both;
+	text-align:center;
+}
+/*---avatar----*/
+.avatarBox {
+  float:left;
+  border-radius: 5px;
+  text-align: left;
+}
+.avatarBox .avatar-big {
+  margin:0 0 10px 0;
+}
+.avatar-big {
+  max-width: 250px;
+  overflow: hidden;
+  border-radius: 5px;
+}
+.avatar-big img {
+  width: 100%;
+}
+.profileInfo{
+	position:relative;
+}
+.chapterDetail{
+	float:left;
+	margin-left:20px;
+}
+.chapterDetail h3{
+	margin:0;
+	font-size:36px;
+}
+.chapterDetail p{
+	font-size:25px;
+}
+.bigNumber{
+	font-size:34px;
+}
+.box-grey{
+	background:url(../images/tr.png) repeat;
+	padding:20px;
+	overflow:hidden;
+}
+.textAng,.textNumber{
+	font-size:30px;
+	text-transform:uppercase;
+}
+.fullwidth{
+	width:96%;
+	text-align:center;
+}
+.infoMembers{
+	width:100%;
+	position:relative;
+}
+.buttonAction{
+	position:absolute;
+	right:10px;
+	bottom:0;
+}
+.ui-widget-content .button{
+	color:#fff;
+}
+#registration-member .formregis textarea,
+#registration-member .formregis p,
+#add-event .formregis textarea,
+#add-event .formregis p,
+#add-tantangan .formregis textarea,
+#add-tantangan .formregis p{
+	text-align:left;
+}
+.dateEvent,.timeEvent,.select_kat,.select_katPoint{
+	text-align:left;
+	margin:5px 0;
+}
+.dateEvent input[type=text],.timeEvent input[type=text]{
+	width:300px;
+}
+.infoMembers .name_member{
+	font-size:20px;
+}
+.infoMembers p{
+	margin:5px 0;
+}
+.infoMembers strong {
+  font-weight: bold;
+  color: #fdcb02;
+}
+#memberListTabs .rows-list{
+	overflow:hidden;
+	padding:20px;
+}
+#detail-member .infoMembers p{
+	font-size:20px;
+}
+#detail-member .infoMembers .name_member{
+	font-size:30px;
+}
+#detail-member .infoMembers  .pointFont{
+	font-size:30px;
+}
+ #map-canvas {
+	width: 100%;
+	height: 100px;
+  }
+#event-detail  #map-canvas {
+	width: 100%;
+	height: 300px;
+  }
+address{
+	margin-bottom:20px;
+}
+.eventPast span{
+	width:30%;
+	display:inline-block;
+}
+.cekin {
+  font-size: 25px;
+  line-height: 36px;
+  color: #0C0;
+}
+.leaderInfo h3 {
+  font-size: 22px;
+  color: #fdcb02;
+}
+.textcenter{
+	text-align:center;
+}
+#pointSelect,#twitSelect,.pointInput,.hastagsInput,.coinInput{
+	display:none;
+}
+/*-------------#Footer------*/
+#footer {
+  border-top: solid 1px #8b3535;
+  padding: 20px 0 0 0;
+  height: 100px;
+  margin: 30px 0 0 0;
+  clear: both;
+}
+#footNav {
+  text-align: center;
+  position: relative;
+  z-index: 100;
+}

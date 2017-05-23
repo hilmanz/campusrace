@@ -1,0 +1,249 @@
+<div class="page_section" id="project-page">
+    <div id="container">
+        <div class="titlebox">
+            <h2 class="fl"><span class="icon-users">&nbsp;</span>List Chapter</h2>
+             
+        </div><!-- end .titlebox -->
+        <div class="content chapter">
+        	<div class="summary">
+       		 <div class="short">
+			  <form method="GET" action="" id="shorter">
+             	
+                <div class="leftShorter">
+                	<div class="select_box">
+                    	<label>Sort by City :</label>
+                        <select name="kota" class="sort">
+                            <option value="">Semua Kota</option>
+                            {section name=i loop=$listcity}
+							{if $kota==$listcity[i].id}
+							<option value="{$listcity[i].id}" selected>{$listcity[i].city}</option>
+                            {else}
+                            <option value="{$listcity[i].id}">{$listcity[i].city}</option>
+                            {/if}
+							{/section}
+
+                        </select>
+                    </div>
+                    <div class="select_box">
+                    	<label>Favorite Club :</label>
+                        <select name="clubs" class="sort">
+			    <option value="">Semua Klub</option>
+                            {section name=i loop=$listclub}
+							{if $clubs==$listclub[i].id}
+							<option value="{$listclub[i].id}" selected>{$listclub[i].name_club}</option>
+							{else}
+							<option value="{$listclub[i].id}">{$listclub[i].name_club}</option>
+							{/if}
+                            {/section}
+                        </select>
+                    </div>
+                    <div class="select_box">
+                    	<label>Sort by Points :</label>
+                        <select name="points" class="sort">
+						
+                            <option value="">Tampilkan Semua</option>
+                            <option value="1" {if $points==1}selected{/if} >Tertinggi</option>
+                            <option value="2" {if $points==2}selected{/if} >Terendah</option>
+                        </select>
+                    </div>
+                </div><!--end.row-->
+             	<div class="rightShorter">
+						 <div id="datePick">
+                                <span class="fl">Tanggal :</span>
+                                <div class="inputDate fl">
+                                    <input type="text" value="{$startdate}" name="startdate" class="datepicker submitter startdate " id="dp1403509217274">
+                                </div><!-- /.rows -->
+                                
+                                <span class="fl">Sampai</span>
+                                <div class="inputDate fl">
+                                    <input type="text" value="{$enddate}" name="enddate" class="datepicker enddate " id="dp1403509217275">
+                                </div><!-- /.rows -->
+						</div>
+                        <div id="searchPick">
+						<span class="fl">Cari :</span>
+						<input type='text' name='search' value="{$search}" class='selectEvent fl' style="width:150px" placeholder="nama/email chapter">
+						<input type="submit" class="button2" style="margin-top:0px;" value="Go">
+						</div>
+					</form>	
+           		</div><!--end.row-->
+				</div>
+            </div><!-- end .summary -->
+			<table cellpadding="0" cellspacing="0" border="0" width="100%">
+			<thead>
+				<tr>
+					<th class="head0">No</th>
+					<th class="head0">Nama Chapter</th> 
+					<th class="head0">Klub</th> 
+					<th class="head0">Chapter Head </th> 
+					<th class="head0">Tanggal Registrasi</th> 
+					<th class="head0">Member Actived</th> 
+					<th class="head0">Member Inactived</th>
+					<th class="head0">Member Deleted</th>
+					<th class="head0">Point</th> 
+					<th class="head0">Status</th> 
+					<th class="head0" >Aksi</th> 
+				</tr>
+			</thead>
+			<tbody class="pagilist">
+					{section name=i loop=$list}
+					<tr>
+					<td>{$list[i].no}</td>
+					<td>{$list[i].name_chapter}</td>
+					<td>{$list[i].name_club}</td>
+					<td>{$list[i].name}</td>
+					<td>{$list[i].date_register}</td>
+					<td class="text-center">{$list[i].total_member_active}</td>
+					<td class="text-center">{$list[i].total_member_inactive}</td>
+					<td class="text-center">{$list[i].total_member_delete}</td>
+					<td class="text-center">{$list[i].point}</td>
+					<td>{if $list[i].n_status==1}Active{elseif $list[i].n_status==0}Inactive{else}Delete{/if}</td>
+					<td>
+						{if $list[i].n_status==0}
+						<a href="{$basedomain}chaptermanagement?paramactive={$list[i].id}" style="color:#19CFA8;">Active</a> | <a href="javascript:void(0)" onClick="confirmation('{$basedomain}chaptermanagement?paramcancel={$list[i].id}','Confirm to Delete?')" style="color:#19CFA8;">Hapus</a> | <a href="{$basedomain}chaptermanagement/editchapter/{$list[i].id}" style="color:#19CFA8;">Edit</a>
+						{elseif $list[i].n_status==1}
+						<a href="{$basedomain}chaptermanagement?paraminactive={$list[i].id}" style="color:#19CFA8;">Inactive</a> | <a href="javascript:void(0)" onClick="confirmation('{$basedomain}chaptermanagement?paramcancel={$list[i].id}','Confirm to Delete?')" style="color:#19CFA8;">Hapus</a> | <a href="{$basedomain}chaptermanagement/editchapter/{$list[i].id}" style="color:#19CFA8;">Edit</a>
+						{/if}
+					</td>
+					</tr>
+					{/section}	
+			</tbody>
+			</table>
+            
+			<!-- <div id="paging_of_chapter_list" class="paging">-->
+			<div id="paging_of_chapter_list" class="paging">
+            
+            </div>
+           <!-- <p>asasas</p>asasas
+            </div> -->
+        </div><!-- end .chapter -->
+    </div><!-- end #container -->
+</div><!-- end #home -->
+
+<script type="text/javascript">
+	getpaging(0,{$total},"paging_of_chapter_list","paging_ajax_chapter",10);
+</script>
+
+<script>
+{literal}
+function paging_ajax_chapter(fungsi,start){ 
+var status=$('.status option:selected').val();
+var kota=$('.kota option:selected').val();		
+var startdate=$('.startdate').val();
+var enddate=$('.enddate').val();	
+var search=$('.search').val();	
+var clubs=$('.clubs option:selected').val();
+var points=$('.points option:selected').val();
+				
+	$.post(basedomain+"chaptermanagement/pagingchapter",{'start':start,ajax:1,'status':status,'kota':kota,'startdate':startdate,'enddate':enddate,'search':search,'clubs':clubs,'points':points},function(response){
+	
+		if(response){
+			  if(response.status==true){
+				var str="";
+				$.each(response.data,function(k,v){
+		
+						str+='<tr>';
+						str+='<td>'+v.no+'</td>';
+						str+='<td>'+v.name_chapter+'</td>';
+						str+='<td>'+v.name_club+'</td>';
+						str+='<td>'+v.name+'</td>';
+						str+='<td>'+v.date_register+'</td>';	
+						str+='<td>'+v.total_member_active+'</td>';	
+						str+='<td>'+v.total_member_inactive+'</td>';
+						str+='<td>'+v.total_member_delete+'</td>';
+						str+='<td>'+v.point+'</td>';
+						str+='<td>'
+						if (v.n_status==1){str+='Actived';}else if(v.n_status==0){str+='Inactived';}else{str+='Deleted';}str+='</td>';
+						str+='<td>'
+						if(v.n_status==0){str+='<a href="'+basedomain+'chaptermanagement?paramactive='+v.id+'" style="color:#19CFA8;">Active</a> | <a href="javascript:void(0)" onClick="confirmation(\''+basedomain+'chaptermanagement?paramcancel='+v.id+'\',\'Confirm to Delete?\')" style="color:#19CFA8;"> Delete</a> | <a href="'+basedomain+'chaptermanagement/editchapter/'+v.id+'" style="color:#19CFA8;">Edit</a>';}
+						else if(v.n_status==1){str+='<a href="'+basedomain+'chaptermanagement?paraminactive='+v.id+'" style="color:#19CFA8;">Inactive</a> | <a href="javascript:void(0)" onClick="confirmation(\''+basedomain+'chaptermanagement?paramcancel='+v.id+'\',\'Confirm to Delete?\')" style="color:#19CFA8;"> Delete</a> | <a href="'+basedomain+'chaptermanagement/editchapter/'+v.id+'" style="color:#19CFA8;">Edit</a>';}str+='</td>';
+						
+						str+='</tr>';
+						
+						});
+						
+						$('.pagilist').html(str);
+						likeunlike();	
+					
+				}
+			}
+		},"JSON");
+	}
+	
+{/literal}
+	</script>
+
+<script>
+{literal}
+//select bootstarp
+
+$('.selectpicker').selectpicker();
+likeunlike();
+
+function likeunlike(){
+
+$(document).ready(function(){
+			$(".checkactive").on("click", function(){
+			var idnya=$(this).val();
+			var thisnya=$(this);
+					  $.ajax({
+                        'type': 'POST',
+                        'url': basedomain+'chaptermanagement/checkit',
+                        'data': {idnya:idnya},
+						'dataType':'json',
+                        'success': function(result){
+						
+							thisnya.hide();
+							thisnya.parent().html('<center><input type="checkbox" class="checkinactives" value='+idnya+' checked>Checked</center>');
+							
+							$(document).ready(function(){
+							$(".checkinactives").on("click", function(){
+							var idnya=$(this).val();
+							var thisnya=$(this);
+									  $.ajax({
+										'type': 'POST',
+										'url': basedomain+'chaptermanagement/incheckit',
+										'data': {idnya:idnya},
+										'dataType':'json',
+										'success': function(result){
+										
+											thisnya.hide();
+											thisnya.parent().html('<center><input type="checkbox" class="checkactive" value='+idnya+'></center>');
+											likeunlike();
+										}
+										
+										});
+
+								});
+							});
+						}
+						
+						});
+
+				});
+			});
+			
+$(document).ready(function(){
+			$(".checkinactive").on("click", function(){
+			var idnya=$(this).val();
+			var thisnya=$(this);
+					  $.ajax({
+                        'type': 'POST',
+                        'url': basedomain+'chaptermanagement/incheckit',
+                        'data': {idnya:idnya},
+						'dataType':'json',
+                        'success': function(result){
+						
+							thisnya.hide();
+							thisnya.parent().html('<center><input type="checkbox" class="checkactive" value="'+idnya+'"></center>');
+							likeunlike();
+						}
+						
+						});
+
+				});
+			});
+}
+
+
+{/literal}
+</script>

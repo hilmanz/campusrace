@@ -1,0 +1,36 @@
+
+<div id="event-detail" class="section">
+	<div id="container">
+    	<div class="row-2">
+            <h1 class="yellow">RESERVATION</h1>
+    	</div>
+        
+
+        <div class="row">
+            <div class="box-grey">
+            	<div class="infoDetailEvent">                            
+                <h1 class="yellow">{$dataevent.time_start}-{$dataevent.time_end}</h1>               
+                    <h1 class="yellow">{$dataevent.name_type} <br />{$dataevent.name}</h1>
+                    <p>{$dataevent.alamat}</p>
+                    <p>{$dataevent.description}</p>
+					</div>
+            </div>
+        </div><!--end.row-->
+		<form  class="formreservation" action="{$basedomain}member/prosesreservation" method="POST">
+			<input type="hidden" name="event" value="{$dataevent.id}">
+			<input type="hidden" name="chapter" value="{$chapterid}">
+			<input type="hidden" name="user" value="{$iduser}">
+		<form>
+        <div class="row textcenter">
+                <a  href="javascript:void(0)" class="button buttonreservation">Reservation</a>
+            </div>
+       
+    </div><!--end#container-->
+</div><!--end.section-->
+<script>
+{literal}
+$(document).on('click','.buttonreservation',function(){
+	$('.formreservation').trigger('submit');
+});
+{/literal}
+</script>

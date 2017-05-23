@@ -1,0 +1,65 @@
+<head>
+	<meta charset="utf-8">
+	<title>Admin SuperSoccer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+    <link rel="icon" href="{$basedomain}assets/images/favicon-2.png" type="image/x-icon">
+
+    <link href="{$basedomain}assets/css/colpick.css" rel="stylesheet" type="text/css" />
+    
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <link href="{$basedomain}assets/css/admin-ssgte.css" rel="stylesheet" type="text/css" />
+    <link href="{$basedomain}assets/css/responsive.css" rel="stylesheet" type="text/css" />
+    <link href="{$basedomain}assets/css/jquery.timepicker.css" rel="stylesheet" type="text/css" />
+    <link type="text/css" href="{$basedomain}assets/css/atooltip.css" rel="stylesheet"  media="screen" />
+    
+    <link rel="stylesheet" href="{$basedomain}assets/css/bootstrap-select.css">
+	{literal}
+	<style>
+		#textcontent{width:100px; height: 100px;} 
+		</style>
+    {/literal}
+	
+    
+    <script type="text/javascript" src="{$basedomain}assets/js/jquery-1.9.1.min.js"></script>
+	<script type="text/javascript" src="{$basedomain}assets/js/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="{$basedomain}assets/js/jquery.atooltip.js"></script>
+    
+  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    
+	<!-- JS library -->
+	<script>
+		var basedomain = "{$basedomain}" ;
+		var basedomainpath = "{$basedomainpath}" ;
+		var pages = "{$pages}" ;
+		var locale = {$locale|@json_encode};
+	</script> 
+	<!--- END ---->
+	<script type="text/javascript" src="{$basedomain}assets/js/tinymce/tinymce.min.js"></script>
+	<script type="text/javascript" src="{$basedomain}assets/js/modernizr.custom.js"></script>
+	<script type="text/javascript" src="{$basedomain}assets/js/jquery.easing.js"></script>
+    <script type="text/javascript" src="{$basedomain}assets/js/jquery.mousewheel.js"></script>
+    <script type="text/javascript" src="{$basedomain}assets/js/jquery.steps.js"></script>
+    <script type="text/javascript" src="{$basedomain}assets/js/jquery.magnific-popup.js"></script>
+    <script type="text/javascript" src="{$basedomain}assets/js/colpick.js"></script>
+    <script type="text/javascript" src="{$basedomain}assets/js/php.js"></script>
+    <script type="text/javascript" src="{$basedomain}assets/js/jquery.form.js"></script>
+    <script type="text/javascript" src="{$basedomain}assets/js/kipagination.js"></script>
+    <script type="text/javascript" src="{$basedomain}assets/js/contentviews.js"></script>
+    <script type="text/javascript" src="{$basedomain}assets/js/contentHelper.js"></script>
+    <script type="text/javascript" src="{$basedomain}assets/js/jquery.timepicker.js"></script>
+    <script type="text/javascript" src="{$basedomain}assets/js/touchbase.js"></script>
+    <script src="{$basedomain}assets/js/bootstrap-select.js"></script>
+    <script src="{$basedomain}assets/js/highcharts.js"></script>
+    <script src="{$basedomain}assets/js/modules/exporting.js"></script>
+	 <script type="text/javascript" src="{$basedomain}assets/js/validationkana.js"></script>
+    <script type="text/javascript">
+    {literal}
+        $(document).ready(function() {
+            $("#datepicker").datepicker({dateFormat:"yy-mm-dd"});
+        }); 
+		  $('.selectpicker').selectpicker();
+    {/literal}
+    </script>
+</head>
+

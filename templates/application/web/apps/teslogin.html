@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+</head>
+ 
+<body>
+<a href="<?php echo $url; ?>">Click here to login</a>
+<form class="formBottle" method="post" action="{$basedomain}teslogin">
+	<input type="submit" class="submitBtn btnlogin" value="CREATE NOW" />
+</form>
+</body>
+</html>
+{literal}
+<script>
+
+$(document).ready(function() {
+
+	$('.btnlogin').click(function(){
+		$.ajax({
+				url:basedomain+'teslogin',
+				data:$('.formBottle').serialize(),
+				type : 'POST',
+				 dataType: "json",
+				success:function(result){
+					if(result.status==1)
+					{
+						
+						window.location = result.fb.urlConnect;
+						
+					}
+				},
+				error: function (xhr, ajaxOptions, thrownError) {
+					return false;
+			  }
+			});
+		
+	
+	});
+
+});
+
+</script>
+{/literal}

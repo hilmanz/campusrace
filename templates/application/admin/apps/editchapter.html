@@ -1,0 +1,193 @@
+<div class="page_section" id="project-page">
+    <div id="container">
+        <div class="titlebox">
+            <h2 class="fl"><span class="icon-books">&nbsp;</span>Edit Chapter</h2>
+            {*}<h2 class="fr"><a href="{$basedomain}adminmanagement" class="button2">Back</a></h2>{/*}
+        </div><!-- end .titlebox -->
+        <div class="content">
+
+            <form id="forms" class="forms" method="post" action="../../chaptermanagement">
+			{section name=i loop=$listnya}
+            <div id="new-project" class="boxcontent">
+                <section class="step1">	
+                    <div class="row">
+                        <label for="name">Nama Chapter<br></label>
+                        <input id="name" name="name"  value="{$listnya[i].name_chapter}" type="text" class="required name" ><br>
+						<label class="msg_name name_no"  style="color: red;">{$name_no}</label>
+                    </div><!-- end .row -->
+                    <div class="row">
+                        <label for="name">Alamat Chapter<br></label>
+                        <textarea id="alamat" name="alamat">{$listnya[i].alamat}</textarea><br>
+						<label class="msg_name name_no"  style="color: red;"></label>
+                    </div><!-- end .row -->
+					  <div class="row">
+                        <label for="email">Email Chapter<br></label>
+                        <input id="email" name="email" value="{$listnya[i].email}" type="text" class="required email" readonly><br>
+						<label class="msg_name email_no" style="color: red;">{$email_no}</label>
+                    </div><!-- end .row -->
+					
+					<div class="row">
+						<label for="password">Password<br></label>
+						<input type="text" value="{$listnya[i].password}"  placeholder="Password" name="password" class="passwordanggota">
+						<label class="passwordanggota_error error_red"></label>
+					</div>
+					
+					  <div class="row">
+                        <label for="klubfav">Klub Favorit <br></label>
+                         <select name="club_fav" class="klubfav">
+					   
+						   <option value="" ]>Select Club</option>
+						  {section name=j loop=$listclub}
+						  {if $listclub[j].id==$listnya[i].club_favorit}
+                          <option value="{$listclub[j].id}" selected>{$listclub[j].name_club}</option>
+						  {else}
+						  <option value="{$listclub[j].id}">{$listclub[j].name_club}</option>
+						  {/if}
+                          {/section}
+						
+					   </select><br>
+						<label class="msg_name username_no" style="color: red;">{$username_no}</label>
+                    </div><!-- end .row -->
+                    <div class="row">
+                        <label for="klubfav">Kota Chapter<br></label>
+                         <select name="kota_chapter" class="kotachap">
+					   <option value="" ]>Select city</option>
+						  {section name=j loop=$listcity}
+						    {if $listcity[j].id==$listnya[i].kota}
+                          <option value="{$listcity[j].id}" selected>{$listcity[j].city}</option>
+						  {else}
+						    <option value="{$listcity[j].id}">{$listcity[j].city}</option>
+							{/if}
+                          {/section}
+					   </select><br>
+						<label class="msg_name username_no" style="color: red;">{$username_no}</label>
+                    </div><!-- end .row -->
+                     <div class="row">
+                        <label for="facebookak">Akun Facebook<br></label>
+                        <div class="relative rowfesbuk">
+                            <span class="fbText">http://www.facebook.com/</span>
+                        <input id="akunface" name="facebook" value="{$listnya[i].facebook}"  type="text" class=" " ></div><br>
+						<label class="msg_name " style="color: red;"></label>
+                    </div><!-- end .row -->
+                    <div class="row">
+                        <label for="twitter">Akun Twitter<br></label>
+                        <div class="relative rowtwitter">
+                            <span class="tweetText">http://www.twitter.com/</span>
+                        <input id="twitter" name="twitter" value="{$listnya[i].twitter}"  type="text" class=" " ></div><br>
+						<label class="msg_name " style="color: red;"></label>
+                    </div><!-- end .row -->
+                     <div class="row">
+                        <label for="headchapter">Nama Head Chapter<br></label>
+                        <input id="headchapter" name="headchapter" value="{$listnya[i].name}"  type="text" class=" " ><br>
+						<label class="msg_name " style="color: red;"></label>
+                    </div><!-- end .row -->
+		    <!--
+                     <div class="row">
+                        <label for="headchapter">Email Head Chapter<br></label>
+                        <input id="headchapter" name="email_headchapter" value="{$listnya[i].email}"  type="text" class=" " ><br>
+						<label class="msg_name " style="color: red;"></label>
+                    </div>
+		    -->
+		    <!-- end .row -->
+                    <div class="row">
+                        <label for="headchapter">No Telp/HP Head Chapter<br></label>
+                        <input id="headchapter" name="telp" value="{$listnya[i].no_tlp}"  type="text" class=" " ><br>
+						<label class="msg_name " style="color: red;"></label>
+                    </div><!-- end .row -->
+                    <div class="row">
+                        <label for="headchapter">Register Date<br></label>
+                        <input name="regdate" value="{$listnya[i].date_register}"  type="text" class="" readonly><br>
+						<label class="msg_name " style="color: red;"></label>
+                    </div><!-- end .row -->
+                     
+                    <div class="row">
+						<input type='hidden' name='submit' value='1'>
+						<input type='hidden' name='chapter_id' value='{$listnya[i].idc}'>
+                        <input type="submit" value="Simpan" name="submit" class="fr button3 submitsave"  />&nbsp;
+						 <a href="{$basedomain}chaptermanagement" class="button4 fr text-center">Batal</a>
+                        <small class="msg">{$status.msgee}</small>
+                        <small class="msg">{$status.msg}</small>
+                    </div><!-- end .row -->
+                </section>
+            </div><!-- end #wizard -->
+			
+			{/section}
+            </form>
+        </div><!-- end .content -->
+    </div><!-- end #container -->
+</div><!-- end #home -->
+<script>
+{literal}
+	$('.typeuser').click(function()
+	{
+			
+			console.log($(this).val());
+			if($(this).val()==9)
+			{
+				$(".checkboxmenu").prop("checked", true);
+				$(".checkboxmenu").attr("disabled", true);				
+			}
+			else {
+				$(".checkboxmenu").prop("checked", false);
+				$(".checkboxmenu").removeAttr("disabled"); 	
+				}
+	});
+	$('.submitsave').click(function()
+		{
+			console.log('asa');return false;
+			var name_no='.name_no';
+			$(name_no).html(' ');
+			var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/; 
+			var email_no=".email_no";
+			$(email_no).html(' ');
+			var username_no='.username_no';
+			$(username_no).html(' ');
+			var password='.password_no';
+			$(password_no).html(' ');
+			var checkboxmenu='.checkboxmenu_no';
+			$(checkboxmenu_no).html(' ');
+			var valid='';
+			if($('.checkboxmenu:checked').length ==0)
+				{
+				
+					$(subcategory_no).html('You cannot leave this field empty');
+					valid='ada';
+				}
+			if($('.name').val()=='')
+			{
+				$(name_no).html('You cannot leave this field empty');
+				valid='ada';
+			}
+			if($('.username').val()=='')
+			{
+				$(username_no).html('You cannot leave this field empty');
+				valid='ada';
+			}
+			if($('.password').val()=='')
+			{
+				$(password_no).html('You cannot leave this field empty');
+				valid='ada';
+			}
+			if($('.email').val()=='')
+			{
+				$(email_no).html('You cannot leave this field empty');
+				valid='ada';
+			}
+			else if(!$('.email').val().match(mailformat))  
+			{  
+				$(email_no).html('format email salah');
+				valid='ada';
+			} 
+			if(valid)
+			{
+				return false;
+			
+			}
+			else
+			{
+				$('input[type="submit"]').attr('disabled','disabled');
+			
+			}
+		}
+{/literal}
+</script>

@@ -1,0 +1,133 @@
+
+<div id="event-detail" class="section">
+	<div id="container">
+    	<div class="row-2">
+            <h1 class="yellow textbg">EVENTS DETAIL</h1>
+    	</div>
+        
+       
+        <div class="row">
+            <div class="box-grey">
+            	<div class="infoDetailEvent">
+                	<h1 class="yellow textbg"><span class="startDates">{$dataevent.time_start|date_format:"%d/%m/%Y"}</span>  <span class="dashDates">&ndash;</span> <span class="endDates">{$dataevent.time_end|date_format:"%d/%m/%Y"}</span></h1>
+                    <p class="">Waktu: {$dataevent.jam_awal} - {$dataevent.jam_akhir}</p>
+                    <h1 class="">{$dataevent.name}<br><span class="categoryEvents">{if $dataevent.type == 1} Nonton Bareng {elseif $dataevent.type == 2} Futsal {else} Gathering{/if}</span></h1>
+                    <address>{$dataevent.alamat}</address>         
+                    <p>{$dataevent.description}</p>   
+					</div>
+            </div>
+        </div><!--end.row-->
+        {*}
+        <div class="row textcenter">
+				<label class="error_red msgerorr"></label>
+				<br>
+                <a  href="javascript:void(0)" class="row button submitcheckin">CHECK-IN</a>
+            </div>{/*}
+        
+    </div><!--end#container-->
+</div><!--end.section-->
+<script>
+
+ var attitude={$dataevent.lat};
+var logitude={$dataevent.long};
+
+ var attitude2='';
+var logitude2='';
+
+var alamat = "{$dataevent.alamat}";
+var idevent = "{$dataevent.id}";
+{literal}
+
+  var coords = new google.maps.LatLng(attitude,logitude);
+  
+	  var options = {
+		zoom: 15,
+		center: coords,
+		mapTypeControl: false,
+		navigationControlOptions: {
+			style: google.maps.NavigationControlStyle.SMALL
+		},
+		mapTypeId: google.maps.MapTypeId.ROADMAP
+	  };
+	  var map = new google.maps.Map(document.getElementById("map-canvas"), options);
+	var infoWindow = new google.maps.InfoWindow({
+                content: alamat
+            });
+	  var marker = new google.maps.Marker({
+		  position: coords,
+		  map: map,
+		  title:alamat
+	  });
+
+ //s:function untuk dapat coordinat
+	  if (navigator.geolocation)
+		{
+		navigator.geolocation.watchPosition(showPosition);
+		}
+	  else{
+	  err="Geolocation is not supported by this browser.";
+	  console.log(err);
+	  }
+	  
+  
+function showPosition(position)
+  {
+	 err="Latitude: " + position.coords.latitude + 
+	  "<br>Longitude: " + position.coords.longitude;	
+	  console.log(err);
+	   attitude2=position.coords.latitude;
+	 logitude2=position.coords.longitude;
+  }
+  //e:function untuk dapat coordinat
+  $(document).on('click','.submitcheckin',function()
+  {
+	console.log(attitude2);
+	console.log('saasa');
+    var R = 6371; // km
+    var dLat = (attitude2 - attitude) * Math.PI / 180;
+    var dLon = (logitude2 - logitude) * Math.PI / 180;
+    var lat1 = logitude * Math.PI / 180;
+    var lat2 = logitude2 * Math.PI / 180;
+ 
+    var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+            Math.sin(dLon/2) * Math.sin(dLon/2) * Math.cos(lat1) * Math.cos(lat2); 
+    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+    var d = R * c;
+    var m = d * 0.621371;
+	var km= d;
+	
+	if(m < radiusmeter)
+	{
+		$.ajax ({ 
+													type	 : 'POST', 
+													url	 :  basedomain+'member/addPeserta' , 
+													data:{idevent:idevent},
+													dataType:'json',
+													success	: function (result) 
+													{ 
+														if(result.status==1)
+														{
+															$('.submitcheckin').remove();
+														}
+														console.log(result.status);
+													}
+												});
+	}
+	else if(m > radiusmeter )
+	{
+		//$('.msgerorr').html('Anda berada diluar radius posisi anda di radius '+ Math.floor(km)+' km');
+		$('.msgerorr').html('Anda berada diluar radius venue');
+		//console.log( );
+	}
+	else
+	{
+		//console.log('tidak suport mesti aktifkan deteksi map di brwoser');
+		$('.msgerorr').html('Tolong aktifkan fungsi Geo-Location di browser Anda');
+	}
+	
+    
+  
+  });
+  
+ {/literal}
+</script>

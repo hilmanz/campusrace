@@ -1,0 +1,133 @@
+<div id="registration-member" class="section">
+	<div id="container">
+    	<div class="row-2">
+            <h1 class="yellow textbg">TAMBAH MEMBER</h1>
+    	</div>
+        <div class="formregis">
+        	<h2 class="formTittle red">ISI EMAIL MEMBER</h2>
+        	<form method="post" id="fromaddmember" action="{$basedomain}home/prosesaddMember" enctype="application/x-www-form-urlencoded">
+            <div class="row">
+            	<textarea class="emailMember" id="emailmember" name="email" placeholder="Masukan email kamu"></textarea><br />
+                <p class="infotext emailmember_erorr error_red" id="emailmember_error" style="width:100%;"></p>
+                {*}<p class="infotext">Maximal 20 email member, setiap email dipisahkan dengan tanda koma (,).</p>{/*}
+                <p class="infotext">Contoh: yahoo@email.com atau gmail@email.com</p>
+            </div>
+            <div class="row">
+                <a  href="javascript:void(0)" class="button submitaddmember">KIRIM</a>
+            </div>
+        </form>
+        </div>
+    </div><!--end#container-->
+</div><!--end.section-->
+<script>
+{literal}
+   
+	$(document).on('click','.submitaddmember',function(){
+		$('#emailmember_error').html('');
+		
+		var valid='';
+		if($('#emailmember').val()=='')
+		{
+			$('#emailmember_error').html('kolom ini harus di isi');
+			valid='ada';
+		}
+		
+		if(valid)
+		{
+			return false;
+		}
+		else
+		{
+			vlidemail(valid);
+		}
+	})
+  
+
+
+function vlidemail(valid)
+{
+	var valid= valid;
+	emailsplit = $('.emailMember').val().split(',');
+	emailformat='';
+	var emailSame='';
+	var ix=0;
+	var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,15})+$/; 
+	if(emailformat=='' && emailSame=='')
+		{
+			if(emailsplit.length > 20 )
+			{
+				$('.emailmember_erorr').html('Maximal 20 Email Member');
+				 valid='ada';	
+				
+			}
+		}	
+		//console.log(emailsplit);
+		$.each(emailsplit,function(ind,value)
+		{
+			mailnya = value.trim();
+			
+			if(!mailnya.match(mailformat))  
+			{  
+				$('.emailmember_erorr').html(' format email salah (e.g. example@gmail.com)');
+				
+				valid='ada';
+				emailformat='ada';
+				//console.log(mailnya);
+			} 
+			else
+			{
+				$.ajax ({ 
+					type	 : 'POST', 
+					url	 :  basedomain+'home/checkEmailMember' , 
+					data:{email:mailnya},
+					dataType:'json',
+					success	: function (result) 
+						{
+							++ix;
+						
+							if(result.status==1)
+							{
+								//console.log(emailSame);
+								if(emailSame=='')
+								{
+									emailSame +=result.email;
+									
+								}
+								else
+								{
+									emailSame +=','+result.email;
+								}
+								if(emailSame)
+									{
+										$('.emailmember_erorr').html('email <span class="emailsama" > '+emailSame+'</span> sudah terdaftar');
+										valid='ada';
+									}
+							}
+							//console.log(valid);
+							if(emailsplit.length==ix)
+							{
+								if(valid)
+								{
+									return false;
+								}
+								else
+								{
+									$('#fromaddmember').trigger('submit');
+								}
+							}
+						}
+				});
+				
+			}
+		});
+		if(valid)
+		{
+			return false;
+		}
+		return false;
+		
+		
+
+}
+{/literal}
+</script>

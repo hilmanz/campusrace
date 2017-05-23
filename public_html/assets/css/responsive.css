@@ -1,0 +1,331 @@
+/* Responsive changes */
+@media (max-width: 1440px) {	
+
+} 
+@media (max-width: 1280px) {
+
+}
+@media (max-width: 1200px) {
+
+}
+@media (max-width: 1100px) {
+
+} 
+@media only screen and (max-width: 979px) {
+
+}
+@media only screen and (max-width: 600px) {
+  #puzzlegame canvas{
+    border: none !important;
+    max-width: 253px; margin: 0 auto;
+  }
+  #puzzlegame{
+    max-width: 270px; margin: 0 auto;
+  }
+  #caramain img{
+    width: 100%;
+  }
+  #landingGame img{
+    max-width: 200px;
+  }
+  #waktuhabis img{
+    max-width: 100px;
+  }
+  #waktuhabis{
+    padding: 50px 0;
+  }
+  #gameContainer .button{
+    font-size: 12px;
+    padding: 0 10px;
+  }
+  .leftText{    
+   width: 100%;
+   border: none;
+   border-bottom: 1px #fff solid;
+   padding-bottom: 15px;
+ }
+ .vocerText {
+   width: 100%;
+   padding-top: 10px;
+ }
+ .leftleader{
+   width:83%;
+ }
+ .col2{
+   width:100%;
+   clear:both;
+ }
+ .reg1{
+   width:100%;
+ }
+ #universal{
+   padding:0px 5px;
+ }
+ #logo{
+   max-width:215px;
+ }
+ .chapterDetail{
+   margin-left:0;
+   margin-top:10px;
+ }
+ .chapterDetail h3{
+   font-size:28px;
+ }
+ .chapterDetail p{
+   font-size:18px;
+ }
+ .bigNumber {
+  font-size: 28px;
+}
+.textAng, .textNumber {
+  font-size: 24px;
+  text-transform: uppercase;
+}
+.box-grey{
+	padding:10px;
+}
+.buttonAction ,.pointInfoPast{
+  position: relative;
+  clear: both;
+  margin: 10px 10px;
+}
+#tabs .button{
+	padding:0 10px;
+	font-size:12px;
+}
+.eventPast span {
+  width: 100%;
+  display: inline-block;
+  margin: 5px 0;
+  font-size:14px;
+}
+.dateEvent input[type=text], .timeEvent input[type=text]{
+	width:100px;
+}
+.ui-tabs .ui-tabs-nav .ui-tabs-anchor{
+	font-size:14px;
+}
+.infoMembers .name_member{
+	font-size:14px;
+}
+.infoMembers p{
+	font-size:13px;
+}
+.cekin {
+  font-size: 18px;
+  line-height: 25px;
+  color: #0C0;
+}
+#navMobile a {
+  display: block;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 14px;
+  color: #fff;
+  padding: 10px 35px;
+}
+.detailInfoTrigger{
+	right:0px;
+}
+}
+@media only screen and (max-width: 650px) {
+
+}
+@media only screen and (max-width: 600px) {
+.leftText{    
+	width: 100%;
+    border: none;
+    border-bottom: 1px #fff solid;
+    padding-bottom: 15px;
+}
+.vocerText {
+	width: 100%;
+    padding-top: 10px;
+}
+.leftleader{
+	width:83%;
+}
+.col2{
+	width:100%;
+	clear:both;
+}
+.reg1{
+	width:100%;
+}
+#universal{
+	padding:0px 5px;
+}
+#logo{
+	max-width:215px;
+}
+.chapterDetail{
+	margin-left:0;
+	margin-top:10px;
+}
+.chapterDetail h3{
+	font-size:28px;
+}
+.chapterDetail p{
+	font-size:18px;
+}
+.bigNumber {
+  font-size: 28px;
+}
+.textAng, .textNumber {
+  font-size: 24px;
+  text-transform: uppercase;
+}
+.box-grey{
+	padding:10px;
+}
+.buttonAction ,.pointInfoPast{
+  position: relative;
+  clear: both;
+  margin: 10px 10px;
+}
+#tabs .button{
+	padding:0 10px;
+	font-size:12px;
+}
+.eventPast span {
+  width: 100%;
+  display: inline-block;
+  margin: 5px 0;
+  font-size:14px;
+}
+.dateEvent input[type=text], .timeEvent input[type=text]{
+	width:100px;
+}
+.ui-tabs .ui-tabs-nav .ui-tabs-anchor{
+	font-size:14px;
+}
+.infoMembers .name_member{
+	font-size:14px;
+}
+.infoMembers p{
+	font-size:13px;
+}
+.cekin {
+  font-size: 18px;
+  line-height: 25px;
+  color: #0C0;
+}
+#navMobile a {
+  display: block;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 14px;
+  color: #fff;
+  padding: 10px 35px;
+}
+.detailInfoTrigger{
+	right:0px;
+}
+}
+
+@media (max-width: 500px) {
+}
+@media (max-width: 470px) {
+.selectMember {
+  position: relative;
+  width: 100%;
+  margin-bottom:15px;
+}
+.selectMember input[type=text],.selectMember select{
+	width:100% !important;
+	margin-bottom:5px;
+}
+.leftleader {
+  width: 77%;
+}
+#desclandingDesktop{
+	display:none;
+}
+.mobileDesc{
+	display:block
+}
+.rowsLogin{
+	padding:0 5px;
+}
+.logonya{
+	min-width:275px;
+}
+.loginForm {
+  margin: 25px 0;
+  text-align: left;
+  padding: 10px 10px;
+ 
+}
+.loginForm .titleLogin{
+	font-size:16px;
+}
+.leaderboard-points {
+  float: right;
+  width: 20%;
+  padding: 0px 0px;
+  text-align: center;
+  height: 46px;
+}
+.leaderboard-points .points {
+  font-size: 16px;
+  font-family: 'BebasNeueRegular';
+  line-height: 46px;
+}
+.smallpts {
+  font-size: 12px;
+  font-family: 'BebasNeueRegular';
+  margin-left: 3px;
+}
+.halfWidth{
+	width:100%;
+	margin:10px 0;
+}
+.chapterDetail{
+	margin-bottom:15px;
+}
+.leaderInfo {
+  margin-top: 0px;
+}
+.rows{
+	margin:0;
+}
+.headerHome {
+  padding: 10px 0;
+}
+.descLanding h4.title-entry {
+  font-size: 19px;
+}
+#footNav p{
+	float:none !important;
+	margin:10px 0;
+}
+.leftleader{
+	height:auto;
+}
+.leftleader .leadClub{
+	line-height:20px;
+}
+.chapterLead{
+	display:block;
+}
+.chapterDetail label {
+  width: 100%;
+}
+.chapterDetail .rownya {
+  clear: both;
+  margin: 10px 0;
+}
+.chapterDetail p {
+  font-size: 16px;
+}
+#logo{
+	float:left;
+}
+.buttonPast{
+	float:left;
+	margin-top:-50px;
+}
+.alamatpast{
+	text-align:left;
+}
+}

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+{$meta}
+<body>
+  <div id="body">
+    <div id="page">
+      {if $pages != 'login' && $pages != 'logout'}
+      <div id="sidebar">
+          <div id="navbar">
+            <ul>
+			<li class="adminList"><a class="adminmenu"  id="adminmenu"><span> MENU</span></a></li>
+            
+           <div class="subadmin1">
+ {*} <li><a class="{if $pages == 'home'}active{/if}" href="{$basedomain}home" ><span>Announcement</span></a></li>{/*}
+           {if $menus}
+				{section name=imn loop=$menus}   
+					
+					{if $menus[imn].id!=5 && $menus[imn].id!=6}
+						<li><a class="{if $pages ==$menus[imn].module }active{/if}" href="{$basedomain}{$menus[imn].module}" ><span>{$menus[imn].name_menu} </span></a></li>
+						{/if}
+                        
+					
+				{/section}
+             <!--  <li><a class="{if $pages =='challangemanagement' }active{/if}" href="{$basedomain}challangemanagement" ><span>Challange Management </span></a></li> -->
+						  
+			{/if}
+			</div>
+			{if $menus && $user->type ==9 }
+				<li class="adminList"><a class="adminmenu2"  id="adminmenu2"><span> ADMIN </span></a></li>
+				<div class="subadmin2">
+				{section name=imna loop=$menus}   
+					
+					{if $menus[imna].id==5 && $user->type ==9 }
+						<li><a class="{if $pages ==$menus[imna].module }active{/if}" href="{$basedomain}{$menus[imna].module}" ><span>{$menus[imna].name_menu} </span>{if $menus[imna].id==9}<span class="notifRound">{$countnotif} </span>{/if}</a></li>
+						{/if}
+					{if $menus[imna].id==6 && $user->type ==9 }
+						<li><a class="{if $pages ==$menus[imna].module }active{/if}" href="{$basedomain}{$menus[imna].module}" ><span>{$menus[imna].name_menu} </span>{if $menus[imna].id==9}<span class="notifRound">{$countnotif} </span>{/if}</a></li>
+						{/if}
+					
+				{/section}
+				
+			
+					{*}<li><a class="{if $pages == 'register'}logout{/if}" href="{$basedomain}logout.php" ><span>Logout </span></a></li>{/*}		
+                </div>
+			{else}	
+			{*}<li><a class="{if $pages == 'register'}logout{/if}" href="{$basedomain}logout.php" ><span>Logout </span></a></li>{/*}		
+			{/if}
+              </ul>
+          </div>
+      </div><!-- end #sidebar -->
+		  {$header}
+      {/if}
+        <div id="thecontent">
+             {$mainContent}
+        </div><!-- /#thecontent -->
+		  {$footer}
+    </div><!-- end #page -->
+  </div><!-- end #body -->    
+</body>
+</html>

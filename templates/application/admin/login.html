@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Admin SuperSoccer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   
+    <link rel="icon" href="{$basedomain}assets/images/favicon-2.png" type="image/x-icon">
+    
+    <link href="{$basedomain}assets/css/colpick.css" rel="stylesheet" type="text/css" />
+    <link href="{$basedomain}assets/css/admin-ssgte.css" rel="stylesheet" type="text/css" />
+    <link href="{$basedomain}assets/css/responsive.css" rel="stylesheet" type="text/css" />
+    <!-- // IE  // -->
+    <!--[if IE]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+    <!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+    
+    <script type="text/javascript" src="{$basedomain}assets/js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="{$basedomain}assets/js/jquery-ui.min.js"></script>
+    
+    <!-- JS library -->
+    <script>
+        var basedomain = "{$basedomain}" ;
+        var basedomainpath = "{$basedomainpath}" ;
+        var pages = "{$pages}" ;
+        var locale = {$locale|@json_encode};
+    </script> 
+    <!--- END ---->
+
+    <!-- // PLUGIN  // -->
+    <script type="text/javascript" src="{$basedomain}assets/js/modernizr.custom.js"></script>
+    <script type="text/javascript" src="{$basedomain}assets/js/jquery.easing.js"></script>
+    <script type="text/javascript" src="{$basedomain}assets/js/jquery.mousewheel.js"></script>
+    <script type="text/javascript" src="{$basedomain}assets/js/jquery.steps.js"></script>
+    <script type="text/javascript" src="{$basedomain}assets/js/jquery.magnific-popup.js"></script>
+    <script type="text/javascript" src="{$basedomain}assets/js/colpick.js"></script>
+    <script type="text/javascript" src="{$basedomain}assets/js/touchbase.js"></script>
+
+</head>
+
+
+<body id="login-page">
+<div id="body">
+        <div class="loginbox">
+            
+            <!--logo-->
+       		<div class="logo_login"></div>
+           <form name="Form2" method="POST" action="{$basedomain}login/local" id="Form2">
+                <input name="username" class="username" placeholder="Username" type="text" > 
+                <input name="password" class="password" placeholder="Password" type="password" >
+				
+				<label class="row msgerorr" style="width: 100%;max-width: 100%;color: #fdcb02;" >{$msg}</label>
+                <input id="button" name="login" class="submitlogin" type="submit" name="Submit" value="Login">
+                <input type="hidden" name="login" value="1">
+            </form> 
+        </div><!--loginbox-->
+</div><!-- end #body -->            
+</body>
+</script>
+<script>
+{literal}
+	$(document).on ('click','.submitlogin',function(){
+		$('.msgerorr').html('');
+		var valid="";
+		if($('.username').val()=='' || $('.password').val()=='')
+		{
+			$('.msgerorr').html('Username atau Password yang Anda masukan salah.');
+			valid="ada";
+		}
+		if(valid)
+		{
+			return false;
+		}
+		else
+		{
+			$('.formlogin').trigger('submit');
+		}
+	}); 
+{/literal}
+
+</script>

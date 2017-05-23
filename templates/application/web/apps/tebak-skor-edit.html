@@ -1,0 +1,186 @@
+<div id="tebak-skor" class="section">
+	<div id="container">
+        <div class="rows">
+        	<img width="100%" src="{$basedomain}assets/images/banner-skor2.jpg" >
+        </div>
+        <div class="rows">
+        	<div class="descSkor rowboxs tr">
+            	
+                      <h4 class="title-entry yellow">Cara Bermain</h4>
+             
+                <ul>
+                	<li>Isi tebakan skor kamu untuk 3 pertandingan yang dipilih untuk ditebak.</li>
+                    <li>Setelah mengisi seluruh tebakan yang kamu pikir paling jitu, klik tombol submit.</li>
+                    <li>Pengumuman pemenang akan diumumkan disini pada tanggal <span class="yellow">19 Oktober 2015</span>.</li>
+                </ul>
+                <br />
+                <h4 class="title-entry yellow">Syarat & ketentuan</h4>
+              
+                <ul>
+                	<li>Pemenang adalah peserta yang berhasil menebak skor ketiga pertandingan paling tepat dan cepat.</li>
+                    <li>Setiap pertandingan yang berhasil ditebak secara jitu dan tepat, maka peserta akan mendapatkan 5 poin.</li>
+                    <li>Poin yang dihasilkan dari TEBAK SKOR! Ini akan masuk ke dalam poin masing-masing peserta dalam Supersoccer Community Race.</li>
+                    <li>Peserta dapat mengubah-ubah prediksi skornya hingga hari <span class="yellow">Jumat, 16 Oktober 2015 pukul 23:59 WIB</span>. Panitia akan menutup submission TEBAK SKOR! Pada <span class="yellow">Sabtu dini hari, pukul 00:00 WIB</span>.</li>
+                </ul>
+            </div><!--end.skorInput-->
+        </div><!--end.rows-->
+		<form method="post" action="../proseseditskor">
+			<div class="rows skorRows">
+				<h1 class="tittle yellow">SCOREBOARD</h1> 
+				
+					<div class="skorsInput tr">					
+						{section name=i loop=$lispertandingan}
+							<div class="rows skorRowss">
+								<div class="col3">
+									<h4 class="namaClub yellow">{$lispertandingan[i].club1}-{$lispertandingan[i].skor1}</h4>
+									<div class="skorIn">
+										<input class="skornya1 number" type="text" name="skor1" maxlength="2" value="{$lispertandingan[i].skor1}"/>
+										<input type="hidden" name="pertandingan1" value="{$lispertandingan[i].id}"/>
+                                        
+									</div>
+                                    <label class="skor1_error error_red"></label>
+									
+								</div>
+								<div class="col3 textSkor">
+									<span class="arrow-left">&nbsp;</span>
+									<h1 class="textVs yellow">VS</h1>
+									<span class="arrow-right">&nbsp;</span>
+								</div>
+								<div class="col3">
+									<h4 class="namaClub yellow">{$lispertandingan[i].club2}-{$lispertandingan[i].skor2}</h4>
+									<div class="skorIn">
+										<input class="skornya2 number" type="text" name="skor2" maxlength="2" value="{$lispertandingan[i].skor2}"/>
+                                       									
+									</div>
+                                     <label class="skor2_error error_red"></label>
+								</div>
+							</div><!--end rows-->
+					
+							<div class="rows skorRowss">
+								<div class="col3">
+									<h4 class="namaClub yellow">{$lispertandingan[i].club3}</h4>
+									<div class="skorIn">
+										<input class="skornya3 number" type="text" name="skor3" maxlength="2" value="{$lispertandingan[i].skor3}"/>
+										<input type="hidden" name="pertandingan3" value="{$lispertandingan[i].id}"/>
+                                       
+									</div>
+                                     <label class="skor3_error error_red"></label>
+									
+								</div>
+								<div class="col3 textSkor">
+									<span class="arrow-left">&nbsp;</span>
+									<h1 class="textVs yellow">VS</h1>
+									<span class="arrow-right">&nbsp;</span>
+								</div>
+								<div class="col3">
+									<h4 class="namaClub yellow">{$lispertandingan[i].club4}</h4>
+									<div class="skorIn">
+										<input class="skornya4 number" type="text" name="skor4" maxlength="2" value="{$lispertandingan[i].skor4}"/>
+                                        									
+									</div>
+                                    <label class="skor4_error error_red"></label>
+								</div>
+							</div><!--end rows-->
+						
+							<div class="rows skorRowss">
+								<div class="col3">
+									<h4 class="namaClub yellow">{$lispertandingan[i].club5}</h4>
+									<div class="skorIn">
+										<input class="skornya5 number" type="text" name="skor5" maxlength="2" value="{$lispertandingan[i].skor5}"/>
+										<input type="hidden" name="pertandingan5" value="{$lispertandingan[i].id}"/>
+                                        
+									</div>
+                                    <label class="skor5_error error_red"></label>
+									
+								</div>
+								<div class="col3 textSkor">
+									<span class="arrow-left">&nbsp;</span>
+									<h1 class="textVs yellow">VS</h1>
+									<span class="arrow-right">&nbsp;</span>
+								</div>
+								<div class="col3">
+									<h4 class="namaClub yellow">{$lispertandingan[i].club6}</h4>
+									<div class="skorIn">
+										<input class="skornya6 number" type="text" name="skor6" maxlength="2" value="{$lispertandingan[i].skor6}"/>                                        								
+									</div>
+                                    <label class="skor6_error error_red"></label>	
+								</div>
+								<div class="col3 textSkor">
+									<span class="arrow-left">&nbsp;</span>
+									<input class="weekid"  type="hidden" name="weekid" value="{$lispertandingan[i].week_id}"/>	
+									<span class="arrow-right">&nbsp;</span>
+								</div>
+							</div><!--end rows-->
+						{/section}
+							
+						<div class="rows">
+							<input type="hidden" name="id_member" value="{$memberprofile.ids}">
+							<!-- <button class="button" name="submit">Submit</button> -->
+							<input class="button simpan" type="submit" name="submit" value="Submit">
+						</div>
+						
+					</div><!--end.skorsInput-->
+				
+			</div><!--skorRows-->
+		</form>
+    </div><!--end#container-->
+</div><!--end.section-->
+{literal}
+<script>
+$(document).on('click','.simpan',function(){
+	$('.skor1_error').html('');
+	$('.skor2_error').html('');
+	$('.skor3_error').html('');
+	$('.skor4_error').html('');
+	$('.skor5_error').html('');
+	$('.skor6_error').html('');
+	
+	var valid="";
+	if($('.skornya1').val()=='')
+	{
+		$('.skor1_error').html('Kolom ini harus diisi');
+		valid="ada";
+	}
+	if($('.skornya2').val()=='')
+	{
+		$('.skor2_error').html('Kolom ini harus diisi');
+		valid="ada";
+	}
+	if($('.skornya3').val()=='')
+	{
+		$('.skor3_error').html('Kolom ini harus diisi');
+		valid="ada";
+	}
+	if($('.skornya4').val()=='')
+	{
+		$('.skor4_error').html('Kolom ini harus diisi');
+		valid="ada";
+	}
+	if($('.skornya5').val()=='')
+	{
+		$('.skor5_error').html('Kolom ini harus diisi');
+		valid="ada";
+	}
+	if($('.skornya5').val()=='')
+	{
+		$('.skor5_error').html('Kolom ini harus diisi');
+		valid="ada";
+	}
+	if(valid)
+	{
+		return false;
+		
+	}
+	
+										  
+});
+
+$('.number').keyup(function () {  
+	if(this.value)
+	{
+		this.value = this.value.replace(/[^0-9]/g,''); 
+		
+	}
+});
+</script>
+{/literal}

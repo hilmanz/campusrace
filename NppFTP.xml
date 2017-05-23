@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<NppFTP defaultCache="%CONFIGDIR%\Cache\%USERNAME%@%HOSTNAME%" outputShown="1" windowRatio="0.707572" clearCache="0" clearCachePermanent="0">
+    <Profiles>
+        <Profile name="beat" hostname="117.54.1.107" port="22" username="inong" password="028F3E21B5397D8CB8" askPassword="0" timeout="30" securityMode="3" transferMode="0" connectionMode="0" dataPortMin="10000" dataPortMax="32000" listParams="" initialDir="" keyFile="" passphrase="" useAgent="0" acceptedMethods="1">
+            <Cache />
+            <FileTypes asciiTypes="" binaryTypes="" />
+        </Profile>
+        <Profile name="cobra" hostname="202.43.162.253" port="22" username="cobra" password="0AD43267E63025871B" askPassword="0" timeout="30" securityMode="3" transferMode="0" connectionMode="0" dataPortMin="10000" dataPortMax="32000" listParams="" initialDir="" keyFile="" passphrase="" useAgent="0" acceptedMethods="1">
+            <Cache />
+            <FileTypes asciiTypes="" binaryTypes="" />
+        </Profile>
+        <Profile name="creasi" hostname="103.23.21.71" port="22" username="webuser" password="1EDE3260F46C3EDC19B380C1028D0F8A" askPassword="0" timeout="30" securityMode="3" transferMode="0" connectionMode="0" dataPortMin="10000" dataPortMax="32000" listParams="" initialDir="" keyFile="" passphrase="" useAgent="0" acceptedMethods="1">
+            <Cache />
+            <FileTypes asciiTypes="" binaryTypes="" />
+        </Profile>
+        <Profile name="gogril" hostname="103.28.15.4" port="21" username="ceritakita" password="1AD33F27B43C7D8C" askPassword="0" timeout="30" securityMode="0" transferMode="0" connectionMode="0" dataPortMin="10000" dataPortMax="32000" listParams="" initialDir="" keyFile="" passphrase="" useAgent="0" acceptedMethods="1">
+            <Cache />
+            <FileTypes asciiTypes="" binaryTypes="" />
+        </Profile>
+        <Profile name="inner" hostname="117.54.1.98" port="21" username="marlboro" password="5B8B3225F539208E2D467E4097" askPassword="0" timeout="30" securityMode="0" transferMode="0" connectionMode="0" dataPortMin="10000" dataPortMax="32000" listParams="" initialDir="" keyFile="" passphrase="" useAgent="0" acceptedMethods="1">
+            <Cache />
+            <FileTypes asciiTypes="" binaryTypes="" />
+        </Profile>
+        <Profile name="mybmw" hostname="10.18.69.3" port="22" username="mybmw" password="00D52470E96D2DD116" askPassword="0" timeout="30" securityMode="3" transferMode="0" connectionMode="0" dataPortMin="10000" dataPortMax="32000" listParams="" initialDir="" keyFile="" passphrase="" useAgent="0" acceptedMethods="1">
+            <Cache />
+            <FileTypes asciiTypes="" binaryTypes="" />
+        </Profile>
+        <Profile name="privew" hostname="202.80.113.52" port="22" username="kana" password="00D52470E96D2DD116" askPassword="0" timeout="30" securityMode="3" transferMode="0" connectionMode="0" dataPortMin="10000" dataPortMax="32000" listParams="" initialDir="" keyFile="" passphrase="" useAgent="0" acceptedMethods="1">
+            <Cache />
+            <FileTypes asciiTypes="" binaryTypes="" />
+        </Profile>
+        <Profile name="prodia" hostname="10.18.69.8" port="22" username="prodia" password="19C93F71EE687CD05B52" askPassword="0" timeout="30" securityMode="3" transferMode="0" connectionMode="0" dataPortMin="10000" dataPortMax="32000" listParams="" initialDir="" keyFile="" passphrase="" useAgent="0" acceptedMethods="1">
+            <Cache />
+            <FileTypes asciiTypes="" binaryTypes="" />
+        </Profile>
+        <Profile name="shinkenjuku" hostname="" port="21" username="" password="" askPassword="0" timeout="30" securityMode="0" transferMode="0" connectionMode="0" dataPortMin="10000" dataPortMax="32000" listParams="" initialDir="" keyFile="" passphrase="" useAgent="0" acceptedMethods="1">
+            <Cache />
+            <FileTypes asciiTypes="" binaryTypes="" />
+        </Profile>
+        <Profile name="sonar" hostname="202.43.162.252" port="22" username="app" password="0DD22270E47D23CD6465" askPassword="0" timeout="30" securityMode="3" transferMode="0" connectionMode="0" dataPortMin="10000" dataPortMax="32000" listParams="" initialDir="" keyFile="" passphrase="" useAgent="0" acceptedMethods="1">
+            <Cache />
+            <FileTypes asciiTypes="" binaryTypes="" />
+        </Profile>
+        <Profile name="stgtouchbase" hostname="202.43.162.253" port="22" username="touchbase" password="0BDA2361E86E22DA" askPassword="0" timeout="30" securityMode="3" transferMode="0" connectionMode="0" dataPortMin="10000" dataPortMax="32000" listParams="" initialDir="" keyFile="" passphrase="" useAgent="0" acceptedMethods="1">
+            <Cache />
+            <FileTypes asciiTypes="" binaryTypes="" />
+        </Profile>
+    </Profiles>
+</NppFTP>

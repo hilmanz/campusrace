@@ -1,0 +1,247 @@
+
+
+<script>
+{literal}
+function paging_ajax_challange(fungsi,start){ 
+
+var category=$('.category option:selected').val();		
+var startdate=$('.startdate').val();
+var enddate=$('.enddate').val();	
+var search=$('.search').val();	
+var status=$('.status option:selected').val();
+
+				
+	$.post(basedomain+"challangemanagement/pagingchallange",{'start':start,ajax:1,'category':category,'startdate':startdate,'enddate':enddate,'search':search,'status':status},function(response){
+	
+		if(response){
+			  if(response.status==true){
+				var str="";
+				$.each(response.data,function(k,v){
+		
+						str+='<tr>';
+						str+='<td>'+v.no+'</td>';
+						str+='<td>'+v.namess+'</td>';
+						str+='<td>'+v.description+'</td>';
+						str+='<td>'+v.start_time+'</td>';
+						str+='<td>'+v.end_time+'</td>';
+						str+='<td>'+v.name_category+'</td>';
+						//str+='<td>'+v.name_chapter+'</td>';
+						str+='<td>'+v.create_challange+'</td>';	
+						
+						//str+='<td>'+v.point+'</td>';
+						str+='<td>'
+						if (v.n_status==1){str+='Actived';}else if(v.n_status==0){str+='Inactived';}else{str+='Finished';}str+='</td>';
+						//str+='<td><a href="'+basedomain+'listtantangan?paramactive='+v.id+'" style="color:#19CFA8;">Active</a> | <a href="'+basedomain+'listtantangan?paraminactive='+v.id+'" style="color:#19CFA8;">Delete</a> | <a href="'+basedomain+'listtantangan/edittantangan/'+v.id+'" style="color:#19CFA8;">Edit</a></td>';					
+						if(v.n_status==0){str+='<td><a href="'+basedomain+'challangemanagement?paramactive='+v.id+'" style="color:#19CFA8;">Active</a> | <a href="javascript:void(0)" onClick="confirmation(\''+basedomain+'challangemanagement?paramcancel='+v.id+'\',\'Confirm to Delete?\')" style="color:#19CFA8;"> Delete</a> | <a href="'+basedomain+'challangemanagement/editchallange/'+v.id+'" style="color:#19CFA8;">Edit</a></td>';}
+						else if(v.n_status==1){str+='<td><a href="'+basedomain+'challangemanagement?paramfinish='+v.id+'" style="color:#19CFA8;">Finish</a> | <a href="'+basedomain+'challangemanagement?paraminactive='+v.id+'" style="color:#19CFA8;">Inactive</a> | <a href="javascript:void(0)" onClick="confirmation(\''+basedomain+'challangemanagement?paramcancel='+v.id+'\',\'Confirm to Delete?\')" style="color:#19CFA8;"> Delete</a> | <a href="'+basedomain+'challangemanagement/editchallange/'+v.id+'" style="color:#19CFA8;">Edit</a></td>';}
+						else if(v.n_status==3){str+='<td></td>';}
+						
+						str+='</tr>';
+						
+						});
+						
+						$('.pagilist').html(str);
+						likeunlike();	
+					
+				}
+			}
+		},"JSON");
+	}
+	
+{/literal}
+	</script>
+	
+<div class="page_section" id="project-page">
+    <div id="container">
+        <div class="titlebox">
+            <h2 class="fl"><span class="icon-users">&nbsp;</span>List Challenge</h2>
+			<h2 class="fr"><a href="{$basedomain}challangemanagement/addchallange" class="button2">Tambah Baru</a></h2>
+             
+        </div><!-- end .titlebox -->
+        <div class="content challange">
+			<div class="summary">
+       		 <div class="short">
+			  <form method="GET" action="" id="shorter">
+             	
+                <div class="leftShorter">
+                	<div class="select_box">
+                    	<label>Status :</label>
+                        <select name="status" class="sort status">
+                            <option value="">Semua Status</option>
+                            <option value="1" {if $status==1}selected{/if} >Active</option>
+                            <option value="2"  {if $status==2}selected{/if}>Inactive</option>
+                        </select>
+                    </div>
+                    <div class="select_box">
+                    	<label>Challange :</label>
+                        <select name="category" class="sort category">
+                            <option value="">Semua Challenge</option>
+                            <option value="1" {if $category==1}selected{/if}>Games</option>
+                            <option value="2" {if $category==2}selected{/if}>Twitter</option>
+			    
+                        </select>
+                    </div>
+                   
+                </div><!--end.row-->
+             	<div class="rightShorter">
+                     <div class="" id="datePick">
+                        <span class="fl">Tanggal :</span>
+                        <div class="inputDate fl">
+                            <input type="text" value="{$startdate}" name="startdate" class="datepicker submitter startdate " id="dp1403509217274">
+                        </div><!-- /.rows -->
+                        
+                        <span class="fl">Sampai</span>
+                        <div class="inputDate fl">
+                            <input type="text"  value="{$enddate}" name="enddate" class="datepicker enddate " id="dp1403509217275">
+                        </div><!-- /.rows -->
+                    </div>
+                    <div id="searchPick">
+                    <span class="fl">Cari :</span>
+                    <input type='text' name='search' value="{$search}"  class='selectEvent fl search' style="width:150px" placeholder="challenge/description">
+                    <input type="submit" class="button2" style="margin-top:0px;" value="Go">
+                    </div>
+					</form>	
+           		</div><!--end.row-->
+				</div>
+            </div><!-- end .summary -->
+			
+			<table cellpadding="0" cellspacing="0" border="0" width="100%">
+			<thead>
+				<tr>
+				
+					<th class="head0">No</th>
+					<th class="head0">Nama Challenge</th> 
+					<th class="head0">Deskripsi Challenge</th> 
+					<th class="head0">Tanggal Mulai</th> 
+					<th class="head0">Tanggal Berakhir </th> 
+					<th class="head0">Jenis Challenge</th> 
+					<!--<th class="head0">Nama Chapter</th>-->
+					<th class="head0">Tanggal Dibuat</th>
+					<th class="head0">Status</th> 
+					<th class="head0">Action</th> 
+					
+				</tr>
+			</thead>
+			<tbody class="pagilist">
+					{section name=i loop=$list}
+					<tr>
+					<td>{$list[i].no}</td>
+					<td>{$list[i].namess}</td>
+					<td>{$list[i].description}</td>
+					<td>{$list[i].start_time}</td>
+					<td>{$list[i].end_time}</td>					
+					<td>{$list[i].name_category}</td>
+					<!--<td>{$list[i].name_chapter}</td>-->
+					<td>{$list[i].create_challange}</td>					
+					<td>{if $list[i].n_status==1}Actived{elseif $list[i].n_status==0}Inactived{else}Finished{/if}</td>
+					{if $list[i].n_status==0}
+						<td><a href="{$basedomain}challangemanagement?paramactive={$list[i].id}" style="color:#19CFA8;">Active</a> | 						
+						<a href="javascript:void(0)" onClick="confirmation('{$basedomain}challangemanagement?paramcancel={$list[i].id}','Confirm to Delete?')" style="color:#19CFA8;">Hapus</a> |
+						<a href="{$basedomain}challangemanagement/editchallange/{$list[i].id}" style="color:#19CFA8;">Edit</a></td>
+						{else}
+						<td style="display:none"><a href="{$basedomain}challangemanagement?paramactive={$list[i].id}" style="color:#19CFA8;">Active</a> | <a href="javascript:void(0)" onClick="confirmation('{$basedomain}challangemanagement?paramcancel={$list[i].id}','Confirm to Delete?')" style="color:#19CFA8;">Hapus</a> | <a href="{$basedomain}challangemanagement/editchallange/{$list[i].id}" style="color:#19CFA8;">Edit</a></td>
+					{/if}
+					
+					{if $list[i].n_status==1}
+						<td><a href="{$basedomain}challangemanagement?paramfinish={$list[i].id}" style="color:#19CFA8;">Finish</a> | <a href="{$basedomain}challangemanagement?paraminactive={$list[i].id}" style="color:#19CFA8;">Inactive</a> | <a href="javascript:void(0)" onClick="confirmation('{$basedomain}challangemanagement?paramcancel={$list[i].id}','Confirm to Delete?')" style="color:#19CFA8;">Hapus</a> | <a href="{$basedomain}challangemanagement/editchallange/{$list[i].id}" style="color:#19CFA8;">Edit</a></td>
+						{else}
+						<td style="display:none"><a href="{$basedomain}challangemanagement?paramactive={$list[i].id}" style="color:#19CFA8;">Active</a> | <a href="javascript:void(0)" onClick="confirmation('{$basedomain}challangemanagement?paramcancel={$list[i].id}','Confirm to Delete?')" style="color:#19CFA8;">Hapus</a> | <a href="{$basedomain}challangemanagement/editchallange/{$list[i].id}" style="color:#19CFA8;">Edit</a></td>
+					{/if}
+					
+					{if $list[i].n_status==3}
+						<td> </td>
+						{else}
+						<td style="display:none"><a href="{$basedomain}challangemanagement?paramactive={$list[i].id}" style="color:#19CFA8;">Active</a> | <a href="javascript:void(0)" onClick="confirmation('{$basedomain}challangemanagement?paramcancel={$list[i].id}','Confirm to Delete?')" style="color:#19CFA8;">Hapus</a> | <a href="{$basedomain}challangemanagement/editchallange/{$list[i].id}" style="color:#19CFA8;">Edit</a></td>
+					{/if}
+					
+					
+					
+					</tr>
+					{/section}	
+			</tbody>
+			</table>
+            <div id="paging_of_challange_list" class="paging">
+            
+            </div>
+        </div><!-- end .chapter -->
+    </div><!-- end #container -->
+</div><!-- end #home -->
+
+<script type="text/javascript">
+	getpaging(0,{$total},"paging_of_challange_list","paging_ajax_challange",10);
+</script>
+
+
+<script>
+{literal}
+//select bootstarp
+
+$('.selectpicker').selectpicker();
+likeunlike();
+
+function likeunlike(){
+
+$(document).ready(function(){
+			$(".checkactive").on("click", function(){
+			var idnya=$(this).val();
+			var thisnya=$(this);
+					  $.ajax({
+                        'type': 'POST',
+                        'url': basedomain+'challangemanagement/checkit',
+                        'data': {idnya:idnya},
+						'dataType':'json',
+                        'success': function(result){
+						
+							thisnya.hide();
+							thisnya.parent().html('<center><input type="checkbox" class="checkinactives" value='+idnya+' checked>Checked</center>');
+							
+							$(document).ready(function(){
+							$(".checkinactives").on("click", function(){
+							var idnya=$(this).val();
+							var thisnya=$(this);
+									  $.ajax({
+										'type': 'POST',
+										'url': basedomain+'challangemanagement/incheckit',
+										'data': {idnya:idnya},
+										'dataType':'json',
+										'success': function(result){
+										
+											thisnya.hide();
+											thisnya.parent().html('<center><input type="checkbox" class="checkactive" value='+idnya+'></center>');
+											likeunlike();
+										}
+										
+										});
+
+								});
+							});
+						}
+						
+						});
+
+				});
+			});
+			
+$(document).ready(function(){
+			$(".checkinactive").on("click", function(){
+			var idnya=$(this).val();
+			var thisnya=$(this);
+					  $.ajax({
+                        'type': 'POST',
+                        'url': basedomain+'challangemanagement/incheckit',
+                        'data': {idnya:idnya},
+						'dataType':'json',
+                        'success': function(result){
+						
+							thisnya.hide();
+							thisnya.parent().html('<center><input type="checkbox" class="checkactive" value="'+idnya+'"></center>');
+							likeunlike();
+						}
+						
+						});
+
+				});
+			});
+}
+{/literal}
+</script>

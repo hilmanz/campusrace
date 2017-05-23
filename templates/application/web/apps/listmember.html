@@ -1,0 +1,275 @@
+<div id="list-Member" class="section">
+	<div id="container">
+        <div class="row-2">
+              <h1 class="yellow textbg">LIST MEMBER</h1>
+        </div>
+        <div class="rows">
+        	<a href="{$basedomain}chapter/addMember" class="button">TAMBAH MEMBER</a>
+			<br><br><br>
+			
+			
+			<div class="col-2 fr relative">
+			
+			<form class="selectMember" method="POST" action="">
+			
+			Cari <input placeholder="Nama/Email" type="text" class="search" name="search" value="{$search}" style="width:131px; height:30px;" > 
+			&nbsp;
+			Status <select name="status" class="status" style="width:131px">
+			<option value=''>Please Select</option>
+			<option value='1' {if $status==1}selected{/if}>Active</option>
+			<option value='2' {if $status==2}selected{/if}>Inactive</option>
+			<option value='3' {if $status==3}selected{/if}>Gagal</option>
+			</select>
+			
+			
+			<button class="button" style="width:86px"> <center>GO</center> </button>
+
+			</form>
+			
+			</div>
+			
+            <div id="memberListTabs" class="leaderInfo">
+				<div id="tabs">
+					<ul>
+						<li><a href="#tabs-1" class="namamember">NAMA</a></li>
+						<li><a href="#tabs-2" class="pointmember">POINT</a></li>
+						
+					</ul>
+					<div id="tabs-1">
+						<div class="listmmber">
+						{if $datamember}
+							{section name=i loop=$datamember}
+								<div class="rows-list">
+									<div class="infoMembers fl">
+										<p class="name_member">{$datamember[i].name}</p>
+										<p class="">ID Member : <strong>{$datamember[i].ssgte_id}</strong></p>
+										<p class="">Status: <strong>{if $datamember[i].n_status==1}Active{elseif $datamember[i].n_status==0}Inactive{else}Gagal{/if}</strong></p>
+										<p class="">Point: <strong>{$datamember[i].point}</strong></p>
+										<div class="detailinfoAnggota">
+											<p class="">{$datamember[i].username}</p>
+											<p class=""><span class="icon-facebook2">&nbsp;</span><a href="https://www.facebook.com/{$datamember[i].fb_id}" target="_blank">{$datamember[i].fb_id}</a></p>
+											<p class=""><span class="icon-twitter2">&nbsp;</span><a href="https://www.twitter.com/{$datamember[i].twiiter_id}" target="_blank">{$datamember[i].twiiter_id}</a></p>
+										</div>
+										<div class="buttonAction">
+											<a id="" class="button triggerDetail" href="#">DETAIL</a>
+											<a id="detail" class="button icons icon-bin" href="{$basedomain}chapter/member/{$datamember[i].id}" onclick="return confirm('Anda yakin mau menghapus member anda');">&nbsp;</a>
+										</div>
+									</div>
+								</div><!--end rows-->
+							{/section}
+							
+						{else}	
+							<div class="rows-list">
+									<div class="infoMembers fl">
+										<Center>Data tidak ditemukan</center>
+									</div>
+								</div><!--end rows-->
+						{/if}
+						</div>
+							<div class="page" id="paggingmember">
+							<a href="#" class="arrowLeft"></a>						
+							<a href="#page-21"></a>
+							<a href="#page-12"></a>						
+							<a href="#" class="arrowRight"></a>	
+							</div>
+					</div>
+					<div id="tabs-2" class="pagilist">
+						<div class="listpoint">
+						{if $datamemberpoint}
+							{section name=j loop=$datamemberpoint}
+								<div class="rows-list">
+									<div class="infoMembers fl">
+										<p class="name_member">{$datamemberpoint[j].name}</p>
+										<p class="">ID Member : <strong>{$datamemberpoint[j].ssgte_id}</strong></p>
+										<p class="">Status: <strong>{if $datamemberpoint[j].n_status==1}Active{elseif $datamemberpoint[j].n_status==0}Inactive{else}Gagal{/if}</strong></p>
+										<p class="">Point: <strong>{$datamemberpoint[j].point}</strong></p>
+										<div class="detailinfoAnggota">
+											<p class="">{$datamemberpoint[j].username}</p>
+											<p class=""><span class="icon-facebook2">&nbsp;</span><a href="https://www.facebook.com/{$datamemberpoint[j].fb_id}" target="_blank">{$datamemberpoint[j].fb_id}</a></p>
+											<p class=""><span class="icon-twitter2">&nbsp;</span><a href="https://www.twitter.com/{$datamemberpoint[j].twiiter_id}" target="_blank">{$datamemberpoint[j].twiiter_id}</a></p>
+										</div>
+										<div class="buttonAction">
+											<a id="" class="button triggerDetail" href="#">DETAIL</a>
+											<!--<a id="detail" class="button icons icon-bin" href="#">&nbsp;</a>-->
+										</div>
+									</div>
+								</div><!--end rows-->
+							{/section}
+						{else}
+								<div class="rows-list">
+									<div class="infoMembers fl">
+										<Center>Data tidak ditemukan</center>
+									</div>
+								</div><!--end rows-->						
+						{/if}
+						</div>
+						<div class="page" id="paggingpoint">
+							<a href="#" class="arrowLeft"></a>						
+							<a href="#page-21"></a>
+							<a href="#page-12"></a>						
+							<a href="#" class="arrowRight"></a>	
+<!-- <div id="page-21">
+						{if $datamember}
+							{section name=i loop=$datamember}
+								<div class="rows-list">
+									<div class="infoMembers fl">
+										<p class="name_member">{$datamember[i].name}</p>
+										<p class="">{$datamember[i].username}</p>
+										<p class="">Status: <strong>{if $datamember[i].n_status==1}Active{elseif $datamember[i].n_status==0}Inactive{else}Invitation{/if}</strong></p>
+										<p class="">Point: <strong>{$datamember[i].point}</strong></p>
+										<div class="detailinfoAnggota">
+											<p class="name_member">{$datamember[i].name}</p>
+											<p class=""><span class="icon-facebook2">&nbsp;</span>{$datamember[i].fb_id}</p>
+											<p class=""><span class="icon-twitter2">&nbsp;</span>{$datamember[i].twiiter_id}</p>
+										</div>
+										<div class="buttonAction">
+											<a id="" class="button triggerDetail" href="#">DETAIL</a>
+											<a id="detail" class="button icons icon-bin" href="{$basedomain}chapter/member/{$datamember[i].id_memberCrypt}">&nbsp;</a>
+										</div>
+									</div>
+								</div>
+							{/section}
+						{/if}
+					</div>		 -->					
+						</div> 
+					</div>
+                </div><!--end#tabs-->
+            </div><!--endleaderInfo-->
+        </div><!--end.rows-->
+    </div><!--end#container-->
+</div><!--end.section-->
+
+<script>
+var totaldatamemberpoint='{$totaldatamemberpoint}';
+var totaldatamember='{$totaldatamember}';
+console.log(totaldatamember);
+getpaging(0,totaldatamember,"paggingmember","paging_list_member",10);
+	{literal}
+
+		$( ".triggerDetail" ).click(function(event ) {
+			event.preventDefault();
+			/*$(this).find( ".dropdownIcons" ).toggleClass( "arrowUp" );*/
+			$(this).parent().parent().find( ".detailinfoAnggota" ).slideToggle( "slow" );
+		});
+
+	
+		$('.namamember').click(function(){
+			getpaging(0,totaldatamember,"paggingmember","paging_list_member",10);
+			
+		});
+		$('.pointmember').click(function(){
+			getpaging(0,totaldatamemberpoint,"paggingpoint","paging_list_pointmemeber",10);
+			console.log('point');
+			
+		});
+		function paging_list_member(fungsi,start){
+		
+				  var keryword=$('.search').val();
+				  var status=$('.status').val();
+			    $.post(basedomain+"chapter/member",{startmember:start,ajaxmember:1,search:keryword,status:status},function(response){
+                 var str='';
+                 if(response.status==1)
+                 {
+						var str='';
+                         $.each(response.data.data,function(k,v){
+								str +='<div class="rows-list">'+
+									'<div class="infoMembers fl">'+
+										'<p class="name_member">'+v.name+'</p>'+
+										'<p class="">ID Member : <strong>'+v.ssgte_id+'</strong></p>'+
+										'<p class="">Status: <strong>';
+										if (v.n_status==1)
+										{
+											str +='Active';
+										}
+										else if (v.n_status==0)
+										{
+											str +='Inactive';
+										}
+										else
+										{
+											str +='Gagal';
+										}
+										str +='</strong></p>'+
+										'<p class="">Point: <strong>'+v.point+'</strong></p>'+
+										'<div class="detailinfoAnggota">'+
+											'<p class="">'+v.username+'</p>'+
+											'<p class=""><span class="icon-facebook2">&nbsp;</span>'+v.fb_id+'</p>'+
+											'<p class=""><span class="icon-twitter2">&nbsp;</span>'+v.twiiter_id+'</p>'+
+										'</div>'+
+										'<div class="buttonAction">'+
+											'<a id="" class="button triggerDetail" href="#">DETAIL</a>'+
+											'<a id="detail" class="button icons icon-bin" href="chapter/member/'
+											+$datamember[i].id+'">&nbsp;</a>'+
+										'</div>'+
+									'</div>'+
+								'</div>';
+						 });
+						  $('.listmmber').html(str);
+				 }
+                 else
+                  {
+                          str +='<tr>';
+                           str +='<td colspan="8"> No data available </td>';
+                            str +='</tr>';
+                           $('.listmmber').html(str);
+
+                   }
+		    },"JSON");
+		}
+		
+		
+		function paging_list_pointmemeber(fungsi,start){
+				  var keryword=$('.search').val();
+				  var status=$('.status').val();
+			    $.post(basedomain+"chapter/member",{startpoint:start,ajaxpoint:1,search:keryword,status:status},function(response){
+                 var str='';
+                 if(response.status==1)
+                 {
+						var str='';
+                         $.each(response.data.data,function(k,v){
+								str +='<div class="rows-list">'+
+									'<div class="infoMembers fl">'+
+										'<p class="name_member">'+v.name+'</p>'+
+										'<p class="">ID Member : <strong>'+v.ssgte_id+'</strong></p>'+
+										'<p class="">Status: <strong>';
+										if (v.n_status==1)
+										{
+											str +='Active';
+										}
+										else if (v.n_status==0)
+										{
+											str +='Inactive';
+										}
+										else
+										{
+											str +='Gagal';
+										}
+										str +='</strong></p>'+
+										'<p class="">Point: <strong>'+v.point+'</strong></p>'+
+										'<div class="detailinfoAnggota">'+
+											'<p class="">'+v.username+'</p>'+
+											'<p class=""><span class="icon-facebook2">&nbsp;</span>'+v.fb_id+'</p>'+
+											'<p class=""><span class="icon-twitter2">&nbsp;</span>'+v.twiiter_id+'</p>'+
+										'</div>'+
+										'<div class="buttonAction">'+
+											'<a id="" class="button triggerDetail" href="#">DETAIL</a>'+
+											'<a id="detail" class="button icons icon-bin" href="#">&nbsp;</a>'+
+										'</div>'+
+									'</div>'+
+								'</div>';
+						 });
+						  $('.listpoint').html(str);
+				 }
+                 else
+                  {
+                          str +='<tr>';
+                           str +='<td colspan="8"> No data available </td>';
+                            str +='</tr>';
+                           $('.listpoint').html(str);
+
+                   }
+		    },"JSON");
+		}
+		
+	{/literal}	
+</script>

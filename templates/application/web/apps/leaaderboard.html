@@ -1,0 +1,188 @@
+<div id="event-detail" class="section">
+	<div id="container">
+    	<div class="row-2">
+            <h1 class="yellow textbg">LEADERBOARD</h1>
+    	</div>
+        
+        <div class="rows">
+            <div class="leaderInfo tabsInfo">
+            	
+            	<div id="tabs">
+                  <ul>
+                    <!--<li><a href="#tabs-1" class="pointcpter">CHAPTER</a></li>-->
+                    <li><a href="#tabs-2" class="pointmember">MEMBER</a></li>
+                  </ul>
+                  <!--<div id="tabs-1">
+				  <div class="listchaptr">
+				  {if $leaderChapter}
+                		{section name=i loop=$leaderChapter}
+                  	<div class="rows-list">
+                    	<div class="leftleader">
+                            <a class="smallerThumb" href="#">
+							{if $leaderChapter[i].img_avatar}
+                             <img src="{$basedomain}public_assets/profile/{$leaderChapter[i].img_avatar}" />
+							{else}
+							<img src="{$basedomain}public_assets/profile/images.jpg" />
+							{/if}
+						   </a>
+                        	<p class="leadClub">{$leaderChapter[i].name_chapter}  <span class="chapterLead yellow">( {$leaderChapter[i].citinya} )</span></p>
+                        </div>
+                        <div class="leaderboard-points">
+                            <span class="points">{$leaderChapter[i].total}</span>
+                        </div>
+                    </div>
+					{/section}
+				{/if}
+                   </div>
+				    <div class="page" id="paggingchapter">
+				   
+				   </div>
+                  </div>-->
+                  
+                  <div id="tabs-2">
+				  <div class="listmmber">
+				  {if $leaderMember}
+                		{section name=j loop=$leaderMember}
+                  	 <div class="rows-list">
+                    	<div class="leftleader anngotalead">
+                    		<p class="leadClub">{$leaderMember[j].name}  <!--<span class="chapterLead yellow">( {$leaderMember[j].name_chapter} )</span>--></p>
+                        </div>
+                        <div class="leaderboard-points"> 
+                        	<span class="points">{$leaderMember[j].total}</span>
+                        </div>
+                    </div>
+					{/section}
+				{/if}
+				</div>
+                   <div class="page" id="paggingpoint">
+				   
+				   </div>
+                  </div>
+                  </div>
+                 
+                </div><!--end#tabs-->
+                
+            </div><!--endleaderInfo-->
+        </div><!--endleaderBoardrows-->
+    
+</div><!--end.section-->
+
+<script>
+var totalleaderChapter='{$totalleaderChapter}';
+var totalleaderMember='{$totalleaderMember}';
+console.log(totalleaderMember);
+
+{literal}
+$( ".headTrigger" ).click(function() {
+  $( ".arrowdown" ).toggleClass( "arrowUp" );
+  $( "#desclandingMobile" ).slideToggle( "slow" );
+});
+{/literal}
+</script>
+
+<script>
+{literal}
+	$(document).on ('click','.submitlogin',function(){
+		$('.msgerorr').html('');
+		var valid="";
+		if($('.email').val()=='' || $('.password').val()=='')
+		{
+			$('.msgerorr').html('Username atau Password yang Anda masukkan salah.');
+			valid="ada";
+		}
+		if(valid)
+		{
+			return false;
+		}
+		else
+		{
+			$('.formlogin').trigger('submit');
+		}
+	}); 
+	
+	
+	$('.pointcpter').click(function(){
+		
+			
+		});
+		$('.pointmember').click(function(){
+		
+			console.log('point');
+			
+		});
+	function paging_list_chapter(fungsi,start){
+		
+				  var keryword=$('.search').val();
+				  var status=$('.status').val();
+			    $.post(basedomain+"home",{startchapter:start,ajaxchapter:1,search:keryword,status:status},function(response){
+                 var str='';
+                 if(response.status==1)
+                 {
+						var str='';
+                         $.each(response.data.data,function(k,v){
+								str +='<div class="rows-list">'+
+										'<div class="leftleader">'+
+											'<a class="smallerThumb" href="#">';
+											if (v.img_avatar)
+											{
+												 str +='<img src="'+basedomain+'public_assets/profile/'+v.img_avatar+'" />';
+											}
+											else
+											{
+												str +='<img src="'+basedomain+'public_assets/profile/images.jpg" />';
+											}
+											
+										 str +='  </a>'+
+											'<p class="leadClub">'+v.name_chapter+'  <span class="chapterLead yellow">( '+v.citinya+' )</span></p>'+
+										'</div>'+
+										'<div class="leaderboard-points">'+
+											'<span class="points">'+v.total+'</span>'+
+										'</div>'+
+									'</div>';
+						 });
+						 console.log(str);
+						  $('.listchaptr').html(str);
+				 }
+                 else
+                  {
+                          str +='<tr>';
+                           str +='<td colspan="8"> No data available </td>';
+                            str +='</tr>';
+                           $('.listchaptr').html(str);
+
+                   }
+		    },"JSON");
+		}
+	function paging_list_pointmemeber(fungsi,start){
+				  var keryword=$('.search').val();
+				  var status=$('.status').val();
+			    $.post(basedomain+"home",{startmember:start,ajaxpoint:1,search:keryword,status:status},function(response){
+                 var str='';
+                 if(response.status==1)
+                 {
+						var str='';
+                         $.each(response.data.data,function(k,v){
+								str +=' <div class="rows-list">'+
+									'<div class="leftleader anngotalead">'+
+										'<p class="leadClub">'+v.name+' <span class="chapterLead yellow">( '+v.name_chapter+')</span></p>'+
+									'</div>'+
+									'<div class="leaderboard-points"> '+
+										'<span class="points">'+v.total+'</span>'+
+									'</div>'+
+								'</div>';
+						 });
+						  $('.listmmber').html(str);
+				 }
+                 else
+                  {
+                          str +='<tr>';
+                           str +='<td colspan="8"> No data available </td>';
+                            str +='</tr>';
+                           $('.listmmber').html(str);
+
+                   }
+		    },"JSON");
+		}
+{/literal}
+
+</script>

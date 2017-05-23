@@ -1,0 +1,340 @@
+<div class="page_section" id="project-page">
+    <div id="container">
+        <div class="titlebox">
+            <h2 class="fl"><span class="icon-books">&nbsp;</span>Edit Jadwal Pertandingan</h2>
+            <h2 class="fr"><a href="{$basedomain}jadwalmanagement" class="button2">Back</a></h2>
+        </div><!-- end .titlebox -->
+        <div class="content">
+
+            <form id="forms" class="forms" method="post" action="{$basedomain}jadwalmanagement/editjadwal">
+
+            <div id="new-project" class="boxcontent">
+            <div class="row">
+				<label for="">Pertandingan minggu ke-</label>
+				<input type="text" name="weekid" {if $listevent[0].week_id==''}value="{$week}"{else}value="{$listevent[0].week_id}"{/if} class="number" readonly> <br>						
+				<label class="number_erorr msg_name" style="color: red;">{$week_no}</label>		
+            </div>
+                <section class="step1">
+
+                    <div class="row">
+						<label>Pertandingan Pertama<br></label>
+						<select name="club1" class="chapter_id ">
+							<option value="">Pilih Club</option>
+							{section name=i loop=$listclub}
+								<option value="{$listclub[i].name_club}" {if $club1_no== $listclub[i].name_club}selected{/if}{if $listevent[0].club1== $listclub[i].name_club}selected{/if}>{$listclub[i].name_club}</option>						
+							{/section}
+						</select> &nbsp;&nbsp;vs&nbsp;&nbsp;
+						<select name="club2" class="chapter_id ">
+							<option value="">Pilih Club</option>
+							{section name=i loop=$listclub}
+								<option value="{$listclub[i].name_club}" {if $club2_no== $listclub[i].name_club}selected{/if}{if $listevent[0].club2 == $listclub[i].name_club}selected{/if}>{$listclub[i].name_club}</option>						
+							{/section}
+						</select><br>
+						<label class="club12_erorr msg_name" style="color: red;">{$club12_no}</label>
+					</div><!-- end .row -->
+
+					<div class="row">
+						<label>Pertandingan Kedua<br></label>
+						<select name="club3" class="chapter_id ">
+							<option value="">Pilih Club</option>
+							{section name=i loop=$listclub}
+								<option value="{$listclub[i].name_club}" {if $club3_no== $listclub[i].name_club}selected{/if}{if $listevent[0].club3== $listclub[i].name_club}selected{/if}>{$listclub[i].name_club}</option>						
+							{/section}
+						</select> &nbsp;&nbsp;vs&nbsp;&nbsp;
+						<select name="club4" class="chapter_id ">
+							<option value="">Pilih Club</option>
+							{section name=i loop=$listclub}
+								<option value="{$listclub[i].name_club}" {if $club4_no== $listclub[i].name_club}selected{/if}{if $listevent[0].club4== $listclub[i].name_club}selected{/if}>{$listclub[i].name_club}</option>						
+							{/section}
+						</select><br>
+						<label class="club23_erorr msg_name" style="color: red;">{$club34_no}</label>
+					</div><!-- end .row -->
+
+					<div class="row">
+						<label>Pertandingan Ketiga<br></label>
+						<select name="club5" class="chapter_id ">
+							<option value="">Pilih Club</option>
+							{section name=i loop=$listclub}
+								<option value="{$listclub[i].name_club}" {if $club5_no== $listclub[i].name_club}selected{/if}{if $listevent[0].club5== $listclub[i].name_club}selected{/if}>{$listclub[i].name_club}</option>						
+							{/section}
+						</select> &nbsp;&nbsp;vs&nbsp;&nbsp;
+						<select name="club6" class="chapter_id ">
+							<option value="">Pilih Club</option>
+							{section name=i loop=$listclub}
+								<option value="{$listclub[i].name_club}" {if $club6_no== $listclub[i].name_club}selected{/if}{if $listevent[0].club6== $listclub[i].name_club}selected{/if}>{$listclub[i].name_club}</option>						
+							{/section}
+						</select><br>
+						<label class="club56_erorr msg_name" style="color: red;">{$club56_no}</label>
+					</div><!-- end .row -->
+					
+				  <div class="row">
+						<label for="">Terakhir Tayang</label>
+						<input type="text" class="timepicker" name="last_submit" {if $listevent[0].id==''}value="{$last_submit_no}"{else}value="{$listevent[0].last_submit_time}"{/if}id="timepicker"><br>
+						<label class="club56_erorr msg_name" style="color: red;">{$last_submit_time_no}</label>
+				  </div>
+				
+                 <div class="row"><input type="hidden" name="id" {if $listevent[0].id==''}value="{$id_no}"{else}value="{$listevent[0].id}"{/if}>
+						<input type="submit" class="fr button3" value="Save" name="submit"  >
+                        <!-- <a class="fr button3 submitevent"  />	Submit	</a> -->
+						<a href="{$basedomain}jadwalmanagement" class="button4 fr">Cancel</a>
+                 </div><!-- end .row -->
+
+                </section>
+            </div><!-- end #wizard -->
+			
+            </form>
+        </div><!-- end .content -->
+    </div><!-- end #container -->
+</div><!-- end #home -->
+<script>
+{literal}
+	$('.typeuser').click(function()
+	{
+
+			console.log($(this).val());
+			if($(this).val()==9)
+			{
+				$(".checkboxmenu").prop("checked", true);
+				$(".checkboxmenu").attr("disabled", true);
+			}
+			else {
+				$(".checkboxmenu").prop("checked", false);
+				$(".checkboxmenu").removeAttr("disabled");
+				}
+	});
+	/**$('.submitsave').click(function()
+		{
+			console.log('asa');return false;
+			var name_no='.name_no';
+			$(name_no).html(' ');
+			var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+			var email_no=".email_no";
+			$(email_no).html(' ');
+			var username_no='.username_no';
+			$(username_no).html(' ');
+			var password='.password_no';
+			$(password_no).html(' ');
+			var checkboxmenu='.checkboxmenu_no';
+			$(checkboxmenu_no).html(' ');
+			var valid='';
+			if($('.checkboxmenu:checked').length ==0)
+				{
+
+					$(subcategory_no).html('You cannot leave this field empty');
+					valid='ada';
+				}
+			if($('.name').val()=='')
+			{
+				$(name_no).html('You cannot leave this field empty');
+				valid='ada';
+			}
+			if($('.username').val()=='')
+			{
+				$(username_no).html('You cannot leave this field empty');
+				valid='ada';
+			}
+			if($('.password').val()=='')
+			{
+				$(password_no).html('You cannot leave this field empty');
+				valid='ada';
+			}
+			if($('.email').val()=='')
+			{
+				$(email_no).html('You cannot leave this field empty');
+				valid='ada';
+			}
+			else if(!$('.email').val().match(mailformat))
+			{
+				$(email_no).html('format email salah');
+				valid='ada';
+			}
+			if(valid)
+			{
+				return false;
+
+			}
+			else
+			{
+				$('input[type="submit"]').attr('disabled','disabled');
+
+			}
+		}**/
+
+	$(document).on('click','.submitevent',function(){
+		$('.name_erorr').html('');
+		$('.email_erorr').html('');
+		$('.ktp_sim_erorr').html('');
+		$('.alamat_erorr').html('');
+		$('.fb_id_erorr').html('');
+		$('.twitter_id_erorr').html('');
+		$('.date_register_erorr').html('');
+		$('.chapter_id_erorr').html('');
+		$('.emailmember_erorr').html('');
+		$('.no_telp_erorr').html('');
+
+		var valid='';
+
+
+		if($('.emailMember').val()=='')
+		{
+			$('.emailmember_erorr').html('kolom ini harus di isi');
+			 valid='ada';
+		}
+
+		var valid='';
+		if($('.name').val()=='')
+		{
+			$('.name_erorr').html('kolom ini harus di isi');
+			valid='ada';
+		}
+		if($('.email').val()=='')
+		{
+			$('.email_erorr').html('kolom ini harus di isi');
+			valid='ada';
+		}
+		if($('.ktp_sim').val()=='')
+		{
+			$('.ktp_sim_erorr').html('kolom ini harus di isi');
+			valid='ada';
+		}
+
+		if($('.alamat').val()=='')
+		{
+			$('.alamat_erorr').html('kolom ini harus di isi');
+			valid='ada';
+		}
+		if($('.fb_id').val()=='')
+		{
+			$('.fb_id_erorr').html('kolom ini harus di isi');
+			valid='ada';
+		}
+		if($('.twitter_id').val()=='')
+		{
+			$('.twitter_id_erorr').html('kolom ini harus di isi');
+			valid='ada';
+		}
+		if($('.date_register').val()=='')
+		{
+			$('.date_register_erorr').html('kolom ini harus di isi');
+			valid='ada';
+		}
+		if($('.chapter_id').val()=='')
+		{
+			$('.chapter_id_erorr').html('kolom ini harus di isi');
+			valid='ada';
+		}
+		if($('.no_telp').val()=='')
+		{
+			$('.no_telp_erorr').html('kolom ini harus di isi');
+			valid='ada';
+		}
+
+
+		if(valid)
+		{
+			return false;
+		}
+		else
+		{
+
+		vlidemail(valid)
+
+
+
+
+
+		}
+
+	})
+
+	function vlidemail(valid)
+	{
+	var valid= valid;
+	emailsplit = $('.emailMember').val().split(',');
+	emailformat='';
+	var emailSame='';
+	var ix=0;
+	var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,15})+$/;
+	if(emailformat=='' && emailSame=='')
+		{
+			if(emailsplit.length > 20 )
+			{
+				$('.emailmember_erorr').html('Maximal 20 Email Member');
+				 valid='ada';
+
+			}
+		}
+		//console.log(emailsplit);
+		$.each(emailsplit,function(ind,value)
+		{
+			mailnya = value.trim();
+
+			if(!mailnya.match(mailformat))
+			{
+			console.log('masuksini salah format');
+				$('.emailmember_erorr').html(' format email salah (e.g. example@gmail.com)');
+
+				valid='ada';
+				emailformat='ada';
+				//console.log(mailnya);
+			}
+			else
+			{
+
+				$.ajax ({
+					type	 : 'POST',
+					url	 :  basedomain+'membermanagement/checkEmail' ,
+					data:{email:mailnya},
+					dataType:'json',
+					success	: function (result)
+						{
+							++ix;
+
+							if(result.status==1)
+							{
+								//console.log(emailSame);
+								if(emailSame=='')
+								{
+									emailSame +=result.email;
+
+								}
+								else
+								{
+									emailSame +=','+result.email;
+								}
+								if(emailSame)
+									{
+										$('.emailmember_erorr').html('email <span class="emailsama" > '+emailSame+'</span> sudah terdaftar');
+										valid='ada';
+
+									}
+							}
+							//console.log(valid);
+							if(emailsplit.length==ix)
+							{
+								if(valid)
+								{
+									console.log('masuk dah');
+									return false;
+									end;
+								}else{
+									 $('.submitnya').trigger('click');
+								}
+
+							}
+						}
+				});
+
+			}
+		});
+		if(valid)
+		{
+			return false;
+		}
+		return false;
+
+
+
+}
+{/literal}
+</script>

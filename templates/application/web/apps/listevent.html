@@ -1,0 +1,105 @@
+
+<div id="list-Event" class="section">
+	<div id="container">
+        <div class="row-2">
+              <h1 class="yellow textbg">LIST EVENT </h1>
+        </div>
+        <div class="rows">
+        	<a href="{$basedomain}chapter/addEvent" class="button">BUAT EVENT</a>
+            <div id="memberListTabs" class="leaderInfo">
+            	
+              <div class="rows">
+            	<div id="tabs">
+                  <ul>
+                    <li><a href="#tabs-1">EVENT YANG AKAN DATANG</a></li>
+                  </ul>
+				   {if $dataevent}
+                		{section name=i loop=$dataevent}
+							  <div id="tabs-1">
+								<div class="rows-list">
+									<div class="infoMembers fl">
+										<p class="name_member yellow">{$dataevent[i].name}</p>
+										<p class="">{$dataevent[i].time_start|date_format:"%d/%m/%y"} - {$dataevent[i].time_end|date_format:"%d/%m/%y"}</p>
+									   <p class="">{$dataevent[i].jam_awal} - {$dataevent[i].jam_akhir}</p>
+										<p class="">{$dataevent[i].alamat}</p>
+										{*}<p class="">Jakarta</p>{/*}
+										<div class="buttonAction">
+											<a id="detail" class="button" href="{$basedomain}chapter/eventDetail/{$dataevent[i].id}">Lihat Event</a>
+                          {if $dataevent[i].n_status==0}
+							 <a  class="button icons" href="{$basedomain}chapter/hapusevent?event={$dataevent[i].id}" onclick="return confirm('Anda yakin mau menghapus event anda');"><span class="icon-bin">&nbsp;</span></a>
+							{/if}						
+							{*}<a id="detail" class="button" href="{$basedomain}chapter/editEvent?event={$dataevent[i].id}">Edit Event</a>{/*}
+										</div>
+									</div>
+								</div><!--end rows-->
+							  
+								
+							  </div>
+						{/section}
+						
+				{else}
+				<div class="rows-list">
+					<div class="infoMembers fl">
+						<center>Belum ada event.</center>
+					</div>
+				</div>
+				
+				{/if}
+                 
+                </div><!--end#tabs-->
+                </div><!--end rows-->
+                <div class="rows">
+                <div id="tabs2">
+                  <ul>
+                    <li><a href="#tabs-1">EVENT YANG TELAH LEWAT</a></li>
+                  </ul>
+                  <div id="tabs-1">
+					  {if $dataeventold}
+							{section name=j loop=$dataeventold}
+								<div class="eventPast rows-list">
+							
+									<!--
+									<span>{$dataeventold[j].time_end}</span> <span>{if $dataeventold[j].type == 1} Nonton Bareng {elseif $dataeventold[j].type == 2} Futsal{elseif $dataeventold[j].type == 3} Gathering {else} Supper Soccer{/if}</span> <span>{$dataeventold[j].name}</span>
+					
+					
+									<span>&nbsp;</span><span class="yellow">{$dataeventold[j].point} POINT</span>
+									<span>
+									<a id="detail" class="button" href="{$basedomain}chapter/eventDetail/{$dataeventold[j].id}">Lihat Event</a>
+									</span>
+					   				-->
+                                    <div class="infoMembers fl">
+                                        <p class="name_member yellow">{$dataeventold[j].name}</p>
+                                        <p class="">{$dataeventold[j].time_start|date_format:"%d/%m/%Y"} - {$dataeventold[j].time_end|date_format:"%d/%m/%Y"}</p>
+                                        <p class="">Jam awal - jam akhir</p>
+                                        <p class="">{$dataeventold[j].alamat}</p>
+                                        <div class="pointInfoPast">
+                                        <p class="yellow">{$dataeventold[j].point} POINT</p>
+                                        </div>
+                                        <div class="buttonAction">
+                                            <a id="detail" class="button" href="{$basedomain}chapter/eventDetail/{$dataeventold[j].id}">Lihat Event</a>
+                                        
+                                        </div>
+                                    </div>
+                                 {*}
+                                <span>{$dataeventold[j].time_start|date_format:"%d/%m/%Y"} - {$dataeventold[j].time_end|date_format:"%d/%m/%Y"}</span> <span>{$dataeventold[j].name}</span> <span>{$dataeventold[j].alamat}</span>
+                                <span>&nbsp;</span><span class="yellow">{$dataeventold[j].point} POINT</span> <span><a id="detail" class="button" href="{$basedomain}chapter/eventDetail/{$dataeventold[j].id}">Lihat Event</a></span>
+								{/*}
+							
+								</div><!--end rows-->
+								
+							{/section}
+					{/if}
+						
+                  	
+                    
+                  </div>
+                  
+                 
+                </div><!--end#tabs-->
+                </div><!--end rows-->
+
+            </div><!--endleaderInfo-->
+        </div><!--end.rows-->
+    	
+    </div><!--end#container-->
+</div><!--end.section-->

@@ -1,0 +1,332 @@
+
+<div id="registration" class="section">
+	<div id="container">
+    	<div class="row-2">
+            <h1 class="yellow textbg">REGISTRASI CHAPTER</h1>
+            <p class="captionReg1">Lengkapi data chapter yang akan Anda kelola. Setelah akun chapter terverifikasi, Anda dapat langsung mengundang Member dan membesarkan chapter Anda.</p>
+            <p class="captionReg2" style="display:none;">Lengkapi data diri Anda
+</p>
+    	</div>
+        <div class="formregis">
+        	<h2 class="formTittle titlereg1 red">Biodata Chapter</h2>
+        	<h2 class="formTittle titlereg2 red" style="display:none;">Biodata Head Chapter</h2>
+        	<form method="post" id="fromreg" action="{$basedomain}chapter/prosesRegistrasi" enctype="application/x-www-form-urlencoded">
+			<div class="reg1">
+				<div class="row">
+					<input type="text" name="namechapter" placeholder="Nama Chapter" class="namechapter">
+					<label class="namechapter_error error_red"></label>
+				</div>
+				<div class="row">
+					<input type="text" name="email"  placeholder="Email Chapter" class="emailMember">
+					<label class="emailmember_error error_red"></label>
+				</div>
+				<div class="row">
+					<input type="text" name="ktp_sim" placeholder="ID KTP / SIM" class="ktpsim number">
+					<label class="ktpsim_error error_red"></label>
+				</div>
+				<div class="row">
+					<input type="password"  name="password" placeholder="Password" class="password">
+					<label class="password_error error_red"></label>
+				</div>
+				<div class="row">
+					<input type="password" name="confirmpassword" class="confirmpassword"  placeholder="Konfirmasi Password">
+					<label class="confirmpassword_error error_red"></label>
+				</div>
+				<div class="row">
+					<textarea class="alamat" name="alamat" placeholder="Alamat"></textarea>
+					<label class="alamat_error error_red"></label>
+				</div>
+				<div class="row">
+					<select name="club" class="club">
+					  <option value="">Klub Favorit</option>
+					  {section name=i loop=$listclub}
+					  <option value="{$listclub[i].id}">{$listclub[i].name_club}</option>
+				
+					  {/section}
+					</select>
+					<label class="kota_error error_red"></label>
+				</div>
+				<div class="row" >
+					<select name="kota" class="kota">
+					  <option value="">Kota Chapter</option>
+					  {section name=i loop=$listcity}
+					  <option value="{$listcity[i].id}">{$listcity[i].city}</option>
+					  {/section}
+					</select>
+					<label class="kota_error error_red"></label>
+				</div>
+				<div class="row relative">
+                	<span class="infoUrl">https://www.facebook.com/</span>
+					<input class="inputsocmedfacebook" type="text" name="facebook" placeholder="Akun Facebook Chapter">
+					<label class="error_red"></label>
+				</div>
+				<div class="row relative">
+                	<span class="infoUrl">https://twitter.com/</span>
+					<input class="inputsocmedtwitt" type="text"  name="twitter" placeholder="Akun Twitter Chapter">
+					<label class="error_red"></label>
+				</div>
+				<div class="row">
+					<a  href="javascript:void(0)" class="button fl lanjut">LANJUT</a>
+				</div>
+			</div>
+			<div class="reg2" style="display:none">
+				<div class="row">
+					<input type="text" placeholder="Nama Head Chapter" name="name" class="name" value="">
+					<label class="name_error error_red"></label>
+				</div>
+				<!--<div class="row">
+					<input type="text"  placeholder="Email Head Chapter" name="emailhead" class="emailhead">
+					<label class="emailhead_error error_red"></label>
+				</div>-->
+				<div class="row">
+					<input type="text"  placeholder="No Telp" name="telp" class="tlp number">
+					<label class="tlp_error error_red"></label>
+				</div>
+				 <div class="row">
+					
+					<a  href="javascript:void(0)" class="fl button sumbitreg">LANJUT</a>
+				</div>
+			</div>
+			
+        </form>
+        </div>
+    </div><!--end#container-->
+</div><!--end.section-->
+<script>
+{literal}
+$(document).on('click','.lanjut',function(){
+	$('.namechapter_error').html('');
+	$('.emailmember_error').html('');
+	$('.ktpsim_error').html('');
+	$('.password_error').html('');
+	$('.confirmpassword_error').html('');
+	$('.facebook_error').html('');
+	$('.twitter_error').html('');
+	$('.alamat_error').html('');
+	$('.club_error').html('');
+	$('.kota_error').html('');
+	
+	var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,15})+$/; 
+			
+	var valid="";
+	if($('.namechapter').val()=='')
+	{
+		$('.namechapter_error').html('Kolom ini harus diisi');
+		valid="ada";
+	}
+	if($('.ktpsim').val()=='')
+	{
+		$('.ktpsim_error').html('Kolom ini harus diisi');
+		valid="ada";
+	}
+	if($('.club option:selected').val()=='')
+	{
+		$('.club_error').html('Kolom ini harus diisi');
+		valid="ada";
+	}
+	if($('.kota option:selected').val()=='')
+	{
+		$('.kota_error').html('Kolom ini harus diisi');
+		valid="ada";
+	}
+	if($('.emailMember').val()=='')
+	{
+		$('.emailmember_error').html('Kolom ini harus diisi');
+		valid="ada";
+	}
+	else if(!$('.emailMember').val().match(mailformat))  
+			{  
+				$('.emailmember_error').html(' Format email salah (contoh: example@gmail.com)');
+				//$(".email").addClass('error');
+				valid='ada';
+			} 
+	if($('.password').val()=='')
+	{
+		$('.password_error').html('Kolom ini harus diisi');
+		valid="ada";
+	}
+	
+	if($('.confirmpassword').val()=='')
+	{
+		$('.confirmpassword_error').html('Kolom ini harus diisi');
+		valid="ada";
+	}
+	else if($('.password').val() != $('.confirmpassword').val())
+	{
+		console.log($('.password').val()+'!='+$('.confirmpassword').val());
+		$('.confirmpassword_error').html('Password yang anda masukan tidak cocok');
+		valid="ada";
+	}
+	if($('.inputsocmedfacebookk1').val()=='')
+	{
+		$('.facebook_error').html('Kolom ini harus diisi');
+		valid="ada";
+	}
+	if($('.inputsocmedtwittt1').val()=='')
+	{
+		$('.twitter_error').html('Kolom ini harus diisi');
+		valid="ada";
+	}
+	if($('.alamat').val()=='')
+	{
+		$('.alamat_error').html('Kolom ini harus diisi');
+		valid="ada";
+	}
+	
+	if(valid)
+	{
+		return false;
+		
+	}
+	else
+	{
+		vlidemail(valid)
+	}
+})
+
+function vlidemail(valid)
+	{
+	var valid= valid;
+	emailsplit = $('.emailMember').val().split(',');
+	emailformat='';
+	var emailSame='';
+	var ix=0;
+	var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,15})+$/; 
+	if(emailformat=='' && emailSame=='')
+		{
+			if(emailsplit.length > 20 )
+			{
+				$('.emailmember_error').html('Maximal 20 Email Member');
+				 valid='ada';	
+				
+			}
+		}	
+		//console.log(emailsplit);
+		$.each(emailsplit,function(ind,value)
+		{
+			mailnya = value.trim();
+			
+			if(!mailnya.match(mailformat))  
+			{  
+			console.log('masuksini salah format');
+				$('.emailmember_error').html(' format email salah (e.g. example@gmail.com)');
+				
+				valid='ada';
+				emailformat='ada';
+				//console.log(mailnya);
+			} 
+			else
+			{
+			
+				$.ajax ({ 
+					type	 : 'POST', 
+					url	 :  basedomain+'home/checkEmail' , 
+					data:{email:mailnya},
+					dataType:'json',
+					success	: function (result) 
+						{
+							++ix;
+						
+							if(result.status==1)
+							{
+								console.log('jj');
+								if(emailSame=='')
+								{
+									emailSame +=result.email;
+									
+								}
+								
+								if(emailSame)
+									{
+										$('.emailmember_error').html('email <span class="emailsama" > '+emailSame+'</span> sudah terdaftar');
+										valid='ada';
+										
+									}
+							}
+							//console.log(valid);
+							if(emailsplit.length==ix)
+							{
+								if(valid)
+								{
+									console.log('masuk dah');
+									return false;
+									end;
+								}else{
+									$('.reg1').hide();
+									$('.reg2').show();
+									$('.captionReg1').hide();
+									$('.captionReg2').show();
+									$('.titlereg1').hide();
+									$('.titlereg2').show();
+									 $('.submitnya').trigger('click'); 
+								}
+								
+							}
+						}
+				});
+				
+			}
+		});
+		if(valid)
+		{
+			return false;
+		}
+		return false;
+		
+		
+
+}
+
+$(document).on('click','.sumbitreg',function(){
+	$('.name_error').html('');
+	$('.tlp_error').html('');
+	//$('.emailhead_error').html('');
+	var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,15})+$/; 
+	var valid="";
+	if($('.name').val()=='')
+	{
+		$('.name_error').html('Kolom ini harus di isi');
+		valid="ada";
+	}
+	if($('.tlp').val()=='')
+	{
+		$('.tlp_error').html('Kolom ini harus di isi');
+		valid="ada";
+	}
+       // if($('.emailhead').val()=='')
+       // {
+               // $('.emailhead_error').html('Kolom ini harus diisi');
+              //  valid="ada";
+        //}
+       // else if(!$('.emailhead').val().match(mailformat))  
+                      //  {  
+                           //     $('.emailhead_error').html(' Format email salah (contoh: example@gmail.com)');
+                                //$(".email").addClass('error');
+                                // valid='ada';
+                     //  } 
+
+	//$('.emailhead_error').html('');
+	if(valid)
+	{
+		return false;
+	}
+	else{
+		$('#fromreg').trigger('submit');
+	}
+});
+	$('.number').keyup(function () {  
+		if(this.value)
+		{
+			this.value = this.value.replace(/[^0-9]/g,''); 
+			
+		}
+	});
+	$('.string').keyup(function () {  
+		if(this.value)
+		{
+			this.value = this.value.replace(/[^a-zA-Z'"]/g,''); 
+			
+		}
+	});	
+{/literal}
+</script>

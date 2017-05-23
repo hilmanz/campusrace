@@ -1,0 +1,249 @@
+<div id="Edit-Chapter" class="section">
+	<div id="container">
+    	<div class="row-2">
+            <h1 class="yellow textbg">EDIT MEMBER</h1>  
+    	</div>
+        <div class="formregis">
+        	<form method="post" id="fromreg" action="{$basedomain}chapter/proseseditmember"  enctype="multipart/form-data">
+            <div class="row">
+                <div class="avatarBox">
+                    <div class="avatar-big" id='uploadPreview'>   
+                      {if $editmember.img_avatar}
+						<img src="{$basedomain}public_assets/profile/{$editmember.img_avatar}" >
+					{else}
+                            <img src="{$basedomain}public_assets/profile/images.jpg" >
+					{/if}
+                    </div>
+                    <p class="infotext" style="margin:10px 0;">Maximal file 2MB (JPG, JPEG, PNG)</p>
+					<div style="display:none">
+						  
+					      <input type="file" class="myfile imgbanner" id="myfile" name="myfile" /> 
+				</div>
+                    <a  class="button browsfile" id="btn_upload ">UNGGAH</a>
+                </div><!--end avatarBox-->
+            </div>
+             <div class="row">
+                <input type="text" class="namemember" name='name_member' value="{$editmember.name}" placeholder="Nama Member">
+             	<label class="namechapter_error error_red"></label>
+			</div>
+            <div class="row">
+                <input type="text"  placeholder="Nomor Telp." value="{$editmember.no_tlp}"  name="no_telp" class="no_telp number">
+                <label class="telp_error error_red"></label>
+			</div>
+			<div class="row">
+                <input type="text"  placeholder="Nama Kampus" value="{$editmember.kampus}"  name="kampus" class="kampus">
+                <label class="kampus_error error_red"></label>
+			</div>           
+           <div class="row">
+               <textarea class="alamat" name="alamat" placeholder='Alamat'>{$editmember.alamat}</textarea>
+               <label class="alamat_error error_red"></label>
+            </div>
+           <div class="row relative">
+                <span class="infoUrl">https://www.facebook.com/</span>
+                <input type="text"  placeholder="Akun facebook member"  value="{$editmember.fb_id}"  name="fbanggota" class="inputsocmedfacebook">
+                <label class="error_red"></label>
+            </div>
+            <div class="row relative">
+                <span class="infoUrl">https://twitter.com/</span>
+                <input type="text"  placeholder="Akun twitter member"  value="{$editmember.twiiter_id}"  name="twitteranggota" class="inputsocmedtwitt">
+                <label class="error_red"></label>
+            </div>
+
+	   {if $editmember.type_login==1}
+            <div class="row">
+                <input type="text" class="password" name='password' placeholder="Password" value="{$password}">
+		<label class="password_error error_red"></label>
+	    </div>
+            <div class="row">
+                <input type="text"  class="confirmpassword" name='repassword' placeholder="Confirm Password" value="{$password}">
+                <label class="confirmpassword_error error_red"></label>
+	    </div>
+	    {/if}            
+
+            <div class="row">
+				<input type='hidden' name='submit' value='1'> 
+                <button type='submit' class="button save">SIMPAN</button>
+            </div>
+        </form>
+		
+		
+						  
+        </div>
+    </div><!--end#container-->
+</div><!--end.section-->
+<script>
+{literal}
+function readImage(file) {
+
+    var reader = new FileReader();
+    var image  = new Image();
+
+    reader.readAsDataURL(file);  
+    reader.onload = function(_file) {
+        image.src    = _file.target.result;              // url.createObjectURL(file);
+        image.onload = function() {
+            var w = this.width,
+                h = this.height,
+                t = file.type,                           // ext only: // file.type.split('/')[1],
+                n = file.name,
+                s = ~~(file.size/1024) +'KB';
+		
+			//if(w=='970' && h=='480')
+			//{			con
+			console.log('previe');
+            $('#uploadPreview').html('<img src="'+ this.src +'">');
+			
+			//}else{
+			//alert('( Ukuran file harus 970 px * 480 px )');
+			//$(".imgbanner").val('');
+			//return false;
+			
+			//}
+        };
+        image.onerror= function() {
+            alert('Silahkan unggah ulang menggunakan file dengan format JPG, JPEG atau PNG');
+        };      
+    };
+
+}
+ 
+$('.browsfile').click(function(e)
+ {
+
+			$(".myfile").trigger('click');
+
+			thiss= $(".myfile");
+ 
+			thiss.change(function(e)
+			{
+		  // console.log(this.files[0].size);
+			   e.preventDefault();
+			 
+			if(this.files[0].size != '')
+			   {
+				if(this.files[0].size > 2000000)
+				{
+					alert ('Maaf, Anda hanya bisa mengunggah foto maksimum 2MB');
+					$(".imgbanner").val('');
+					return false;
+					
+				}				
+				if(this.files[0].type != 'image/jpeg' && this.files[0].type != 'image/png')
+				{
+					 alert('Silahkan unggah ulang menggunakan file dengan format JPG, JPEG atau PNG');
+					 $(".imgbanner").val('');
+					 return false;
+					
+				}
+				
+			  }
+			  
+				var F = this.files;
+				if(F && F[0]) for(var i=0; i<F.length; i++) readImage( F[i] );
+				
+			});
+			});
+
+
+$(document).on('click','.save',function(){
+	$('.namechapter_error').html('');
+	$('.email_error').html('');
+	$('.telp_error').html('');
+
+	$('.password_error').html('');
+	$('.confirmpassword_error').html('');
+	$('.facebook_error').html('');
+	$('.twitter_error').html('');
+	$('.alamat_error').html('');
+	$('.kampus_error').html('');
+	
+	var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,15})+$/; 
+			
+	var valid="";
+	if($('.namechapter').val()=='')
+	{
+		$('.namechapter_error').html('kolom ini harus di isi');
+		valid="ada";
+	}
+	
+	if($('.email').val()=='')
+	{
+		$('.email_error').html('kolom ini harus di isi');
+		valid="ada";
+	}
+	else if(!$('.email').val().match(mailformat))  
+			{  
+				$('.email_error').html(' Format email salah (contoh: nama@gmail.co.id)');
+				//$(".email").addClass('error');
+				valid='ada';
+			} 
+	if($('.password').val()=='')
+	{
+		$('.password_error').html('Kolom ini harus diisi');
+		valid="ada";
+	}
+	
+	if($('.no_telp').val()=='')
+	{
+		$('.telp_error').html('Kolom ini harus diisi');
+		valid="ada";
+	}
+	
+	if($('.confirmpassword').val()=='')
+	{
+		$('.confirmpassword_error').html('Kolom ini harus diisi');
+		valid="ada";
+	}
+	else if($('.password').val() != $('.confirmpassword').val())
+	{
+		console.log($('.password').val()+'!='+$('.confirmpassword').val());
+		$('.confirmpassword_error').html('Password yang anda masukan tidak cocok');
+		valid="ada";
+	}
+	if($('.facebook').val()=='')
+	{
+		$('.facebook_error').html('Kolom ini harus diisi');
+		valid="ada";
+	}
+	if($('.twitter').val()=='')
+	{
+		$('.twitter_error').html('Kolom ini harus diisi');
+		valid="ada";
+	}
+	if($('.kampus').val()=='')
+	{
+		$('.kampus_error').html('Kolom ini harus diisi');
+		valid="ada";
+	}
+	if($('.alamat').val()=='')
+	{
+		$('.alamat_error').html('Kolom ini harus diisi');
+		valid="ada";
+	}
+	
+	if(valid)
+	{
+		return false;
+		
+	}else{
+		$('#fromreg').trigger('submit');
+	
+	}			
+});			
+
+$('.number').keyup(function () {  
+		if(this.value)
+		{
+			this.value = this.value.replace(/[^0-9]/g,''); 
+			
+		}
+	});
+$('.string').keyup(function () {  
+		if(this.value)
+		{
+			this.value = this.value.replace(/[^a-zA-Z'"]/g,''); 
+			
+		}
+	});	
+{/literal}		
+</script>

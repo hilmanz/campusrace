@@ -1,0 +1,193 @@
+<script>
+{literal}
+$(function() {
+    $( "#datepickers1" ).datepicker({
+	dateFormat:"dd-mm-yy",
+     // defaultDate: "+1w",
+      changeMonth: true,
+      numberOfMonths: 1,
+      onClose: function( selectedDate ) {
+        $( "#datepickers2" ).datepicker( "option", "minDate", selectedDate );
+		$('#timepicker1').val('');
+		$('#timepicker2').val('');
+		
+      }
+    });
+    $( "#datepickers2" ).datepicker({
+	dateFormat:"dd-mm-yy",
+     // defaultDate: "+1w",
+      changeMonth: true,
+      numberOfMonths: 1,
+      onClose: function( selectedDate ) { 
+        $( "#datepickers1" ).datepicker( "option", "maxDate", selectedDate );
+		$('#timepicker1').val('');
+		$('#timepicker2').val('');
+      }
+    });
+	
+
+});
+{/literal}
+</script>
+
+<div id="add-tantangan" class="section">
+	<div id="container">
+    	<div class="row-2">
+            <h1 class="yellow">BUAT CHALLENGE</h1>
+    	</div>
+        <div class="formregis">
+        	<form method="post" id="posttantangan" action="{$basedomain}chapter/prosesaddtantangan" enctype="application/x-www-form-urlencoded">
+            <div class="row">
+            	<p>Nama Challenge</p>
+                <input name="name" class="name" type="text" placeholder="">
+				<label class="name_erorr error_red"></label>
+            </div>
+            <div class="row">
+            	<p>Keterangan Challenge</p>
+                <input name="keterangan" class="keterangan" type="text"  placeholder="">
+				<label class="keterangan_erorr error_red"></label>
+            </div>
+            
+            
+            <div class="row">
+            	<p>Waktu Event</p>
+                	<div class="dateEvent">
+                    <input id="datepickers1" type="text"  placeholder="Tanggal"> - <input id="datepickers2" type="text"  placeholder="Tanggal">
+                    </div>
+                    <div class="timeEvent">
+                    <input id="timepicker1" type="text"  placeholder="Jam" data-scroll-default="6:00am" > - <input id="timepicker2" type="text"  placeholder="Jam"data-scroll-default="6:00am" >
+                    </div>	
+                 <label class="date_erorr error_red"></label>
+            </div>
+            <div class="row">
+            	<p>Kategori Challenge:</p>
+                <div id="kategoriSelect" class="select_kat">
+                    <select name="kat" class="kat" id="selectCategor">
+                      <option value="0">Pilih Kategori</option>
+                      <option value="1">FM Supersoccer</option>
+                      <option value="2">Twitter</option>
+                    </select>
+					 <label class="kat_erorr error_red"></label>
+                </div>
+                <div id="pointSelect" class="select_katPoint">
+                    <select  name="subcat" class="subcat" id="selectPoint">
+                      <option value="">Pilih Point</option>
+                      <option value="1">Weekly Point</option>
+                      <option value="2">Weekly Coin</option>
+                      <option value="3">Weekly Ranking (In Top 100)</option>
+                      <option value="4">Register FM</option>
+                    </select>
+					<label class="point_erorr error_red"></label>
+               	</div>
+                 <div id="twitSelect" class="select_katTwit">
+                    <select name="subcat" class="subcat" id="selectwitt">
+                      <option value="">Pilih Kategori Twitter</option>
+                      <option value="1">#hastag</option>
+                      <option value="2">Retweet Account Supersoccer</option>
+                    </select>
+					<label class="kattwt_erorr error_red"></label>
+               	</div>
+            </div>
+            <div class="row pointInput">
+            	<p>Isi Jumlah Point</p>
+                <input name="jmlhpoint" class="jmlhpoint" type="text"  placeholder="">
+				<label class="jmlhpoint_erorr error_red"></label>
+            </div>
+            <div class="row coinInput">
+            	<p>Isi Jumlah Coin</p>
+                <input name="jmlcoint" class="jmlcoint" type="text"  placeholder="">
+				<label class="jmlcoint_erorr error_red"></label>
+            </div>
+            <div class="row hastagsInput">
+            	<p>Social Media #hastag</p>
+                <input type="text" name="mediasocial" class="mediasocial" placeholder="">
+				<label class="mediasocial_erorr error_red"></label>
+            </div>
+            <div class="row">
+                <a  href="javascript:void(0)" class="button submittantangan">BUAT CHALLENGE</a>
+            </div>
+        </form>
+        </div>
+    </div><!--end#container-->
+</div><!--end.section-->
+<script>
+{literal}
+$(function() {
+    $(document).on('change','#selectCategor',function(){
+        if($('#selectCategor').val() == '1') {
+          	$('#pointSelect').show();
+        	$('#twitSelect').hide();
+			$('.hastagsInput').hide();
+        } else if($('#selectCategor').val() == '2') {
+            $('#twitSelect').show();
+        	$('#pointSelect').hide();
+			$('.coinInput').hide();
+        	$('.pointInput').hide()
+        } 
+    });
+});
+
+$(function() {
+    $(document).on('change','#selectPoint',function(){
+        if($('#selectPoint').val() == '1') {
+          	$('.pointInput').show();
+        	$('.coinInput').hide();
+        } else if($('#selectPoint').val() == '2') {
+            $('.coinInput').show();
+        	$('.pointInput').hide();
+        } else{
+			$('.coinInput').hide();
+        	$('.pointInput').hide()
+		}
+    });
+});
+$(function() {
+    $(document).on('change','#selectwitt',function(){
+        if($('#selectwitt').val() == '1') {
+          	$('.hastagsInput').show();
+        	
+        } else {
+            $('.hastagsInput').hide();
+        } 
+    });
+});
+$(document).on('click','.submittantangan',function(){
+		$('.name_erorr').html('');
+		$('.keterangan_erorr').html('');
+		
+		var valid='';
+		if($('.name').val()=='')
+		{
+			$('.name_erorr').html('kolom ini harus di isi');
+			valid='ada';
+		}
+		if($('.keterangan').val()=='')
+		{
+			$('.keterangan_erorr').html('kolom ini harus di isi');
+			valid='ada';
+		}
+		
+		if(valid)
+		{
+			return false;
+		}
+		else
+		{
+			$('#posttantangan').trigger('submit');
+			//return false;
+		}
+	})
+$(document).on('changeTime','#timepicker1', function() {
+		$('#timepicker2').val('');
+		if($( "#datepickers1" ).val()==$( "#datepickers2" ).val())
+		{
+			$('#timepicker2').timepicker('option', 'minTime', $('#timepicker1').val());
+		}
+		else
+		{
+			$('#timepicker2').timepicker('option', 'minTime', '12:00am');
+		}
+			
+	});
+{/literal}
+</script>

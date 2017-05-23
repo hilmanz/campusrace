@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html dir="ltr" lang="en-US" class="ie6"> <![endif]-->
+<!--[if IE 7]>    <html dir="ltr" lang="en-US" class="ie7"> <![endif]-->
+<!--[if IE 8]>    <html dir="ltr" lang="en-US" class="ie8"> <![endif]-->
+<!--[if gt IE 8]><!--> <html dir="ltr" lang="en-US"> <!--<![endif]-->
+{if $pages=='puzzle' || $pages=='puzzle2'}
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+{/if}
+<head>
+{$meta}
+</head>
+{if $pages=='puzzle' || $pages=='puzzle2'}
+<body onload="init();">
+
+{else}
+<body id='{if $pages=='' || $pages=="login"}landing{else}{$pages}{/if}'>
+{/if}
+<div id="body">
+<div id="mainContainer">
+	<div id="universal">
+	
+    	{if $pages=='' || $pages=="login" || $pages=="loginfb" || $pages=="home" && $act=="loginfb" || $pages=="chapter" && $act=="proseseditchapter" || $pages=="member" && $act=="proseseditmember" || $pages=="chapter" && $act=="prosesadEvent" }
+		{else}
+		{$header}
+		{/if}
+		
+		
+		{$mainContent}
+        
+    	{if $pages=="login" || $pages=="loginfb" || $pages=="home" && $act=="loginfb" || $pages=="chapter" && $act=="proseseditchapter" || $pages=="member" && $act=="proseseditmember" || $pages=="chapter" && $act=="prosesaddMember" || $pages=="chapter" && $act=="prosesadEvent" || $pages=="chapter" && $act=="prosesRegistrasi"}
+		{else}
+		{$footer}
+		{/if}
+		
+		
+      </div>
+</div>	
+</div>
+</body>
+</html>

@@ -1,0 +1,396 @@
+<script>
+{literal}
+//UNTUK DOWNLOAD XLS
+		$(document).ready(function(){
+			$(".unduhxls2").on("click", function(){
+				
+				//console.log('masuk');
+				var status=$('.status option:selected').val();
+				var category=$('.category option:selected').val();
+				var startdate=$('.startdate').val();
+				var enddate=$('.enddate').val();
+				var search=$('.search').val();
+				
+				location.href = basedomain+"eventmanagement?download=report&status="+status+"&category="+category+"&startdate="+startdate+"&enddate="+enddate+"&search="+search+"";
+			});
+		});
+
+$(document).on('click','.avatarnya',function(){
+
+	console.log($(this).attr('src'));
+	$gambarnya= $(this).attr('src');
+	console.log($('.gmbrpopup'));
+	$('.gmbrpopup').attr('src',$gambarnya);
+})
+
+$(document).on('click','.idinput',function(){
+
+	$idnya= $(this).attr('idnya');
+	$chapteridnya= $(this).attr('chapteridnya');
+	$memberidnya= $(this).attr('memberidnya');
+	$weekidnya= $(this).attr('weekidnya');
+	$skor1=$('#skor1nya').val();
+	$skor2=$('#skor2nya').val();
+	$skor3=$('#skor3nya').val();
+	$skor4=$('#skor4nya').val();
+	$skor5=$('#skor5nya').val();
+	$skor6=$('#skor6nya').val();
+
+
+	$('.idchapter').val($idnya);
+	$('.memberidnya').val($memberidnya);
+	$('.chapteridnya').val($chapteridnya);
+	$('.weekidnya').val($weekidnya);
+	$('.skor1nya').val($skor1);
+	$('.skor2nya').val($skor2);
+	$('.skor3nya').val($skor3);
+	$('.skor4nya').val($skor4);
+	$('.skor5nya').val($skor5);
+	$('.skor6nya').val($skor6);
+	/*
+	 $.ajax({
+                        'type': 'POST',
+                        'url': basedomain+'tebakskormanagement/statuspoints',
+                        'data': {idnya:idnya,pointnya:pointnya},
+						'dataType':'json',
+                        'success': function(result){
+						//alert("sukses")
+						}
+						
+						});
+	*/
+})
+{/literal}
+</script>
+{include file="application/admin/widgets/popup-images.html"}
+{include file="application/admin/widgets/popup-tebakskorid.html"}
+<div class="page_section" id="project-page">
+    <div id="container">
+        <div class="titlebox">
+            <h2 class="fl"><span class="icon-users">&nbsp;</span>List Tebak Skor</h2>
+            <!--<h2 class="fr"><a href="{$basedomain}eventmanagement/addevent" class="button2">Tambah Baru</a></h2>-->
+            <!-- <h2 class="fr"><a href="#" class="button2 unduhxls2">Unduh XLS</a></h2>-->
+        </div><!-- end .titlebox -->
+        <div class="content event">
+        	<div class="summary">
+       		 <div class="short">
+			  <form method="POST" action="" id="shorter">             	
+             	<div class="skorShorter">
+                     <div class="skorEach" id="">
+                        <span class="fl">Club 1 </span>
+                        <div class="skorRow fl">
+                            <input type="text" value="{$skor1}" name="skor1" class="skorInput" id="skor1nya">
+                        </div><!-- /.rows -->
+                        
+                        <span class="fl">Vs Club 2</span>
+                        <div class="skorRow fl">
+                            <input type="text"  value="{$skor2}" name="skor2" class="skorInput" id="skor2nya">
+                        </div><!-- /.rows -->
+                    </div>
+
+                    <div class="skorEach" id="">
+                        <span class="fl">Club 3 </span>
+                        <div class="skorRow fl">
+                            <input type="text" value="{$skor3}" name="skor3" class="skorInput" id="skor3nya">
+                        </div><!-- /.rows -->
+                        
+                        <span class="fl">Vs  Club 4 </span>
+                        <div class="skorRow fl">
+                            <input type="text"  value="{$skor4}" name="skor4" class="skorInput" id="skor4nya">
+                        </div><!-- /.rows -->
+                    </div>
+
+                    <div class="skorEach" id="">
+                        <span class="fl">Club 5 </span>
+                        <div class="skorRow fl">
+                            <input type="text" value="{$skor5}" name="skor5" class="skorInput" id="skor5nya">
+                        </div><!-- /.rows -->
+                        
+                        <span class="fl">Vs Club 6 </span>
+                        <div class="skorRow fl">
+                            <input type="text"  value="{$skor6}" name="skor6" class="skorInput" id="skor6nya">
+                        </div><!-- /.rows -->
+						{section name=i loop=$list}
+							<input type="hidden"  value="{$list[i].week_id}" name="weekid" >
+						{/section}
+                        <input type="submit" class="button2" name="submit" style="margin-top:0px; margin-bottom: 0; margin-left: 20px;" value="Go">
+                    </div>
+
+                   
+					</form>	
+           		</div><!--end.row-->
+				</div>
+            </div><!-- end .summary -->
+       
+			<table cellpadding="0" cellspacing="0" border="0" width="100%">
+			<thead>
+				<tr>
+				
+					<th class="head0">No</th>
+					<th class="head0">Nama Member</th> 					
+					<!--<th class="head0">Nama Chapter</th>					-->
+					<th class="head0">{$pertandingan.club1} vs {$pertandingan.club2}</th>					
+					<th class="head0">{$pertandingan.club3} vs {$pertandingan.club4}</th>					
+					<th class="head0">{$pertandingan.club5} vs {$pertandingan.club6}</th>												
+					<th class="head0" >Tanggal Submit</th> 					
+					<th class="head0">Insert Point</th> 				
+				</tr>
+			</thead>			
+			<tbody class="pagilist">
+				{section name=i loop=$list}
+					<tr>
+						<td>{$list[i].no}</td>
+						<td>{$list[i].membername}</td>
+						<!--<td>{$list[i].name_chapter}</td>-->
+						{if $list[i].sekor1=='' && $list[i].sekor2==''}
+						<td class="center">{$list[i].skor1} - {$list[i].skor2}</td>
+						{elseif $list[i].sekor1==$list[i].skor1 && $list[i].sekor2==$list[i].skor2}
+						<td class="center"><span class="trueA icon-checkmark">&nbsp;</span></td>
+						{elseif $list[i].sekor1!=$list[i].skor1 && $list[i].sekor2!=$list[i].skor2}
+						<td class="center"><span class="wrongA">X</span></td>
+						{elseif $list[i].sekor1!=$list[i].skor1 && $list[i].sekor2==$list[i].skor2}
+						<td class="center"><span class="wrongA">X</span></td>
+						{elseif $list[i].sekor1==$list[i].skor1 && $list[i].sekor2!=$list[i].skor2}
+						<td class="center"><span class="wrongA">X</span></td>
+						{else}
+						<td class="center">Tidak Terdaftar</td>
+						{/if}
+						
+						{if $list[i].sekor3=='' && $list[i].sekor4==''}
+						<td class="center">{$list[i].skor3} - {$list[i].skor4}</td>
+						{elseif $list[i].sekor3==$list[i].skor3 && $list[i].sekor4==$list[i].skor4}
+						<td class="center"><span class="trueA icon-checkmark">&nbsp;</span></td>
+						{elseif $list[i].sekor3!=$list[i].skor3 && $list[i].sekor4!=$list[i].skor4}
+						<td class="center"><span class="wrongA">X</span></td>
+						{elseif $list[i].sekor3!=$list[i].skor3 && $list[i].sekor4==$list[i].skor4}
+						<td class="center"><span class="wrongA">X</span></td>
+						{elseif $list[i].sekor3==$list[i].skor3 && $list[i].sekor4!=$list[i].skor4}
+						<td class="center"><span class="wrongA">X</span></td>
+						{else}
+						<td class="center">Tidak Terdaftar</td>
+						{/if}
+						
+						{if $list[i].sekor5=='' && $list[i].sekor6==''}
+						<td class="center">{$list[i].skor5} - {$list[i].skor6}</td>	
+						{elseif $list[i].sekor5==$list[i].skor5 && $list[i].sekor6==$list[i].skor6}
+						<td class="center"><span class="trueA icon-checkmark">&nbsp;</span></td>
+						{elseif $list[i].sekor5!=$list[i].skor5 && $list[i].sekor6!=$list[i].skor6}
+						<td class="center"><span class="wrongA">X</span></td>
+						{elseif $list[i].sekor5!=$list[i].skor5 && $list[i].sekor6==$list[i].skor6}
+						<td class="center"><span class="wrongA">X</span></td>
+						{elseif $list[i].sekor5==$list[i].skor5 && $list[i].sekor6!=$list[i].skor6}
+						<td class="center"><span class="wrongA">X</span></td>
+						{else}
+						<td class="center">Tidak Terdaftar</td>
+						{/if}						
+						<td>{$list[i].created}</td>
+						
+						<td>
+							{if ($list[i].sekor1==$list[i].skor1 && $list[i].sekor2==$list[i].skor2)&&($list[i].sekor3==$list[i].skor3 && $list[i].sekor4==$list[i].skor4)&&($list[i].sekor5==$list[i].skor5 && $list[i].sekor6==$list[i].skor6)}
+								<a href="#popup-eventbig" class="showPopup"><input type="submit" class="button2 idinput" style="margin-top:0px;" value="Insert" idnya="{$list[i].id}" weekidnya="{$list[i].week_id}" chapteridnya="{$list[i].chapter_id}" memberidnya="{$list[i].member_id}"></a>
+							{/if}
+						 </td>
+						
+						 <!-- <td>
+							{if $list[i].name_type=='Supersoccer' && $list[i].stat=='1'}
+								<a href="#popup-eventbig" class="showPopup"><input type="submit" class="button2 idinput" style="margin-top:0px;" value="Insert" idnya="{$list[i].id}" chapteridnya="{$list[i].chapter_id}"></a>
+							{/if}
+						 </td> -->					
+					</tr>					
+				{/section}				
+			</tbody>
+			</table>
+			
+            <!-- <div id="paging_of_event_list" class="paging"> -->
+            
+            </div>
+			
+		
+        </div><!-- end .event -->
+    </div><!-- end #container -->
+</div><!-- end #home -->
+
+
+<script type="text/javascript">
+	getpaging(0,{$total},"paging_of_event_list","paging_ajax_event",10);
+</script>
+
+<script>
+{literal}
+function paging_ajax_event(fungsi,start){ 
+var status=$('.status option:selected').val();		
+var startdate=$('.startdate').val();
+var enddate=$('.enddate').val();	
+var listchapter=$('.listchapter option:selected').val();	
+var search=$('.search').val();	
+var category=$('.category option:selected').val();	
+var kota=$('.kota option:selected').val();
+				
+	$.post(basedomain+"eventmanagement/pagingevent",{'start':start,'ajax':1,'status':status,'startdate':startdate,'enddate':enddate,'category':category,'search':search,'listchapter':listchapter},function(response){
+	
+		if(response){
+			  if(response.status==true){
+				var str="";
+			
+				$.each(response.data,function(k,v){
+		
+						str+='<tr>';
+						str+='<td>'+v.no+'</td>';
+						str+='<td>'+v.names+'</td>';
+						str+='<td>'+v.name_type+'</td>';
+						str+='<td>'+v.time_start+'</td>';
+						str+='<td>'+v.time_end+'</td>';
+						str+='<td>'+v.alamat+'</td>';
+						str+='<td>';
+						if(v.upload_foto!=0){
+						$.each(v.upload_foto,function(kk,vv){
+							str+='<a href="#popup-imgbig" class="showPopup">';
+							if(vv.name)
+							{
+							str+='<img src="'+basedomainpath+'public_assets/uploadfoto/'+vv.name+'" class="avatarnya" width="40" height="40"></a>';
+							}
+						});
+						}
+						str+='</td>';
+						if(v.name_chapter)
+						{
+						str+='<td>'+v.name_chapter+'</td>';
+						}else{
+						str+='<td></td>';
+						}
+						str+='<td>'+v.date_create+'</td>';
+						/**str+='<td>'+v.jumlahundangan+'</td>';**/	
+						str+='<td>'+v.poin+'</td>';	
+						str+='<td>'
+						
+						if (v.stat==1){str+='Approved';}else if(v.stat==0){str+='Inactived';}else if(v.stat==3){str+='Finished';}else if(v.stat==4){str+='Rejected';}str+='</td>';
+						if(v.stat==0){
+							str+='<td><a href="'+basedomain+'eventmanagement?paramactive='+v.id+'" style="color:#19CFA8;">Approve</a> | <a href="javascript:void(0)" onClick="confirmation(\''+basedomain+'eventmanagement?paramcancel='+v.id+'\',\'Confirm to Delete?\')" style="color:#19CFA8;">Delete</a> | <a href="'+basedomain+'eventmanagement/editevent/'+v.id+'" style="color:#19CFA8;">Edit</a></td>';
+						}	
+						else if(v.stat=='1' && v.name_type=='Supersoccer'){
+                                                        str+='<td>   <a href="javascript:void(0)" onClick="confirmation(\''+basedomain+'eventmanagement?paramcancel='+v.id+'\',\'Confirm to Delete?\')" style="color:#19CFA8;">Delete</a> | <a href="'+basedomain+'eventmanagement/editevent/'+v.id+'" style="color:#19CFA8;">Edit</a></td>';
+                                                }
+						else if(v.stat==1){
+							str+='<td>   <a href="javascript:void(0)" onClick="confirmation(\''+basedomain+'eventmanagement?paramcancel='+v.id+'\',\'Confirm to Delete?\')" style="color:#19CFA8;">Delete</a> | <a href="'+basedomain+'eventmanagement/editevent/'+v.id+'" style="color:#19CFA8;">Edit</a>';  
+							if(v.upload_foto!=0){
+							str+=' | <a href="'+basedomain+'eventmanagement?paramfinish='+v.id+'&&idchapter='+v.chapter_id+'" style="color:#19CFA8;">Finish</a>';
+							}
+							str+='</td>';
+						}
+						else if(v.stat==3){
+							str+='<td></td>';
+						}
+						else if(v.stat==4){
+                                                        str+='<td></td>';
+                                                }
+						
+						/**str+='<td><a href="'+basedomain+'eventmanagement?paramactive='+v.id+'" style="color:#19CFA8;">Approve</a>   <a href="'+basedomain+'eventmanagement?paramcancel='+v.id+'" style="color:#19CFA8;">Delete</a>  <a href="'+basedomain+'eventmanagement/editevent/'+v.id+'" style="color:#19CFA8;">Edit</a>';
+						if(v.name_type!='Supper Soccer')
+						{
+						str+=' <a href="'+basedomain+'eventmanagement?paramfinish='+v.id+'&&idchapter='+v.chapter_id+'&&pointnya='+v.point+'" style="color:#19CFA8;">Finish</a>';
+						}
+						str+='</td>'**/
+						
+						<!-- if(v.name_type=='Supersoccer' && v.stat=='1') -->
+						if (v.sekor1==v.skor1 && v.sekor2==v.skor2)&&(v.sekor3==v.skor1 && v.sekor4==v.skor2)&&(v.sekor5==v.skor1 && v.sekor6==v.skor2)
+						{
+						str+='<td><a href="#popup-eventbig" class="showPopup"><input type="submit" class="button2 idinput" style="margin-top:0px;" value="Insert" idnya="'+v.id+'" chapteridnya="'+v.chapter_id+'"></a></td>';						
+						}else{
+						str+='<td></td>';
+						}
+						str+='</tr>';
+						
+						});
+						$('.pagilist').html(str);
+						$('.showPopup').magnificPopup({
+							type:'inline',
+							midClick: true 
+						});
+						
+						
+						likeunlike();	
+					
+				}
+			}
+		},"JSON");
+	}
+	
+{/literal}
+	</script>
+	
+	
+<script>
+{literal}
+//select bootstarp
+
+$('.selectpicker').selectpicker();
+likeunlike();
+
+function likeunlike(){
+
+$(document).ready(function(){
+			$(".checkactive").on("click", function(){
+			var idnya=$(this).val();
+			var thisnya=$(this);
+					  $.ajax({
+                        'type': 'POST',
+                        'url': basedomain+'eventmanagement/checkit',
+                        'data': {idnya:idnya},
+						'dataType':'json',
+                        'success': function(result){
+						
+							thisnya.hide();
+							thisnya.parent().html('<center><input type="checkbox" class="checkinactives" value='+idnya+' checked>Checked</center>');
+							
+							$(document).ready(function(){
+							$(".checkinactives").on("click", function(){
+							var idnya=$(this).val();
+							var thisnya=$(this);
+									  $.ajax({
+										'type': 'POST',
+										'url': basedomain+'eventmanagement/incheckit',
+										'data': {idnya:idnya},
+										'dataType':'json',
+										'success': function(result){
+										
+											thisnya.hide();
+											thisnya.parent().html('<center><input type="checkbox" class="checkactive" value='+idnya+'></center>');
+											likeunlike();
+										}
+										
+										});
+
+								});
+							});
+						}
+						
+						});
+
+				});
+			});
+			
+$(document).ready(function(){
+			$(".checkinactive").on("click", function(){
+			var idnya=$(this).val();
+			var thisnya=$(this);
+					  $.ajax({
+                        'type': 'POST',
+                        'url': basedomain+'eventmanagement/incheckit',
+                        'data': {idnya:idnya},
+						'dataType':'json',
+                        'success': function(result){
+						
+							thisnya.hide();
+							thisnya.parent().html('<center><input type="checkbox" class="checkactive" value="'+idnya+'"></center>');
+							likeunlike();
+						}
+						
+						});
+
+				});
+			});
+}
+
+
+{/literal}
+</script>

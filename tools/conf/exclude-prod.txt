@@ -1,0 +1,12 @@
+## Exclude Public Assets
+
+- public_html/public_assets/
+- public_html/.htaccess
+- public_html/assets/.htaccess
+- public_html/public_assets/.htaccess
+- admin_html/.htaccess
+- config/config.inc.php
+- config/locale.inc.php
+- tools/
+- logs/
+- tmp/

@@ -1,0 +1,192 @@
+<script>
+{literal}
+	//UNTUK DOWNLOAD XLS
+		$(document).ready(function(){
+			$(".unduhxls").on("click", function(){
+
+				var chapternya=$('.chapternya option:selected').val();
+				var status=$('.status option:selected').val();
+				var points=$('.points option:selected').val();
+				var startdate=$('.startdate').val();
+				var enddate=$('.enddate').val();
+				var searchname=$('.searchname').val();
+
+				location.href = basedomain+"membermanagement?download=report&chapternya="+chapternya+"&status="+status+"&points="+points+"&startdate="+startdate+"&enddate="+enddate+"&search="+searchname+"";
+			});
+		});
+
+$(document).on('click','.avatarnya',function(){
+
+	console.log($(this).attr('src'));
+	$gambarnya= $(this).attr('src');
+	console.log($('.gmbrpopup'));
+	$('.gmbrpopup').attr('src',$gambarnya);
+})
+
+
+
+{/literal}
+	</script>
+{include file="application/admin/widgets/popup-images.html"}
+<div class="page_section" id="project-page">
+    <div id="container">
+        <div class="titlebox">
+            <h2 class="fl"><span class="icon-users">&nbsp;</span>List Skor Puzzle</h2>
+		 	<!-- <h2 class="fr"><a href="{$basedomain}puzzlemanagement/addpuzzle" class="button2">Tambah Baru</a></h2>-->
+			<!-- <h2 class="fr"><a  href="#" class="button2 unduhxls">Unduh XLS</a></h2> -->
+
+        </div><!-- end .titlebox -->
+        <div class="content chapter">
+        	{*}<div class="summary">
+       		 <div class="short">
+			  <form method="GET" action="" id="shorter">
+             	<div class="leftShorter">
+					<!-- <div class="select_box">
+                    	<label>Sort by Chapter :</label>
+                        <select name="chapternya" class="sort chapternya">
+                            <option value="">Semua Chapter</option>
+							{section name=t loop=$chapter}
+							{if $chapternya==$chapter[t].id}
+							  <option value="{$chapter[t].id}" selected>{$chapter[t].name_chapter}</option>
+							{else}
+							  <option value="{$chapter[t].id}">{$chapter[t].name_chapter}</option>
+							{/if}
+							{/section}
+                        </select>
+                    </div> -->
+                	<div class="select_box">
+                    	<label>Sort by Status :</label>
+                        <select name="status" class="sort status">
+                            <option value="">Semua Status</option>
+                            <option value="1"  {if $status==1}selected{/if}>Actived</option>
+                            <option value="2"  {if $status==2}selected{/if}>Inactived</option>
+							<option value="3"  {if $status==3}selected{/if}>Deleted</option>
+                            <option value="4"  {if $status==4}selected{/if}>Gagal</option>
+                        </select>
+                    </div>
+					<!-- <div class="select_box">
+                    	<label>Sort by Points :</label>
+                        <select name="points" class="sort points">
+                            <option value="">Tampilkan Semua</option>
+                            <option value="1"  {if $points==1}selected{/if}>Tertinggi</option>
+                            <option value="2"  {if $points==2}selected{/if}>Terendah</option>
+                        </select>
+                    </div> -->
+
+                </div><!--end.row-->
+
+
+             	<div class="rightShorter">
+                   		 <div id="datePick">
+                                <span class="fl">Tanggal :</span>
+                                <div class="inputDate fl">
+                                    <input type="text" value="{$startdate}" name="startdate" class="datepicker submitter startdate " id="dp1403509217274">
+                                </div><!-- /.rows -->
+
+                                <span class="fl">Sampai</span>
+                                <div class="inputDate fl">
+                                    <input type="text"  value="{$enddate}" name="enddate" class="datepicker enddate " id="dp1403509217275">
+                                </div><!-- /.rows -->
+
+                        </div>
+						<div id="searchPick">
+						<span class="fl">Cari :</span>
+						<input type='text' name='search' value="{$search}" class='selectEvent fl searchname' style="width:150px" placeholder="nama/email">
+                        <input type="submit" class="button2" style="margin-top:0px;" value="Go">
+
+						</div>
+
+
+					</form>
+           		</div><!--end.row-->
+				</div>
+            </div><!-- end .summary -->{/*}
+			<table cellpadding="0" cellspacing="0" border="0" width="100%">
+			<thead>
+				<tr>
+					<th class="head0">No</th>
+					<th class="head0">Puzzle</th>
+					<th class="head0">Nama Member</th>							
+					<!--th class="head0">Chapter</th-->	
+					<th class="head0">Point</th>
+					<th class="head0">Time</th>					
+					<th class="head0" >Tgl dibuat</th>										
+				</tr>
+			</thead>
+			<tbody class="pagilist">
+					{section name=i loop=$list}
+					<tr>
+					<td>{$list[i].no}</td>
+					<td><a href="#popup-imgbig" class="showPopup"><img src="{$basedomainpath}/public_assets/puzzle/{$list[i].gbr_besar}" class="avatarnya" width="40"height='40'></a></td>
+					<td>{$list[i].name}</td>	
+					<!--td>{$list[i].name_chapter}</td-->					
+					<td>{$list[i].point}</td>
+					<td>{$list[i].timer}</td>
+					<td>{$list[i].created}</td>												
+					</tr>
+					{/section}	
+			</tbody>
+			</table>
+			<div id="paging_of_chapter_list" class="paging">
+
+            </div>
+        </div><!-- end .chapter -->
+    </div><!-- end #container -->
+</div><!-- end #home -->
+
+<script type="text/javascript">
+	getpaging(0,{$total},"paging_of_chapter_list","paging_ajax_member",10);
+</script>
+
+
+<script>
+{literal}
+//select bootstarp
+
+function paging_ajax_member(fungsi,start){
+
+	var chapternya=$('.chapternya option:selected').val();
+	var startdate=$('.startdate').val();
+	var enddate=$('.enddate').val();
+	var search=$('.search').val();
+	var status=$('.status option:selected').val();
+	var points=$('.points option:selected').val();
+
+	$.post(basedomain+"skorpuzzlemanagement/pagingskorpuzzle",{'chapternya':chapternya,'startdate':startdate,'enddate':enddate,'search':search,'status':status,'points':points,'start':start,ajax:1},function(response){
+
+		if(response){
+			  if(response.status==true){
+				var str="";
+				$.each(response.data,function(k,v){
+					//console.log(v.status);
+					str+='<tr>';
+
+					str+='<td>'+v.no+'</td>';
+					str+='<td><a href="#popup-imgbig" class="showPopup">';
+					str+='<img src="'+basedomainpath+'public_assets/puzzle/'+v.gbr_besar+'" class="avatarnya" width="40" height="40"></a>';
+					str+='</td></a>';
+					str+='<td>'+v.name+'</td>';
+					str+='<td>'+v.name_chapter+'</td>';
+					str+='<td>'+v.point+'</td>';
+					str+='<td>'+v.timer+'</td>';
+					str+='<td>'+v.created+'</td>';
+
+					
+					str+='</tr>';
+
+				});
+				console.error;
+				$('.pagilist').html(str);
+				$('.showPopup').magnificPopup({
+							type:'inline',
+							midClick: true 
+						});
+
+			}
+		}
+	},"JSON");
+}
+
+
+{/literal}
+</script>

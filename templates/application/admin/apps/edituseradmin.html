@@ -1,0 +1,131 @@
+{literal}
+	<script>
+	tinymce.init({selector:'textarea',
+
+    toolbar1: "bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | styleselect formatselect fontselect fontsizeselect",
+    toolbar2: "cut copy paste | bullist numlist | outdent indent blockquote | undo redo | anchor | forecolor backcolor",
+
+
+	theme : "modern",
+
+    height: "100",
+    width:900
+	
+	});
+	</script>
+{/literal}
+<div class="page_section" id="project-page">
+    <div id="container">
+        <div class="titlebox">
+            <h2 class="fl"><span class="icon-people">&nbsp;</span> Edit User</h2>
+            {*}<h2 class="fr"><a href="{$basedomain}adminmanagement" class="button2">Back</a></h2>{/*}
+        </div><!-- end .titlebox -->
+        <div class="content">
+            <div class="summary">
+            </div><!-- end .summary -->
+
+            <form id="forms" class="forms" method="post" action="">
+            <div id="new-project" class="boxcontent">
+                <section class="step1">
+
+					
+					
+					
+					 <div class="row">
+                        <label for="title">User Type<br></label>
+                       <select name="type" class="typeuser">
+					   
+					  {if $load}
+						{section name=i loop=$load} 
+							
+						  <option value="{$load[i].id}" {if $user.type==$load[i].id } selected="selected" {/if} >{$load[i].name}</option>
+						{/section}
+					  {/if}
+					   </select>
+                    </div><!-- end .row -->
+                    <div class="row">
+                        <label for="name">Name<br></label>
+						 <input id="iduser" name="iduser"  value="{$user.id}" type="hidden" class="required" >
+                        <input id="name" name="name"  value="{$user.name}" type="text" class="required" ><br>
+						<label class="msg_name"  style="color: red;">{$name_no}</label>
+                    </div><!-- end .row -->
+					  <div class="row">
+                        <label for="email">Email<br></label>
+                        <input id="email" name="email" value="{$user.email}" type="text" class="required" ><br>
+						<label class="msg_name" style="color: red;">{$email_no}</label>
+                    </div><!-- end .row -->
+					
+					  <div class="row">
+                        <label for="username">User Name<br></label>
+                        <input id="username" name="username" value="{$user.username}" type="text" class="required" ><br>
+						<label class="msg_name" style="color: red;">{$username_no}</label>
+                    </div><!-- end .row -->
+                     <div class="row">
+                        <label for="password">New Password<br></label>
+                        <input id="password" name="password" value=""  type="password" class="required" ><br>
+						<label class="msg_name" style="color: red;">{$password_no}</label>
+                    </div><!-- end .row -->
+
+					<hr>
+					   <div class="row">
+                        <h3>User Access</h3>
+                    </div><!-- end .row -->
+					<hr>
+                   {if $listModule}
+						{section name=m loop=$listModule} 
+						{if $listModule[m].id !=5}
+						 <div class="row">
+							<label for="title">{$listModule[m].name_menu}</label>
+							<input type="checkbox" name="menu[]" class="checkboxmenu" value="{$listModule[m].id}"  {if $checkmenu }	{if in_array($listModule[m].id, $checkmenu)  } checked="checked" {/if} {/if} >
+						</div><!-- end .row -->
+						{/if}
+						{if $listModule[m].id ==5 && $user->type==9}
+						 <div class="row">
+							<label for="title">{$listModule[m].name_menu}</label>
+							<input type="checkbox" name="menu[]" class="checkboxmenu" value="{$listModule[m].id}"  {if $checkmenu }	{if in_array($listModule[m].id, $checkmenu)  } checked="checked" {/if} {/if} >
+						</div><!-- end .row -->
+						{/if}
+						{/section}
+					 {/if}
+                    <input type="hidden" name="submit" value="1">
+                        <input type="submit" value="Save" class="button3 fr"  />
+						 <a href="{$basedomain}adminmanagement" class="fr button4">Cancel</a>
+                        <small class="msg">{$status.msgee}</small>
+                        <small class="msg">{$status.msg}</small>
+                    </div><!-- end .row -->
+                </section>
+            </div><!-- end #wizard -->
+            </form>
+        </div><!-- end .content -->
+    </div><!-- end #container -->
+</div><!-- end #home -->
+<script>
+{literal}
+	if($('.typeuser').val()==9)
+			{
+				$(".checkboxmenu").prop("checked", true);	
+				$(".checkboxmenu").attr("disabled", true);	
+				$(".checkboxmenu").prop("checked", true);				
+			}
+			else {
+				//console.log('aaaa');
+				//$(".checkboxmenu").prop("checked", false);
+				//$(".checkboxmenu").removeAttr("disabled"); 	
+				}
+
+	$('.typeuser').click(function()
+	{
+			
+			console.log($(this).val());
+			if($(this).val()==9)
+			{
+				$(".checkboxmenu").prop("checked", true);
+				$(".checkboxmenu").attr("disabled", true);				
+			}
+			else {
+				$(".checkboxmenu").prop("checked", false);
+				$(".checkboxmenu").removeAttr("disabled"); 	
+				}
+	});
+{/literal}
+</script>

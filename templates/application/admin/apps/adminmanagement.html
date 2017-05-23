@@ -1,0 +1,104 @@
+<div class="page_section" id="project-page">
+    <div id="container">
+        <div class="titlebox">
+            <h2 class="fl"><span class="icon-notebook">&nbsp;</span> User Admin Management</h2>
+               <h2 class="fr"><a href="{$basedomain}adminmanagement/addUser" class="button2">Add New</a></h2>
+        </div><!-- end .titlebox -->
+        <div class="content">
+        	<div class="summary">
+       		
+            </div><!-- end .summary -->
+			<table cellpadding="0" cellspacing="0" border="0">
+			<thead>
+				<tr>
+					<th width="3%" class="head0">No</th>
+					<th class="head0">Name</th> 
+					<th class="head0">Type</th> 
+					<th class="head0">Registration Date</th> 
+					<th class="head0">Status</th> 
+					<th width="25%" class="head0">Action</th> 
+				</tr>
+			</thead>
+			<tbody class="pagilist">
+			{if $list}
+				{section name=i loop=$list}    
+                    <tr>
+					
+						<td  >{$list[i].no}</td>
+						<td ><span>{$list[i].name}</span></td> 
+						<td ><span>{if $list[i].type==9} Super Admin {else} Admin {/if}</span></td> 
+						<td ><span>{$list[i].tanggal}</span></td> 
+						
+						<td  ><span>{if $list[i].n_status==1} Active {else} No Active {/if}</span></td> 
+						
+						<td  >	
+
+							
+                        	<a href="{$basedomain}adminmanagement/editadmin?id={$list[i].id}" class="button"><span class="icon-pencil">&nbsp;</span> Edit</a>
+                        	{if $user->id != $list[i].ownerid}
+                        	<a href="javascript:void(0)" class="button" onClick="confirmation('{$basedomain}adminmanagement/deluser?id={$list[i].id}','Confirm to Delete?')" ><span class="icon-trash">&nbsp;</span> Hapus</a>
+                        	{/if}
+                        </td>
+					</tr>
+                {/section}
+			{/if}
+					
+			</tbody>
+			</table>
+            <div id="paging_of_jobs" class="paging">
+              <a href="#"><span class="icon-first">&nbsp;</span></a>
+              <a href="#"><span class="icon-backward2">&nbsp;</span></a>
+              <a href="#">1</a>
+              <a href="#">2</a>
+              <a href="#" class="current">3</a>
+              <a href="#">4</a>
+              <a href="#">5</a>
+              <a href="#"><span class="icon-forward3">&nbsp;</span></a>
+              <a href="#"><span class="icon-last">&nbsp;</span></a>
+            </div>
+        </div><!-- end .content -->
+    </div><!-- end #container -->
+</div><!-- end #home -->
+
+<script type="text/javascript">
+	getpaging(0,{$total},"paging_of_jobs","paging_ajax_jobs",10);
+	var userid = {$user->id};
+	{literal}
+	function paging_ajax_jobs(fungsi,start){ 
+
+	
+	$.post(basedomain+"jobmanagement/main",{start:start,ajax:1},function(response){
+	console.log(response);
+		if(response){
+					  if(response.status==1){
+							var no = start+1;
+							var str="";
+							$.each(response.result,function(k,v){  
+							
+								str='<tr>'+
+							   '<td  >'+no+'</td>'+
+									'<td ><span>'+v.namaPerusahaan+'</span></td> '+
+									'<td ><span>'+v.job_title+'</span></td> '+
+									'<td><span>'+v.job_description+'</span></td> '+
+									'<td><span>'+v.requitment+'</span></td> '+
+									'<td  ><span>'+v.date+'</span></td> '+
+									'<td>'+	
+										'<a href="'+basedomain+'jobmanagement/publish?id='+v.id_job+'" class="button"> <span class="icon-eye"> &nbsp;</span>Publish</a>'+ 
+										'<a href="'+basedomain+'news/editnews?id='+v.id_news+'" class="button"><span class="icon-pencil">&nbsp;</span> Edit</a>'+
+										'<a href="javascript:void(0)" class="button delct" data-id="'+v.id+'" ><span class="icon-trash">&nbsp;</span> Delete</a>'+
+									 '</td>'+
+								'</tr>';
+								no++;
+							});
+							$('.pagilist').html(str);
+							//verified();
+							//delct();
+					}else{
+						$('.pagilist').html('<tr><td colspan="5"> No Data</td></tr>');
+			 
+					}
+				}
+		},"JSON");
+	}
+	{/literal}
+</script>

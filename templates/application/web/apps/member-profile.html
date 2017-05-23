@@ -1,0 +1,150 @@
+
+<div id="member-profile" class="section">
+	<div id="container">
+        <div class="row-2">
+              <h1 class="yellow textbg">PROFIL MEMBER </h1>
+        </div>
+            <div class="rows">
+            	<div class="profileInfo">
+                	<div class="avatarBox">
+                        <div class="avatar-big gallery-image" >   
+					{if $memberprofile.ava}
+						<img src="{$basedomain}public_assets/profile/{$memberprofile.ava}" >
+					{else}
+                            <img src="{$basedomain}public_assets/profile/images.jpg" >
+					{/if}
+                        </div>
+						<!-- <div style="display:none">
+						  <form id="formuploadcv" enctype="multipart/form-data" method="post" name="fileinfo">
+						  
+					      <input type="file" class="myfile" id="myfile" name="myfile" /> 
+					     
+						  </form>
+						  </div> -->
+                      
+                    </div><!--end avatarBox-->
+                    <div class="chapterDetail">
+                    	<!--<div class="rownya">
+                    		<label>Nama Chapter :</label><div class="infonya yellow"> {$memberprofile.nama_chapter}</div>
+                        </div>-->
+                        <div class="rownya">
+                        	<label>Nama Member :</label><div class="infonya yellow"> {$memberprofile.name}</div>
+                        </div>
+						<div class="rownya">
+                        	<label>Status :</label><div class="infonya yellow"> {if $memberprofile.n_status==1}Verified{else $memberprofile.n_status==0}Unverified {/if}</div>
+                        </div>
+						<div class="rownya">
+                        	<label>Kampus :</label><div class="infonya yellow"> {$memberprofile.kampus}</div>
+                        </div>
+						<div class="rownya">
+                                <label>Tipe Login :</label><div class="infonya yellow"> {if $memberprofile.type_login==1}Email{elseif $memberprofile.type_login==2}Twitter{elseif $memberprofile.type_login==3}Facebook{/if}</div>
+                        </div>
+                        <!--<div class="rownya">
+                        	<label>Member ID:</label><div class="infonya yellow">{$memberprofile.ssgte_id}</div>
+                        </div>-->
+                        <div class="rownya rownsocial">
+                        	<label>Social Media :</label><div class="infonya yellow"> <p><span class="icon-facebook2">&nbsp;</span><a href="https://www.facebook.com/{$memberprofile.user_login}" target="_blank">{$memberprofile.fb_id}</a></p><p><span class="icon-twitter2">&nbsp;</span><a href="https://twitter.com/{$memberprofile.twiiter_id}" target="_blank">{$memberprofile.twiiter_acc}</a></p></div>
+                        </div>
+                    	
+                        <p class="points yellow"><span class="bigNumber">{$memberprofile.point}</span> Points</p>
+                        <a href="member/editmember/{$memberprofile.ids}/{$memberprofile.name}"><button class="button" >UBAH</button></a>
+                    </div><!---end.chapterDetail-->
+                </div><!--end.profileInfo-->
+            </div><!--end.rows-->
+            <div class="rows">
+            	<div class="boxLine">
+                	<div class="leftText">
+                    	<p>Masukan kode voucher Anda setelah login ke <a href="http://fm.supersoccer.co.id/" target="_blank">fm.supersoccer.co.id</a> untuk mendapatkan fitur-fitur special di game Football Manager</p>
+                    </div>
+                    <div class="vocerText">
+                    	<!--<p><i>Kode Voucer</i> <span class="codeVocher yellow">{if $memberprofile.voucer_id==0}Tidak Tersedia{else}{$memberprofile.voucer}{/if}</span></p>-->
+						<p><i>Kode Voucher</i> <span class="codeVocher yellow">{if $memberprofile.voucer_id==0}<a href="member/addkodevoucer/{$memberprofile.ids}"><button class="button" >Dapatkan Voucer</button></a>{else}{$memberprofile.voucer}{/if}</span></p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="rows">
+            <div id="memberListTabs" class="leaderInfo">
+			<!--
+              <div class="rows">
+            	<div id="tabs">
+                  <ul>
+                    <li><a href="#tabs-1">EVENT YANG AKAN DATANG</a></li>
+                  </ul>
+                  <div id="tabs-1">
+				  {if $listevent}
+				  {section name=i loop=$listevent}
+                  	<div class="rows-list">
+                    	<div class="infoMembers fl">
+                        	<div class="rowsEvent">
+                        		<p class="name_member yellow">{$listevent[i].name}</p>
+                            </div>
+                            <div class="rowsdateEvent">
+                            <p class="">{$listevent[i].time_start} - {$listevent[i].time_end}</p>
+                            <p class="">{$listevent[i].jam_awal} - {$listevent[i].jam_akhir}</p>
+                            </div>
+                            <p class="addressEvent">{$listevent[i].alamat}</p>
+                          
+                            <div class="buttonAction">
+                        		<a id="detail" class="button" href="{$basedomain}member/eventDetail/{$listevent[i].id}">Lihat Event</a>
+                            </div>
+                        </div>
+                    </div>
+                  	{/section}
+                    {else}
+					<div class="rows-list">
+                    	<div class="infoMembers fl">
+                        	<center>Belum ada Event dari Chapter Anda.</center>
+                        </div>
+                    </div>
+					
+					{/if}
+                  </div>                  
+                </div>
+                </div>
+                -->
+                <div class="rows">
+                <div id="tabs2">
+                  <ul>
+                    <li><a href="#tabs-1">CHALLENGE YANG AKAN DATANG</a></li>
+                  </ul>
+                  <div id="tabs-1">
+				    {if $listantangan}
+                		{section name=j loop=$listantangan}
+							<div class="rows-list">
+								<div class="infoMembers fl">
+									<p class="name_member yellow">{$listantangan[j].time_start} - {$listantangan[j].time_end}</p>
+									<p class="">{$listantangan[j].name}</p>
+									<div class="buttonAction">
+										<a id="detail" class="button" href="{$basedomain}member/detailtantangan/{$listantangan[j].id}">Lihat Challenge</a>
+									</div>
+								</div>
+							</div><!--end rows-->
+                  		{/section}
+					{else}
+						<div class="rows-list">
+								<div class="infoMembers fl">
+									<center>Belum ada challenge untuk Anda.</center>
+								</div>
+							</div><!--end rows-->
+					{/if}
+                  </div>
+                  
+                 
+                </div><!--end#tabs-->
+                </div><!--end rows-->
+               <div></div>
+
+            </div><!--endleaderInfo-->
+        </div><!--end.rows-->
+
+    	
+    </div><!--end#container-->
+</div><!--end.section-->
+
+
+<script>
+{literal}
+upload_foto();
+{/literal}
+</script>
